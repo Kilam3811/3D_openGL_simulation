@@ -152,6 +152,14 @@ void drawGoals()
 		glPopMatrix();
 	}
 }
+void testing_Draw() {
+	glBegin(GL_TRIANGLES);
+	glVertex3d(1, 2, 3);
+	glVertex3d(9, 5, 2);
+	glVertex3d(2, 5, 2);
+	glEnd();
+}
+
 
 void display() {
 	frameCounter++;
@@ -194,7 +202,7 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-
+	testing_Draw();
 	glutSwapBuffers();
 };
 
