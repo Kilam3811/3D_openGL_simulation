@@ -156,22 +156,15 @@ void drawGoals()
 }
 void testing_Draw() {
 	Rectangular object;
-	object.setLength(10, 10, 10);
-	//object.setX
-	object.draw();
+	object.setLength(20, 10, 10);
+	object.setPosition(-10, 10, 0);
+	object.setRotation(100);
+	object.positionInGL();
+	object.setColor(2, 0, 0);
+	object.setColorInGL();
 	
+	object.draw();
 
-	//GLUquadric* ptr = gluNewQuadric();
-	//glRotated(90, -1, 0, 0);
-	//gluDisk(ptr, 5, 10.5, 100, 10);
-	//gluCylinder(ptr, 10, 50, 30, 100, 10);
-	//gluQuadricOrientation(ptr, GLU_OUTSIDE);
-	/*glBegin(GL_TRIANGLES);
-	glColor3d(123, 121, 13);
-	glVertex3d(1, 2, 0);
-	glVertex3d(9, 5, 0);
-	glVertex3d(2, 5, 0);
-	glEnd();*/
 }
 
 
