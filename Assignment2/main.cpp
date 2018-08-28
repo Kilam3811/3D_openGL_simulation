@@ -39,6 +39,8 @@
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
 
+#include "Rectangular.h"
+
 void display();
 void reshape(int width, int height);
 void idle();
@@ -153,11 +155,23 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
-	glBegin(GL_TRIANGLES);
-	glVertex3d(1, 2, 3);
-	glVertex3d(9, 5, 2);
-	glVertex3d(2, 5, 2);
-	glEnd();
+	Rectangular object;
+	object.setLength(10, 10, 10);
+	//object.setX
+	object.draw();
+	
+
+	//GLUquadric* ptr = gluNewQuadric();
+	//glRotated(90, -1, 0, 0);
+	//gluDisk(ptr, 5, 10.5, 100, 10);
+	//gluCylinder(ptr, 10, 50, 30, 100, 10);
+	//gluQuadricOrientation(ptr, GLU_OUTSIDE);
+	/*glBegin(GL_TRIANGLES);
+	glColor3d(123, 121, 13);
+	glVertex3d(1, 2, 0);
+	glVertex3d(9, 5, 0);
+	glVertex3d(2, 5, 0);
+	glEnd();*/
 }
 
 
