@@ -39,8 +39,11 @@
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
 
+//Private #include
 #include "Rectangular.h"
 #include "Triangular.h"
+#include "MyVehicle.h"
+#include "Cylinder.h"
 
 void display();
 void reshape(int width, int height);
@@ -156,33 +159,12 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
-	Rectangular rec;
-	rec.setLength(40, 20, 20);
-	rec.setPosition(10, 10,0 );
-	rec.positionInGL();
-	rec.draw();
 	
-	Triangular tri;
-	tri.setPosition(0, 0, 0);
-	//tri.setRotation(90);
-	tri.positionInGL();
-	tri.setColor(0, 2, 1);
-	tri.setColorInGL();
-	tri.setX_length(40);
-	tri.setY_length(20);
-	tri.setZ_length(20);
-	tri.setTheta(60);
-	tri.draw();
-	
-	
-
-
-	//object.setPosition(-10, 10, 0);
-	//object.setRotation(100);
-	//object.positionInGL();
-	//object.setColor(2, 2, 0);
-	//object.setColorInGL();
-	
+	//MyVehicle car;
+	//car.draw();
+	Cylinder cy;
+	//cy.setPosition(0, 10, 0);
+	//cy.positionInGL();
 
 }
 
@@ -223,7 +205,7 @@ void display() {
 	// draw obstacles
 	ObstacleManager::get()->drawAll();
 
-	// draw goals
+	//draw goals
 	drawGoals();
 
 	// draw HUD
