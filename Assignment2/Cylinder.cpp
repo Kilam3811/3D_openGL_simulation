@@ -23,33 +23,23 @@ void Cylinder::draw()
 	gluCylinder(cylinder,getRadius(),getRadius(),getHeight(),getSlices(),getStacks());
 
 	//Draw the disk to cover top and bottom side(circles)
-	glColor3f(1, 2, 0);
+	//glColor3f(1, 2, 0);
 	gluDisk(cylinder,0,getRadius(),getSlices(),10);
 
 	glTranslated(0, 0, getHeight());
-	glColor3f(0, 2, 2);
+	//glColor3f(0, 2, 2);
 	gluDisk(cylinder, 0, getRadius(), getSlices(), 10);
 }
 
-void Cylinder::setRaius(double r)
+void Cylinder::set_Dimension(double radius_, double depth_, double slices_, double stacks_)
 {
-	radius = r;
-}
-
-void Cylinder::setheight(double h)
-{
-	depth = h;
-}
-
-void Cylinder::setSlices(double slice_)
-{
-	slices = slice_;
-}
-
-void Cylinder::setStacks(double stacks_)
-{
+	radius = radius_;
+	depth = depth_ ;
+	slices = slices_;
 	stacks = stacks_;
 }
+
+
 
 double Cylinder::getRadius()
 {

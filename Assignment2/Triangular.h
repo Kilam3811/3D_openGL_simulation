@@ -10,10 +10,7 @@ protected:
 public:
 	void draw();
 	//Setters
-	void setTheta(double angle);
-	void setX_length(double x_length);
-	void setY_length(double y_length);
-	void setZ_length(double z_length);
+	void set_dimension(double x_length, double y_length, double z_length,double angle);
 	
 	//Getters
 	double getTheta();

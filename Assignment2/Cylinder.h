@@ -12,11 +12,8 @@ public:
 	//Draw cylinder
 	void draw();
 
-	//Setters
-	void setRaius(double r);
-	void setheight(double h);
-	void setSlices(double slice_);
-	void setStacks(double stacks_);
+	//Setter
+	void set_Dimension(double radius_,double depth_,double slices_,double stacks_);
 
 	//Getters
 	double getRadius();

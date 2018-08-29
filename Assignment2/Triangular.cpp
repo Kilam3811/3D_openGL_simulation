@@ -61,28 +61,15 @@ void Triangular::draw()
 	glEnd();
 }
 
-void Triangular::setTheta(double angle)
+void Triangular::set_dimension(double x_length, double y_length, double z_length,double angle)
 {
-	//Normalized angle from degree to radian
+	a_length = x_length;
+	b_length = y_length;
+	depth = z_length;
 	if (angle >= 2 * PI) {
 		angle = (angle*PI) / 180;
 	}
 	theta = angle;
-}
-
-void Triangular::setX_length(double x_length)
-{
-	a_length = x_length;
-}
-
-void Triangular::setY_length(double y_length)
-{
-	b_length = y_length;
-}
-
-void Triangular::setZ_length(double z_length)
-{
-	depth = z_length;
 }
 
 double Triangular::getTheta()
