@@ -157,16 +157,19 @@ void drawGoals()
 }
 void testing_Draw() {
 	Rectangular rec;
-	rec.setLength(20, 10, 10);
-	//rec.draw();
+	rec.setLength(40, 20, 20);
+	rec.setPosition(10, 10,0 );
+	rec.positionInGL();
+	rec.draw();
+	
 	Triangular tri;
-	tri.setPosition(10, 0, 0);
-	tri.setRotation(90);
+	tri.setPosition(0, 0, 0);
+	//tri.setRotation(90);
 	tri.positionInGL();
 	tri.setColor(0, 2, 1);
 	tri.setColorInGL();
-	tri.setX_length(20);
-	tri.setY_length(10);
+	tri.setX_length(40);
+	tri.setY_length(20);
 	tri.setZ_length(20);
 	tri.setTheta(60);
 	tri.draw();
