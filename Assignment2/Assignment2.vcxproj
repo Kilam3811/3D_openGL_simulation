@@ -170,6 +170,7 @@
     <ClCompile Include="Rectangular.cpp" />
     <ClCompile Include="RemoteDataManager.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Trapezoidal.cpp" />
     <ClCompile Include="Triangular.cpp" />
     <ClCompile Include="VectorMaths.cpp" />
     <ClCompile Include="Vehicle.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="RemoteDataManager.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shape.hpp" />
+    <ClInclude Include="Trapezoidal.h" />
     <ClInclude Include="Triangular.h" />
     <ClInclude Include="VectorMaths.hpp" />
     <ClInclude Include="Vehicle.hpp" />

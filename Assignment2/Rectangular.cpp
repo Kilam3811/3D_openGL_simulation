@@ -29,6 +29,8 @@ void Rectangular::draw()
 	
 	//Draw 4 sides of the rectangle
 	//Calculating the offset realtive to the origin of the rectangle
+
+	//Left
 	glBegin(GL_QUADS);
 	glVertex3d(get_x_length()/2,get_y_length(), -get_z_length()/2);
 	glVertex3d(get_x_length()/2,get_y_length(), get_z_length()/2);
@@ -36,13 +38,15 @@ void Rectangular::draw()
 	glVertex3d(get_x_length()/2, 0, -get_z_length()/2);
 	glEnd();
 
+	//front
 	glBegin(GL_QUADS);
 	glVertex3d(get_x_length()/2, get_y_length(), -get_z_length()/2);
 	glVertex3d(get_x_length()/2, 0, -get_z_length() / 2);
 	glVertex3d(-get_x_length()/2, 0,-get_z_length()/2);
 	glVertex3d(-get_x_length()/2, get_y_length(), -get_z_length()/2);
-	//setColorInGL();
 	glEnd();
+
+	//Right
 	glBegin(GL_QUADS);
 	glVertex3d(-get_x_length() / 2, 0, get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);
@@ -50,6 +54,7 @@ void Rectangular::draw()
 	glVertex3d(-get_x_length() / 2, 0, -get_z_length() / 2);
 	glEnd();
 
+	//back
 	glBegin(GL_QUADS);
 	glVertex3d(-get_x_length() / 2, 0,get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);

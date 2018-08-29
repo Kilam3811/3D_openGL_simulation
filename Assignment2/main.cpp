@@ -42,8 +42,10 @@
 //Private #include
 #include "Rectangular.h"
 #include "Triangular.h"
-#include "MyVehicle.h"
+#include "Trapezoidal.h"
 #include "Cylinder.h"
+#include "MyVehicle.h"
+
 
 void display();
 void reshape(int width, int height);
@@ -160,12 +162,13 @@ void drawGoals()
 }
 void testing_Draw() {
 	
-	//MyVehicle car;
-	//car.draw();
-	Cylinder cy;
-	//cy.setPosition(0, 10, 0);
-	//cy.positionInGL();
-
+	Trapezoidal tra;
+	tra.setLength(10, 5, 5, 10);
+	tra.setColor(1, 200, 0);
+	tra.setPosition(10, 10, 1);
+	tra.positionInGL();
+	tra.setColorInGL();
+	tra.draw();
 }
 
 
