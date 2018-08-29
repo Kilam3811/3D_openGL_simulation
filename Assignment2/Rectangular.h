@@ -11,6 +11,4 @@ class Rectangular : public Shape {
 		double get_x_length();
 		double get_y_length();
 		double get_z_length();
-
-
 };

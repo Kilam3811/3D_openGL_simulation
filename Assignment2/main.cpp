@@ -40,6 +40,7 @@
 #include "ObstacleManager.hpp"
 
 #include "Rectangular.h"
+#include "Triangular.h"
 
 void display();
 void reshape(int width, int height);
@@ -155,15 +156,30 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
-	Rectangular object;
-	object.setLength(20, 10, 10);
-	object.setPosition(-10, 10, 0);
-	object.setRotation(100);
-	object.positionInGL();
-	object.setColor(2, 0, 0);
-	object.setColorInGL();
+	Rectangular rec;
+	rec.setLength(20, 10, 10);
+	//rec.draw();
+	Triangular tri;
+	tri.setPosition(10, 0, 0);
+	tri.setRotation(90);
+	tri.positionInGL();
+	tri.setColor(0, 2, 1);
+	tri.setColorInGL();
+	tri.setX_length(20);
+	tri.setY_length(10);
+	tri.setZ_length(20);
+	tri.setTheta(60);
+	tri.draw();
 	
-	object.draw();
+	
+
+
+	//object.setPosition(-10, 10, 0);
+	//object.setRotation(100);
+	//object.positionInGL();
+	//object.setColor(2, 2, 0);
+	//object.setColorInGL();
+	
 
 }
 

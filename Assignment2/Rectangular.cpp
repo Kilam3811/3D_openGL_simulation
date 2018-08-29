@@ -1,4 +1,3 @@
-#pragma once
 #include "Rectangular.h"
 
 #ifdef __APPLE__
@@ -25,10 +24,12 @@ void Rectangular::setLength(double x_, double y_, double z_)
 
 void Rectangular::draw()
 {
+	//Is there any other convinent methods to draw?
+
 	
 	//Draw 4 sides of the rectangle
 	//Calculating the offset realtive to the origin of the rectangle
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 	glVertex3d(get_x_length()/2,get_y_length(), -get_z_length()/2);
 	glVertex3d(get_x_length()/2,get_y_length(), -get_z_length()/2);
 	glVertex3d(get_x_length()/2, 0, -get_z_length()/2);
@@ -44,7 +45,7 @@ void Rectangular::draw()
 	glEnd();
 	glBegin(GL_QUADS);
 	glVertex3d(-get_x_length() / 2, 0, get_z_length() / 2);
-	glVertex3d(-get_x_length() / 2, get_y_length(), +get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, get_y_length(), -get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, 0, -get_z_length() / 2);
 	glEnd();
