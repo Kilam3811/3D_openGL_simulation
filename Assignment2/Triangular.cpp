@@ -1,5 +1,6 @@
 #include "Triangular.h"
 #include "VectorMaths.hpp"
+
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -56,16 +57,19 @@ void Triangular::draw()
 	glBegin(GL_QUADS);
 	glVertex3d(getX_length() / 2, 0, getZ_length() / 2);
 	glVertex3d(getX_length() / 2, 0, -getZ_length() / 2);
-	glVertex3d(-getX_length()/2, 0, -getZ_length() / 2);
-	glVertex3d(-getX_length()/2, 0, getZ_length() / 2);
+	glVertex3d(-getX_length() / 2, 0, -getZ_length() / 2);
+	glVertex3d(-getX_length() / 2, 0, getZ_length() / 2);
 	glEnd();
 }
 
-void Triangular::set_dimension(double x_length, double y_length, double z_length,double angle)
+void Triangular::set_dimension(double x_length, double y_length, double z_length, double angle)
 {
 	a_length = x_length;
 	b_length = y_length;
 	depth = z_length;
+	if (angle == 90) {
+		angle = PI / 2;
+	}
 	if (angle >= 2 * PI) {
 		angle = (angle*PI) / 180;
 	}
@@ -95,15 +99,15 @@ double Triangular::getZ_length()
 double Triangular::getNormal_X_Cor()
 {
 	double x_cor;
-	if(theta < PI/2){
-		x_cor = getX_length()/2-cos(theta)*getY_length();
+	if (theta < PI / 2) {
+		x_cor = (getX_length() / 2.0) - cos(theta)*getY_length();
 	}
 	else if (theta == PI / 2) {
 		x_cor = getX_length() / 2;
 	}
 	else {
-		double aux = PI / 2 - theta;
-		x_cor = getX_length() + sin(aux)*getY_length();
+		double temp_angle = PI - getTheta();
+		x_cor = getX_length() / 2 + cos(temp_angle)*getY_length();
 	}
 	return x_cor;
 }
@@ -111,12 +115,15 @@ double Triangular::getNormal_X_Cor()
 double Triangular::getNormal_Y_Cor()
 {
 	double y_cor;
-	if (theta <= PI / 2) {
+	if (theta < PI / 2) {
 		y_cor = sin(theta)*getY_length();
 	}
+	else if (theta == PI / 2) {
+		y_cor = getY_length();
+	}
 	else {
-		double aux = PI / 2 - theta;
-		y_cor = cos(aux)*getY_length();
+		double temp_angle = PI - getTheta();
+		y_cor = sin(temp_angle)*getY_length();
 	}
 	return y_cor;
 }

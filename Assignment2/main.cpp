@@ -162,13 +162,13 @@ void drawGoals()
 }
 void testing_Draw() {
 	
-	glPushMatrix();
+	/*glPushMatrix();
 	Trapezoidal tra;
 	tra.setLength(20, 10, 10, 10);
 	/*tra.setColor(1, 200, 0);
 	tra.setPosition(10, 10, 1);
 	tra.positionInGL();
-	tra.setColorInGL();*/
+	tra.setColorInGL();
 	tra.setPosition(15, 0, 0);
 	tra.positionInGL();
 	tra.draw();
@@ -190,10 +190,10 @@ void testing_Draw() {
 	rec.draw();
 	glPopMatrix();
 
-	glPopMatrix();
+	glPopMatrix();*/
 	Triangular tri;
-	tri.set_dimension(10, 15, 10, 100);
-	tri.setPosition(-70, 0, 0);
+	tri.set_dimension(3, 5, 10, 100);
+	tri.setPosition(0, 0, 0);
 	tri.positionInGL();
 	tri.draw();
 	glPopMatrix();
