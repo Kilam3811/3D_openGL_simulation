@@ -162,43 +162,10 @@ void drawGoals()
 }
 void testing_Draw() {
 	
-	/*glPushMatrix();
-	Trapezoidal tra;
-	tra.setLength(20, 10, 10, 10);
-	/*tra.setColor(1, 200, 0);
-	tra.setPosition(10, 10, 1);
-	tra.positionInGL();
-	tra.setColorInGL();
-	tra.setPosition(15, 0, 0);
-	tra.positionInGL();
-	tra.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	Cylinder cy;
-	cy.set_Dimension(10, 10, 100, 10);
-	cy.setPosition(-20, 0, 0);
-	cy.positionInGL();
-	cy.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	Rectangular rec;
-	rec.setLength(10, 10, 10);
-	rec.setPosition(-50, 0, 0);
-	rec.positionInGL();
-	rec.draw();
-	glPopMatrix();
-
-	glPopMatrix();*/
-	Triangular tri;
-	tri.set_dimension(3, 5, 10, 100);
-	tri.setPosition(0, 0, 0);
-	tri.positionInGL();
-	tri.draw();
-	glPopMatrix();
-
-
+	MyVehicle F1;
+	//F1.setRotation(90);
+	//F1.positionInGL();
+	F1.draw();
 }
 
 

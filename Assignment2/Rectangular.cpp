@@ -15,6 +15,7 @@
 #include <GL/glut.h>
 #endif
 
+
 void Rectangular::setLength(double x_, double y_, double z_)
 {
 	x_length = x_;

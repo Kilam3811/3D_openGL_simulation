@@ -17,6 +17,7 @@
 #endif
 
 
+#define MAX_COLOUR 255
 Shape::Shape() {
 	x = y = z = 0.0;
 	rotation = 0.0;
@@ -106,8 +107,8 @@ double Shape::getBlue() {
 };
 
 void Shape::setColor(float red_, float green_, float blue_) {
-	red = red_;
-	green = green_;
-	blue = blue_;
+	red = red_/ MAX_COLOUR;
+	green = green_/ MAX_COLOUR;
+	blue = blue_/ MAX_COLOUR;
 };
 
