@@ -107,8 +107,18 @@ double Shape::getBlue() {
 };
 
 void Shape::setColor(float red_, float green_, float blue_) {
-	red = red_/ MAX_COLOUR;
-	green = green_/ MAX_COLOUR;
-	blue = blue_/ MAX_COLOUR;
+	double red_temp = red_;
+	double green_temp = green_;
+	double blue_temp = blue_;
+
+	if (red_ > 1 || green_ > 1 || blue_ > 1) {
+		red_temp = red_ / MAX_COLOUR;
+		green_temp = green_ / MAX_COLOUR;
+		blue_temp = blue_ / MAX_COLOUR;
+	}
+	
+	red = red_temp;
+	green = green_temp;
+	blue = blue_temp;
 };
 

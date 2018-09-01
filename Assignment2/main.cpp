@@ -161,13 +161,9 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
-	
-	//MyVehicle F1;
-	//F1.setPosition(10,0,0);
-	//F1.positionInGL();
-	//F1.draw();
-
-	glPushMatrix();
+	//==========================================
+	//TASK 1 CODE
+	/*glPushMatrix();
 	Trapezoidal tra;
 	tra.setColor(12, 123, 121);
 	tra.setColorInGL();
@@ -206,7 +202,20 @@ void testing_Draw() {
 	cy.setPosition(-50, 0, 0);
 	cy.positionInGL();
 	cy.draw();
-	glPopMatrix();
+	glPopMatrix();*/
+
+	//CUSTOMIZED VEHICLE
+
+	MyVehicle F1;
+	//F1.setPosition(10,0,0);
+	//F1.positionInGL();
+	F1.draw();
+	//==========================================
+
+
+	//Cylinder cy;
+	//cy.set_Dimension(10, 10, 100, 10);
+	//cy.draw();
 }
 
 

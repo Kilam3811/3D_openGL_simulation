@@ -18,7 +18,7 @@ void Cylinder::draw()
 	//Set up cylinder variable
 	GLUquadric* cylinder = gluNewQuadric();
 	//Move to the plane(Spcific position at first)
-	glTranslated(0,getRadius(),0);
+	glTranslated(0,getRadius(),-getHeight()/2);
 	//Call the function to draw out the cylinder
 	gluCylinder(cylinder,getRadius(),getRadius(),getHeight(),getSlices(),getStacks());
 

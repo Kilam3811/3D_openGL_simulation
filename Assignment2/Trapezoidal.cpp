@@ -14,12 +14,14 @@
 #include <GL/glut.h>
 #endif
 
-void Trapezoidal::setLength(double a_length_,double b_length_, double height_, double depth_)
+void Trapezoidal::setLength(double a_length_,double b_length_, double height_, double depth_,double a_offset_,double b_offset_)
 {
 	a_length = a_length_;
 	height = height_;
 	b_length = b_length_;
 	depth = depth_;
+	a_offset = a_offset_;
+	b_offset = b_offset_;
 }
 
 void Trapezoidal::draw()
@@ -85,7 +87,7 @@ double Trapezoidal::get_a_length()
 
 double Trapezoidal::get_b_length()
 {
-	return b_length;
+	return get_a_length() - (get_a_offset() + get_b_offset());
 }
 
 double Trapezoidal::get_height()
@@ -96,4 +98,14 @@ double Trapezoidal::get_height()
 double Trapezoidal::get_depth()
 {
 	return depth;
+}
+
+double Trapezoidal::get_a_offset()
+{
+	return a_offset;
+}
+
+double Trapezoidal::get_b_offset()
+{
+	return b_offset;
 }
