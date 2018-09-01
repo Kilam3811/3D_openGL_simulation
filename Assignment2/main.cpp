@@ -115,7 +115,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	vehicle = new MyVehicle();
+	//vehicle = new MyVehicle();
 
 
 	// add test obstacles
@@ -166,6 +166,47 @@ void testing_Draw() {
 	//F1.setPosition(10,0,0);
 	//F1.positionInGL();
 	//F1.draw();
+
+	glPushMatrix();
+	Trapezoidal tra;
+	tra.setColor(12, 123, 121);
+	tra.setColorInGL();
+	tra.setLength(10, 20, 10, 10);
+	tra.setPosition(10, 0, 0);
+	tra.positionInGL();
+	tra.draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	Triangular tri;
+	tri.setColor(123, 12, 121);
+	tri.setColorInGL();
+	tri.set_dimension(10, 20, 10, PI/4);
+	tri.setPosition(-10, 0, 0);
+	tri.positionInGL();
+	tri.draw();
+	glPopMatrix();
+
+	glPushMatrix();
+	Rectangular rec;
+	rec.setColor(123, 120, 12);
+	rec.setColorInGL();
+	rec.setLength(10, 20, 30);
+	rec.setPosition(-30, 0, 0);
+	rec.positionInGL();
+	rec.draw();
+	glPopMatrix();
+
+
+	glPushMatrix();
+	Cylinder cy;
+	cy.setColor(13, 160, 12);
+	cy.setColorInGL();
+	cy.set_Dimension(10, 20, 100, 10);
+	cy.setPosition(-50, 0, 0);
+	cy.positionInGL();
+	cy.draw();
+	glPopMatrix();
 }
 
 

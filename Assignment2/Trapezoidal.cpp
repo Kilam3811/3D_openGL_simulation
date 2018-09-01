@@ -64,7 +64,7 @@ void Trapezoidal::draw()
 	glBegin(GL_QUADS);
 	glVertex3d(get_b_length() / 2, get_height(), -get_depth() / 2);
 	glVertex3d(-get_b_length() / 2, get_height(), -get_depth() / 2);
-	glVertex3d(-get_b_length() / 2, get_height() / 2, get_depth()/ 2);
+	glVertex3d(-get_b_length() / 2, get_height(), get_depth()/ 2);
 	glVertex3d(get_b_length() / 2, get_height(), get_depth() / 2);
 	glEnd();
 

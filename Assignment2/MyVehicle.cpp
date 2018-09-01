@@ -23,10 +23,11 @@ void MyVehicle::draw()
 	// move to the vehicle¡¦s local frame of reference
 	glPushMatrix();
 	positionInGL();
+
+	// all the local drawing code
+	// move back to global frame of reference
 	//We can put our shapes in to a array and print them out.??
 	//Body
-
-
 	Rectangular rec1;
 	rec1.setLength(2, 1, 1);
 	rec1.setColor(255, 217, 84);
@@ -65,8 +66,6 @@ void MyVehicle::draw()
 	rec2.setColorInGL();
 	rec2.draw();
 	glPopMatrix();
-	// all the local drawing code
-	// move back to global frame of reference
 	
 	//Base
 	//glPushMatrix();
