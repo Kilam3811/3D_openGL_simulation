@@ -115,7 +115,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	vehicle = new MyVehicle();
 
 
 	// add test obstacles
@@ -162,10 +162,10 @@ void drawGoals()
 }
 void testing_Draw() {
 	
-	MyVehicle F1;
-	//F1.setRotation(90);
+	//MyVehicle F1;
+	//F1.setPosition(10,0,0);
 	//F1.positionInGL();
-	F1.draw();
+	//F1.draw();
 }
 
 
@@ -312,7 +312,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {

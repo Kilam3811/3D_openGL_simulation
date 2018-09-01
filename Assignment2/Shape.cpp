@@ -17,7 +17,7 @@
 #endif
 
 
-#define MAX_COLOUR 255
+#define MAX_COLOUR 255.0
 Shape::Shape() {
 	x = y = z = 0.0;
 	rotation = 0.0;
