@@ -8,6 +8,7 @@ protected:
 	double depth;
 	double theta;
 public:
+	Triangular(double x_length, double y_length, double z_length, double angle);
 	void draw();
 	//Setters
 	void set_dimension(double x_length, double y_length, double z_length,double angle);

@@ -163,59 +163,42 @@ void drawGoals()
 void testing_Draw() {
 	//==========================================
 	//TASK 1 CODE
-	/*glPushMatrix();
-	Trapezoidal tra;
+	glPushMatrix();
+	Trapezoidal tra(10,5,5,10,2.5,2.5);
 	tra.setColor(12, 123, 121);
-	tra.setColorInGL();
-	tra.setLength(10, 20, 10, 10);
 	tra.setPosition(10, 0, 0);
-	tra.positionInGL();
 	tra.draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	Triangular tri;
+	Triangular tri(10, 20, 10, PI / 4);
 	tri.setColor(123, 12, 121);
-	tri.setColorInGL();
-	tri.set_dimension(10, 20, 10, PI/4);
 	tri.setPosition(-10, 0, 0);
-	tri.positionInGL();
 	tri.draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	Rectangular rec;
+	Rectangular rec(10, 20, 30);
 	rec.setColor(123, 120, 12);
-	rec.setColorInGL();
-	rec.setLength(10, 20, 30);
 	rec.setPosition(-30, 0, 0);
-	rec.positionInGL();
 	rec.draw();
 	glPopMatrix();
 
 
 	glPushMatrix();
-	Cylinder cy;
+	Cylinder cy(10, 20, 100, 10);
 	cy.setColor(13, 160, 12);
-	cy.setColorInGL();
-	cy.set_Dimension(10, 20, 100, 10);
 	cy.setPosition(-50, 0, 0);
-	cy.positionInGL();
 	cy.draw();
-	glPopMatrix();*/
+	glPopMatrix();
 
 	//CUSTOMIZED VEHICLE
 
-	MyVehicle F1;
+	//MyVehicle F1;
 	//F1.setPosition(10,0,0);
 	//F1.positionInGL();
-	F1.draw();
+	//F1.draw();
 	//==========================================
-
-
-	//Cylinder cy;
-	//cy.set_Dimension(10, 10, 100, 10);
-	//cy.draw();
 }
 
 

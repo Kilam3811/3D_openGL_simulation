@@ -6,6 +6,7 @@ class Rectangular : public Shape {
 		double y_length;
 		double z_length;
 	public:
+		Rectangular(double x_, double y_, double z_);
 		void setLength(double x_,double y_,double z_);
 		void draw();
 		double get_x_length();

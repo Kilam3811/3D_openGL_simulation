@@ -14,6 +14,11 @@
 #include <GL/glut.h>
 #endif
 
+Trapezoidal::Trapezoidal(double a_length_, double b_length_, double height_, double depth_, double a_offset_, double b_offset_)
+{
+	setLength(a_length_,b_length_, height_, depth_, a_offset_, b_offset_);
+}
+
 void Trapezoidal::setLength(double a_length_,double b_length_, double height_, double depth_,double a_offset_,double b_offset_)
 {
 	a_length = a_length_;
@@ -28,6 +33,9 @@ void Trapezoidal::draw()
 {
 	//Draw 4 sides of the trapezoidal
 	//Calculating the offset realtive to the origin of the rectangle
+	positionInGL();
+	setColorInGL();
+
 
 	//Front
 	glBegin(GL_QUADS);

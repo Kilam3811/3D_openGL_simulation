@@ -15,8 +15,14 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #endif
+Triangular::Triangular(double x_length, double y_length, double z_length, double angle)
+{
+	set_dimension(x_length, y_length, z_length, angle);
+}
 void Triangular::draw()
 {
+	positionInGL();
+	setColorInGL();
 	//Draw two triangular sides
 	double angle = getTheta();
 	glBegin(GL_TRIANGLES);

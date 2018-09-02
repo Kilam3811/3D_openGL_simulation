@@ -9,6 +9,7 @@ protected:
 	double stacks;
 
 public:
+	Cylinder(double radius_, double depth_, double slices_, double stacks_);
 	//Draw cylinder
 	void draw();
 

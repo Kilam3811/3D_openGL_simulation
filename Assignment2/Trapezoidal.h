@@ -10,6 +10,7 @@ protected:
 	double a_offset;
 	double b_offset;
 public:
+	Trapezoidal(double a_length_, double b_length_, double height_, double depth_, double a_offset_, double b_offset_);
 	void setLength(double a_length_,double b_length_, double height_, double depth_,double a_offset_,double b_offset_);
 	void draw();
 	double get_a_length();

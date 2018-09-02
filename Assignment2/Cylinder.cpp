@@ -13,8 +13,15 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #endif
+Cylinder::Cylinder(double radius_, double depth_, double slices_, double stacks_)
+{
+	set_Dimension(radius_, depth_, slices_, stacks_);
+}
 void Cylinder::draw()
 {
+
+	positionInGL();
+	setColorInGL();
 	//Set up cylinder variable
 	GLUquadric* cylinder = gluNewQuadric();
 	//Move to the plane(Spcific position at first)
