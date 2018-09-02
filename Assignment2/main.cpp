@@ -163,7 +163,7 @@ void drawGoals()
 void testing_Draw() {
 	//==========================================
 	//TASK 1 CODE
-	/*glPushMatrix();
+	glPushMatrix();
 	Trapezoidal tra;
 	tra.setColor(12, 123, 121);
 	tra.setColorInGL();
@@ -177,7 +177,7 @@ void testing_Draw() {
 	Triangular tri;
 	tri.setColor(123, 12, 121);
 	tri.setColorInGL();
-	tri.set_dimension(10, 20, 10, PI/4);
+	//tri.set_dimension(10, 20, 10, PI/4);
 	tri.setPosition(-10, 0, 0);
 	tri.positionInGL();
 	tri.draw();
