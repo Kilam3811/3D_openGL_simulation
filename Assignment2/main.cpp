@@ -115,7 +115,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	vehicle = new MyVehicle();
 
 
 	// add test obstacles
@@ -161,41 +161,10 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
-	//==========================================
-	//TASK 1 CODE
-	glPushMatrix();
-	Trapezoidal tra(10,5,5,10,2.5,2.5);
-	tra.setColor(12, 123, 121);
-	tra.setPosition(10, 0, 0);
-	tra.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	Triangular tri(10, 20, 10, PI / 4);
-	tri.setColor(123, 12, 121);
-	tri.setPosition(-10, 0, 0);
-	tri.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	Rectangular rec(10, 20, 30);
-	rec.setColor(123, 120, 12);
-	rec.setPosition(-30, 0, 0);
-	rec.draw();
-	glPopMatrix();
-
-
-	glPushMatrix();
-	Cylinder cy(10, 20, 100, 10);
-	cy.setColor(13, 160, 12);
-	cy.setPosition(-50, 0, 0);
-	cy.draw();
-	glPopMatrix();
-
 	//CUSTOMIZED VEHICLE
 
-	//MyVehicle F1;
-	//F1.setPosition(10,0,0);
+	MyVehicle F1;
+	F1.setPosition(10,0,0);
 	//F1.positionInGL();
 	//F1.draw();
 	//==========================================
@@ -392,8 +361,7 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
-
+								otherVehicles[vm.remoteID] = new MyVehicle();
 								//
 								// more student code goes here
 								//

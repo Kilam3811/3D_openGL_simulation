@@ -6,5 +6,6 @@ class MyVehicle : public Vehicle {
 protected:
 
 public:
+	MyVehicle();
 	void draw();
 };
