@@ -111,12 +111,15 @@ void Shape::setColor(float red_, float green_, float blue_) {
 	double green_temp = green_;
 	double blue_temp = blue_;
 
-	if (red_ > 1 || green_ > 1 || blue_ > 1) {
+	if (red_ > 1) {
 		red_temp = red_ / MAX_COLOUR;
+	}
+	if (green_ > 1) {
 		green_temp = green_ / MAX_COLOUR;
+	}
+	if (blue_ > 1) {
 		blue_temp = blue_ / MAX_COLOUR;
 	}
-	
 	red = red_temp;
 	green = green_temp;
 	blue = blue_temp;

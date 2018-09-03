@@ -45,6 +45,7 @@
 #include "Trapezoidal.h"
 #include "Cylinder.h"
 #include "MyVehicle.h"
+#include "Enemy.h"
 
 
 void display();
@@ -212,7 +213,7 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	testing_Draw();
+	//testing_Draw();
 	glutSwapBuffers();
 };
 
@@ -234,6 +235,7 @@ void remoteDriver(Vehicle * vehicle, double x, double z, double r, double speed_
 	vehicle->setRotation(r);
 	vehicle->steering = steering_;
 	vehicle->speed = speed_;
+
 }
 
 double getTime()
@@ -322,11 +324,14 @@ void idle() {
 
 					VehicleModel vm;
 					vm.remoteID = 0;
-
-					//
+					
+					ShapeInit init;
+					MyVehicle(&vm, &init);
+					//Describle my car..
 					// student code goes here
 					//
-
+					
+					
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
 			}
@@ -361,7 +366,9 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								otherVehicles[vm.remoteID] = new MyVehicle();
+
+								//Testing ..... I know what to do now..
+								otherVehicles[vm.remoteID] = new Enemy(vm);
 								//
 								// more student code goes here
 								//

@@ -22,6 +22,7 @@ void Vehicle::update(double dt)
 	x += speed * dt * cos(rotation * 3.1415926535 / 180.0);
 	z += speed * dt * sin(rotation * 3.1415926535 / 180.0);
 
+
 	// update heading
 	rotation += dt * steering * speed;
 
@@ -33,7 +34,6 @@ void Vehicle::update(double dt)
 		speed = 0;
 	if(fabs(steering) < .1)
 		steering = 0;
-
 }
 
 void Vehicle::update(double speed_, double steering_, double dt) 
