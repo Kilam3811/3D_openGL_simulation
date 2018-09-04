@@ -45,7 +45,7 @@
 #include "Trapezoidal.h"
 #include "Cylinder.h"
 #include "MyVehicle.h"
-#include "Enemy.h"
+#include "Remote.h"
 #define MAX_COLOUR 255.0
 
 
@@ -362,6 +362,8 @@ void idle() {
 					init.rotation = 0;
 					init.params.cyl.depth = 0.1;
 					init.params.cyl.radius = 0.4;
+					init.params.cyl.isSteering = TRUE;
+					init.params.cyl.isRolling = TRUE;
 					vm.shapes.push_back(init);
 
 
@@ -380,6 +382,8 @@ void idle() {
 					init.rotation = 0;
 					init.params.cyl.depth = 0.1;
 					init.params.cyl.radius = 0.4;
+					init.params.cyl.isSteering = TRUE;
+					init.params.cyl.isRolling = TRUE;
 					vm.shapes.push_back(init);
 
 					//back right(seen from initial position)
@@ -398,6 +402,8 @@ void idle() {
 					init.rotation = 0;
 					init.params.cyl.depth = 0.1;
 					init.params.cyl.radius = 0.4;
+					init.params.cyl.isSteering = FALSE;
+					init.params.cyl.isRolling = TRUE;
 					vm.shapes.push_back(init);
 
 					/*//back left(seen from initial position)
@@ -415,6 +421,8 @@ void idle() {
 					init.rotation = 0;
 					init.params.cyl.depth = 0.1;
 					init.params.cyl.radius = 0.4;
+					init.params.cyl.isSteering = FALSE;
+					init.params.cyl.isRolling = TRUE;
 					vm.shapes.push_back(init);
 
 
@@ -496,7 +504,7 @@ void idle() {
 								//Testing ..... I know what to do now..
 								
 								
-								//otherVehicles[vm.remoteID] = new Enemy(vm);
+								otherVehicles[vm.remoteID] = new Remote(vm);
 								//
 								// more student code goes here
 								//
@@ -511,7 +519,7 @@ void idle() {
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
 
-								//std::cout << "Steering at " << vs.steering << std::endl
+								std::cout << "Steering at " << vs.steering << std::endl;
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
 									Vehicle * veh = iter->second;

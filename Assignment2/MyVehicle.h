@@ -8,5 +8,5 @@ protected:
 public:
 	MyVehicle();
 	void draw();
-	void turning_effect(Shape* shape_);
+	//void turning_effect(Shape* shape_);
 };

@@ -72,7 +72,7 @@
     <ClCompile Include="Trapezoidal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Remote.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,7 +134,7 @@
     <ClInclude Include="Trapezoidal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Remote.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

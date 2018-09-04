@@ -73,56 +73,24 @@ MyVehicle::MyVehicle()
 
 void MyVehicle::draw()
 {
-
 	std::vector<Shape *>::iterator it;
-	double flag = 0;
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
-		Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
-		if (*it != NULL) {
-			if (getSteering() > 0) {
-				//Draw a new one??
-
-				glPushMatrix();
-				
-				positionInGL();
-				//setRotation(getSteering());
-				(*it)->draw();
-				glPopMatrix();
-				std::cout << "Streeing at " << getSteering() << std::endl;
-			}
-			else if (getSteering() < 0) {
-				//Draw a new one??
-
-				glPushMatrix();
-				
-				positionInGL();
-				//setRotation(getSteering());
-				(*it)->draw();
-
-				//glTranslated(-shape_->getX(), -shape_->getY(), shape_->getZ());
-				glPopMatrix();
-				std::cout << "Streeing at " << getSteering() << std::endl;
-			}
-			else {
-				glPushMatrix();
-				positionInGL();
-				(*it)->draw();
-				glPopMatrix();
-			}
-		}
-		else {
+		//Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
+		//if (*it != NULL) {
 			glPushMatrix();
 			positionInGL();
+			//positionInGL();
+			//setColorInGL();
 			(*it)->draw();
 			glPopMatrix();
-		}
+		//}
 	}
 }
 
-void MyVehicle::turning_effect(Shape* shape_)
+/*void MyVehicle::turning_effect(Shape* shape_)
 {
 	Cylinder *cyl = static_cast<Cylinder *> (shape_);
 	
 	
-}
+}*/
