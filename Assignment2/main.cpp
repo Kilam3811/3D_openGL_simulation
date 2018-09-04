@@ -5,7 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include <map>
-
+#include <cassert>
 #ifdef __APPLE__
 	#include <OpenGL/gl.h>
 	#include <OpenGL/glu.h>
@@ -164,8 +164,8 @@ void drawGoals()
 void testing_Draw() {
 	//CUSTOMIZED VEHICLE
 
-	MyVehicle F1;
-	F1.setPosition(10,0,0);
+	//MyVehicle F1;
+	//F1.setPosition(10,0,0);
 	//F1.positionInGL();
 	//F1.draw();
 	//==========================================
@@ -326,12 +326,24 @@ void idle() {
 					vm.remoteID = 0;
 					
 					ShapeInit init;
-					MyVehicle(&vm, &init);
+					//MyVehicle(&vm, &init);
+
+					std::cout << "Has created shape to the server" << std::endl;
+					init.type = TRIANGULAR_PRISM;
+					init.xyz[0] = 0;
+					init.xyz[1] = 0;
+					init.xyz[2] = 0;
+					init.rgb[0] = 124 / 255.0;
+					init.rgb[1] = 32 / 255.0;
+					init.rgb[2] = 51 / 255.0;
+					init.params.tri.alen = 10;
+					init.params.tri.blen = 20;
+					init.params.tri.angle = PI / 4;
+					init.params.tri.depth = 10;
+					vm.shapes.push_back(init);
 					//Describle my car..
 					// student code goes here
 					//
-					
-					
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
 			}
@@ -366,9 +378,14 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-
 								//Testing ..... I know what to do now..
 								otherVehicles[vm.remoteID] = new Enemy(vm);
+								/*std::cout << "RemoteID is " << vm.remoteID << std::endl;
+								std:cout << "i is now " << i << std::endl;
+								std::cout << "model vector array size is " << models.size() << std::endl;*/
+
+
+						
 								//
 								// more student code goes here
 								//

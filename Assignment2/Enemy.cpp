@@ -18,9 +18,10 @@
 Shape * shape_ptr = NULL;
 Enemy::Enemy(VehicleModel vm_)
 {
+	vm = vm_;
 	std::vector<ShapeInit>::iterator it;
 	//Assume the exteral car would have one shape for now?..
-	for (it = vm_.shapes.begin(); it != vm_.shapes.end(); ++it) {
+	for (it = vm.shapes.begin(); it != vm.shapes.end(); ++it)
 		//Might optimized a bit later...
 		if (it->type == RECTANGULAR_PRISM) {
 			double xLength = it->params.rect.xlen;
@@ -43,10 +44,8 @@ Enemy::Enemy(VehicleModel vm_)
 			double blue = it->rgb[2];
 			double x_cor = it->xyz[0];
 			double y_cor = it->xyz[1];
-			double z_cor = it->xyz[2];			
+			double z_cor = it->xyz[2];
 			double rotate_angle = it->rotation;
-		
-
 			draw_cyl(radius, depth, red, green, blue, x_cor, y_cor, z_cor, rotate_angle);
 		}
 		else if (it->type == TRIANGULAR_PRISM) {
@@ -78,21 +77,19 @@ Enemy::Enemy(VehicleModel vm_)
 			double rotate_angle = it->rotation;
 			draw_tra(a_len, b_len, depth, height, offset, red, green, blue, x_cor, y_cor, z_cor, rotate_angle);
 		}
-	}
-
 }
 
 void Enemy::draw()
 {
 	std::vector<Shape *>::iterator it;
-	for (it = shapes.begin(); it != shapes.end(); ++it) {
+	for (it = enemy.begin(); it != enemy.end(); ++it) {
 		// move to the vehicle¡¦s local frame of reference
-		glPushMatrix();
-		positionInGL();
-		// all the local drawing code
-		(*it)->draw();
-		// move back to global frame of reference
-		glPopMatrix();
+			glPushMatrix();
+			positionInGL();
+			// all the local drawing code
+			(*it)->draw();
+			// move back to global frame of reference
+			glPopMatrix();
 	}
 
 }
@@ -103,7 +100,8 @@ void Enemy::draw_rec(double xLength, double yLength, double zLength, double red,
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
-	addShape(shape_ptr);
+	add_to_draw_list(shape_ptr);
+	shape_ptr->draw();
 }
 
 void Enemy::draw_tri(double a_len, double b_len, double depth, double theta, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
@@ -112,7 +110,8 @@ void Enemy::draw_tri(double a_len, double b_len, double depth, double theta, dou
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
-	addShape(shape_ptr);
+	add_to_draw_list(shape_ptr);
+	shape_ptr->draw();
 }
 
 void Enemy::draw_tra(double a_len, double b_len, double depth, double height, double offset, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
@@ -121,7 +120,8 @@ void Enemy::draw_tra(double a_len, double b_len, double depth, double height, do
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
-	addShape(shape_ptr);
+	add_to_draw_list(shape_ptr);
+	shape_ptr->draw();
 }
 
 void Enemy::draw_cyl(double radius, double depth, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
@@ -130,5 +130,11 @@ void Enemy::draw_cyl(double radius, double depth, double red, double green, doub
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
-	addShape(shape_ptr);
+	add_to_draw_list(shape_ptr);
+	shape_ptr->draw();
+}
+
+void Enemy::add_to_draw_list(Shape * shape)
+{
+	enemy.push_back(shape);
 }

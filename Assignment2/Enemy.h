@@ -11,7 +11,7 @@
 class Enemy : public MyVehicle {
 protected:
 	VehicleModel vm;
-
+	std::vector<Shape *> enemy;
 public:
 	Enemy(VehicleModel vm_);
 	void draw();
@@ -19,4 +19,5 @@ public:
 	void draw_tri(double a_len,double b_len,double depth,double theta,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);
 	void draw_tra(double a_len,double b_len,double depth,double height,double offset,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);
 	void draw_cyl(double radius,double depth,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);
+	void add_to_draw_list(Shape*);
 };

@@ -63,7 +63,7 @@ MyVehicle::MyVehicle()
 
 	
 	ptr = new Triangular (0.5, 1.5, 0.5, PI / 6);
-	ptr->setColor(100, 101, 124);
+	ptr->setColor(100, 11, 124);
 	ptr->setPosition(0.5, 1.9, 0);
 	addShape(ptr);
 
@@ -71,7 +71,7 @@ MyVehicle::MyVehicle()
 
 MyVehicle::MyVehicle(VehicleModel * vm, ShapeInit * init)
 {
-	std::vector<Shape*>::iterator it;
+	/*std::vector<Shape*>::iterator it;
 	//Assume the exteral car would have one shape for now?..
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Might optimized a bit later...
@@ -104,43 +104,42 @@ MyVehicle::MyVehicle(VehicleModel * vm, ShapeInit * init)
 			init->params.cyl.radius = cyl->getRadius();
 		}
 		Triangular* tri = dynamic_cast<Triangular*> (*it);
-		if ((*it) != NULL) {}
-		init->type = TRIANGULAR_PRISM;
-		init->xyz[0] = tri->getX();
-		init->xyz[1] = tri->getY();
-		init->xyz[2] = tri->getZ();
-		init->rgb[0] = tri->getRed();
-		init->rgb[1] = tri->getGreen();
-		init->rgb[2] = tri->getBlue();
-		init->rotation = tri->getRotation();
-		init->params.tri.alen = tri->getX_length();
-		init->params.tri.blen = tri->getY_length();
-		init->params.tri.angle = tri->getTheta();
-		init->params.tri.depth = tri->getZ_length();
-	}
-	/*Trapezoidal* tra = dynamic_cast<Trapezoidal*> (*it);
-	if ((*it) != NULL) {
-		init->type = TRAPEZOIDAL_PRISM;
-		init->xyz[0] = tra->getX();
-		init->xyz[1] = tra->getY();
-		init->xyz[2] = tra->getZ();
-		init->rgb[0] = tra->getRed();
-		init->rgb[1] = tra->getGreen();
-		init->rgb[2] = tra->getBlue();
-		init->rotation = tra->getRotation();
-		init->params.trap.alen = tra->get_a_length();
-		init->params.trap.blen = tra->get_b_length();
-		init->params.trap.aoff = tra->get_a_offset();
-		init->params.trap.depth = tra->get_depth();
-		init->params.trap.height = tra->get_height();
+		if ((*it) != NULL) {
+			init->type = TRIANGULAR_PRISM;
+			init->xyz[0] = tri->getX();
+			init->xyz[1] = tri->getY();
+			init->xyz[2] = tri->getZ();
+			init->rgb[0] = tri->getRed();
+			init->rgb[1] = tri->getGreen();
+			init->rgb[2] = tri->getBlue();
+			init->rotation = tri->getRotation();
+			init->params.tri.alen = tri->getX_length();
+			init->params.tri.blen = tri->getY_length();
+			init->params.tri.angle = tri->getTheta();
+			init->params.tri.depth = tri->getZ_length();
+		}
+		Trapezoidal* tra = dynamic_cast<Trapezoidal*> (*it);
+		if ((*it) != NULL) {
+			init->type = TRAPEZOIDAL_PRISM;
+			init->xyz[0] = tra->getX();
+			init->xyz[1] = tra->getY();
+			init->xyz[2] = tra->getZ();
+			init->rgb[0] = tra->getRed();
+			init->rgb[1] = tra->getGreen();
+			init->rgb[2] = tra->getBlue();
+			init->rotation = tra->getRotation();
+			init->params.trap.alen = tra->get_a_length();
+			init->params.trap.blen = tra->get_b_length();
+			init->params.trap.aoff = tra->get_a_offset();
+			init->params.trap.depth = tra->get_depth();
+			init->params.trap.height = tra->get_height();
+		}
 	}*/
 }
 
 void MyVehicle::draw()
 {
-	
 	std::vector<Shape *>::iterator it;
-	
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
 		Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
@@ -159,13 +158,13 @@ void MyVehicle::draw()
 			glPopMatrix();
 		}
 	}
-
+	
 }
 
 void MyVehicle::turning_effect()
 {
 	if (getSteering() != 0) {
-		std::cout << "turning at" << getSteering() << std::endl;
+		//std::cout << "turning at" << getSteering() << std::endl;
 	}
 	/*if (getSteering() > 0) {
 		setRotation(getSteering());
