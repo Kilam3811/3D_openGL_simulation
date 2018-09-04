@@ -5,6 +5,7 @@
 #include "Trapezoidal.h"
 #include "VectorMaths.hpp"
 #include "Messages.hpp"
+#include "RemoteDataManager.hpp"
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -72,20 +73,46 @@ MyVehicle::MyVehicle()
 
 void MyVehicle::draw()
 {
+
 	std::vector<Shape *>::iterator it;
+	double flag = 0;
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
 		Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
 		if (*it != NULL) {
-			glPushMatrix();
-			turning_effect();
-			positionInGL();
-			(*it)->draw();
-			glPopMatrix();
+			if (getSteering() > 0) {
+				//Draw a new one??
+
+				glPushMatrix();
+				
+				positionInGL();
+				//setRotation(getSteering());
+				(*it)->draw();
+				glPopMatrix();
+				std::cout << "Streeing at " << getSteering() << std::endl;
+			}
+			else if (getSteering() < 0) {
+				//Draw a new one??
+
+				glPushMatrix();
+				
+				positionInGL();
+				//setRotation(getSteering());
+				(*it)->draw();
+
+				//glTranslated(-shape_->getX(), -shape_->getY(), shape_->getZ());
+				glPopMatrix();
+				std::cout << "Streeing at " << getSteering() << std::endl;
+			}
+			else {
+				glPushMatrix();
+				positionInGL();
+				(*it)->draw();
+				glPopMatrix();
+			}
 		}
 		else {
 			glPushMatrix();
-			//turning_effect();
 			positionInGL();
 			(*it)->draw();
 			glPopMatrix();
@@ -93,18 +120,9 @@ void MyVehicle::draw()
 	}
 }
 
-void MyVehicle::turning_effect()
+void MyVehicle::turning_effect(Shape* shape_)
 {
-	if (getSteering() != 0) {
-		//std::cout << "turning at" << getSteering() << std::endl;
-	}
-	/*if (getSteering() > 0) {
-		setRotation(getSteering());
-	}
-	else if(getSteering() < 0){
-		setRotation(getSteering());
-	}
-	else {
-		setRotation(0);
-	}*/
+	Cylinder *cyl = static_cast<Cylinder *> (shape_);
+	
+	
 }

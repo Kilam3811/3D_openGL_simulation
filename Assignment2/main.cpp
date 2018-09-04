@@ -494,7 +494,9 @@ void idle() {
 								
 								// uncomment the line below to create remote vehicles
 								//Testing ..... I know what to do now..
-								otherVehicles[vm.remoteID] = new Enemy(vm);
+								
+								
+								//otherVehicles[vm.remoteID] = new Enemy(vm);
 								//
 								// more student code goes here
 								//
@@ -509,6 +511,7 @@ void idle() {
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
 
+								//std::cout << "Steering at " << vs.steering << std::endl
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
 									Vehicle * veh = iter->second;

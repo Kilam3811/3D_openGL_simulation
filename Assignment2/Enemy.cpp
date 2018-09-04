@@ -46,6 +46,8 @@ Enemy::Enemy(VehicleModel vm_)
 			double y_cor = it->xyz[1];
 			double z_cor = it->xyz[2];
 			double rotate_angle = it->rotation;
+
+
 			draw_cyl(radius, depth, red, green, blue, x_cor, y_cor, z_cor, rotate_angle);
 		}
 		else if (it->type == TRIANGULAR_PRISM) {
