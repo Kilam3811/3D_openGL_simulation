@@ -101,7 +101,6 @@ void Enemy::draw_rec(double xLength, double yLength, double zLength, double red,
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
 	add_to_draw_list(shape_ptr);
-	shape_ptr->draw();
 }
 
 void Enemy::draw_tri(double a_len, double b_len, double depth, double theta, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
@@ -111,7 +110,6 @@ void Enemy::draw_tri(double a_len, double b_len, double depth, double theta, dou
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
 	add_to_draw_list(shape_ptr);
-	shape_ptr->draw();
 }
 
 void Enemy::draw_tra(double a_len, double b_len, double depth, double height, double offset, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
@@ -121,7 +119,6 @@ void Enemy::draw_tra(double a_len, double b_len, double depth, double height, do
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
 	add_to_draw_list(shape_ptr);
-	shape_ptr->draw();
 }
 
 void Enemy::draw_cyl(double radius, double depth, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
@@ -131,7 +128,6 @@ void Enemy::draw_cyl(double radius, double depth, double red, double green, doub
 	shape_ptr->setRotation(rotate_angle);
 	shape_ptr->setColor(red, green, blue);
 	add_to_draw_list(shape_ptr);
-	shape_ptr->draw();
 }
 
 void Enemy::add_to_draw_list(Shape * shape)

@@ -46,6 +46,7 @@
 #include "Cylinder.h"
 #include "MyVehicle.h"
 #include "Enemy.h"
+#define MAX_COLOUR 255.0
 
 
 void display();
@@ -165,7 +166,7 @@ void testing_Draw() {
 	//CUSTOMIZED VEHICLE
 
 	//MyVehicle F1;
-	//F1.setPosition(10,0,0);
+	//F1.setPosition(0,0,0);
 	//F1.positionInGL();
 	//F1.draw();
 	//==========================================
@@ -213,7 +214,7 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	//testing_Draw();
+	testing_Draw();
 	glutSwapBuffers();
 };
 
@@ -324,12 +325,138 @@ void idle() {
 
 					VehicleModel vm;
 					vm.remoteID = 0;
-					
-					MyVehicle car;
-					car.setUp_info();
+					ShapeInit init;
+					/*//Body
+					ptr = new Rectangular(3, 1, 2);
+					ptr->setPosition(0, 0.4, 0);
+					ptr->setColor(255, 186, 221);
+					addShape(ptr);*/
+					init.type = RECTANGULAR_PRISM;
+					//Might have probs?
+					init.xyz[0] = 0;
+					init.xyz[1] = 0.4;
+					init.xyz[2] = 0;
+					init.rgb[0] = 255 / MAX_COLOUR;
+					init.rgb[1] = 186 / MAX_COLOUR;
+					init.rgb[2] = 221 / MAX_COLOUR;
+					init.rotation = 0;
+					init.params.rect.xlen = 3;
+					init.params.rect.ylen = 1;
+					init.params.rect.zlen = 2;
+					vm.shapes.push_back(init);
 
-					
-					//Describle my car..
+
+					/*//front right(seen from initial position)
+					ptr = new Cylinder(0.4, 0.1, 100, 10);
+					ptr->setColor(145, 207, 255);
+					ptr->setPosition(1.1, 0, 1.1);
+					addShape(ptr);*/
+
+					init.type = CYLINDER;
+					init.xyz[0] = 1.1;
+					init.xyz[1] = 0;
+					init.xyz[2] = 1.1;
+					init.rgb[0] = 145/MAX_COLOUR;
+					init.rgb[1] = 207/ MAX_COLOUR;
+					init.rgb[2] = 255/ MAX_COLOUR;
+					init.rotation = 0;
+					init.params.cyl.depth = 0.1;
+					init.params.cyl.radius = 0.4;
+					vm.shapes.push_back(init);
+
+
+					/*//front left(seen from initial position)
+					ptr = new Cylinder(0.4, 0.1, 100, 10);
+					ptr->setColor(145, 207, 255);
+					ptr->setPosition(1.1, 0, -1.1);
+					addShape(ptr);*/
+					init.type = CYLINDER;
+					init.xyz[0] = 1.1;
+					init.xyz[1] = 0;
+					init.xyz[2] = -1.1;
+					init.rgb[0] = 145 / MAX_COLOUR;
+					init.rgb[1] = 207 / MAX_COLOUR;
+					init.rgb[2] = 255 / MAX_COLOUR;
+					init.rotation = 0;
+					init.params.cyl.depth = 0.1;
+					init.params.cyl.radius = 0.4;
+					vm.shapes.push_back(init);
+
+					//back right(seen from initial position)
+					/*ptr = new Cylinder(0.8, 0.1, 100, 10);
+					ptr->setColor(255, 224, 147);
+					ptr->setPosition(-1.1, 0, -1.1);
+					addShape(ptr);*/
+
+					init.type = CYLINDER;
+					init.xyz[0] = -1.1;
+					init.xyz[1] = 0;
+					init.xyz[2] = -1.1;
+					init.rgb[0] = 255 / MAX_COLOUR;
+					init.rgb[1] = 224 / MAX_COLOUR;
+					init.rgb[2] = 147 / MAX_COLOUR;
+					init.rotation = 0;
+					init.params.cyl.depth = 0.1;
+					init.params.cyl.radius = 0.4;
+					vm.shapes.push_back(init);
+
+					/*//back left(seen from initial position)
+					ptr = new Cylinder(0.8, 0.1, 100, 10);
+					ptr->setColor(255, 224, 147);
+					ptr->setPosition(-1.1, 0, 1.1);
+					addShape(ptr);*/
+					init.type = CYLINDER;
+					init.xyz[0] = -1.1;
+					init.xyz[1] = 0;
+					init.xyz[2] = 1.1;
+					init.rgb[0] = 255 / MAX_COLOUR;
+					init.rgb[1] = 224 / MAX_COLOUR;
+					init.rgb[2] = 147 / MAX_COLOUR;
+					init.rotation = 0;
+					init.params.cyl.depth = 0.1;
+					init.params.cyl.radius = 0.4;
+					vm.shapes.push_back(init);
+
+
+					/*ptr = new Trapezoidal(1.5, 0.5, 0.5, 0.5, 0.5, 0.5);
+					ptr->setColor(10, 201, 124);
+					ptr->setPosition(0.5, 1.4, 0);
+					addShape(ptr);*/
+					init.type = TRAPEZOIDAL_PRISM;
+					init.xyz[0] = 0.5;
+					init.xyz[1] = 1.4;
+					init.xyz[2] = 0;
+					init.rgb[0] = 10/ MAX_COLOUR;
+					init.rgb[1] = 201 / MAX_COLOUR;
+					init.rgb[2] = 124 / MAX_COLOUR;
+					init.rotation = 0;
+					init.params.trap.alen = 1.5;
+					init.params.trap.blen = 0.5;
+					init.params.trap.aoff = 0.5;
+					init.params.trap.depth = 0.5;
+					init.params.trap.height = 0.5;
+					vm.shapes.push_back(init);
+
+
+					/*ptr = new Triangular(0.5, 1.5, 0.5, PI / 6);
+					ptr->setColor(100, 11, 124);
+					ptr->setPosition(0.5, 1.9, 0);
+					addShape(ptr);*/
+					init.type = TRIANGULAR_PRISM;
+					init.xyz[0] = 0.5;
+					init.xyz[1] = 1.9;
+					init.xyz[2] = 0;
+					init.rgb[0] = 100/ MAX_COLOUR;
+					init.rgb[1] = 11 / MAX_COLOUR;
+					init.rgb[2] = 124 / MAX_COLOUR;
+					init.rotation = 0;
+					init.params.tri.alen = 0.5;
+					init.params.tri.blen = 1.5;
+					init.params.tri.angle = PI / 6;
+					init.params.tri.depth = 0.5;
+					vm.shapes.push_back(init);
+
+				
 					// student code goes here
 					//
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
@@ -368,12 +495,6 @@ void idle() {
 								// uncomment the line below to create remote vehicles
 								//Testing ..... I know what to do now..
 								otherVehicles[vm.remoteID] = new Enemy(vm);
-								/*std::cout << "RemoteID is " << vm.remoteID << std::endl;
-								std:cout << "i is now " << i << std::endl;
-								std::cout << "model vector array size is " << models.size() << std::endl;*/
-
-
-						
 								//
 								// more student code goes here
 								//

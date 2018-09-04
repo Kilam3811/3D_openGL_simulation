@@ -7,7 +7,6 @@ protected:
 	//Some extra variables?
 public:
 	MyVehicle();
-	void setUp_info();
 	void draw();
 	void turning_effect();
 };
