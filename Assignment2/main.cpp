@@ -325,22 +325,10 @@ void idle() {
 					VehicleModel vm;
 					vm.remoteID = 0;
 					
-					ShapeInit init;
-					//MyVehicle(&vm, &init);
+					MyVehicle car;
+					car.setUp_info();
 
-					std::cout << "Has created shape to the server" << std::endl;
-					init.type = TRIANGULAR_PRISM;
-					init.xyz[0] = 0;
-					init.xyz[1] = 0;
-					init.xyz[2] = 0;
-					init.rgb[0] = 124 / 255.0;
-					init.rgb[1] = 32 / 255.0;
-					init.rgb[2] = 51 / 255.0;
-					init.params.tri.alen = 10;
-					init.params.tri.blen = 20;
-					init.params.tri.angle = PI / 4;
-					init.params.tri.depth = 10;
-					vm.shapes.push_back(init);
+					
 					//Describle my car..
 					// student code goes here
 					//

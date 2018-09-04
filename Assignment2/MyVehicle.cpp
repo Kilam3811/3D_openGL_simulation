@@ -21,6 +21,7 @@
 #endif
 
 Shape *ptr = NULL;
+#define MAX_COLOUR 255.0
 MyVehicle::MyVehicle()
 {
 	//SAMPLE CAR
@@ -69,72 +70,141 @@ MyVehicle::MyVehicle()
 
 }
 
-MyVehicle::MyVehicle(VehicleModel * vm, ShapeInit * init)
+void MyVehicle:: setUp_info()
 {
-	/*std::vector<Shape*>::iterator it;
-	//Assume the exteral car would have one shape for now?..
-	for (it = shapes.begin(); it != shapes.end(); ++it) {
-		//Might optimized a bit later...
-		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
-		if ((*it) != NULL) {
-			init->type = RECTANGULAR_PRISM;
-			init->xyz[0] = rec->getX();
-			init->xyz[1] = rec->getY();
-			init->xyz[2] = rec->getZ();
-			init->rgb[0] = rec->getRed();
-			init->rgb[1] = rec->getGreen();
-			init->rgb[2] = rec->getBlue();
-			init->rotation = rec->getRotation();
-			init->params.rect.xlen = rec->get_x_length();
-			init->params.rect.ylen = rec->get_y_length();
-			init->params.rect.zlen = rec->get_z_length();
-		}
+	VehicleModel vm;
+	ShapeInit init;
+	
+	/*//Body
+	ptr = new Rectangular(3, 1, 2);
+	ptr->setPosition(0, 0.4, 0);
+	ptr->setColor(255, 186, 221);
+	addShape(ptr);*/
+	init.type = RECTANGULAR_PRISM;
+	//Might have probs?
+	init.xyz[0] = 0;
+	init.xyz[1] = 0.4;
+	init.xyz[2] = 0;
+	init.rgb[0] = 255 / MAX_COLOUR;
+	init.rgb[1] = 186 / MAX_COLOUR;
+	init.rgb[2] = 221 / MAX_COLOUR;
+	init.rotation = 0;
+	init.params.rect.xlen = 3;
+	init.params.rect.ylen = 1;
+	init.params.rect.zlen = 2;
+	vm.shapes.push_back(init);
 
-		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
-		if ((*it) != NULL) {
-			init->type = CYLINDER;
-			init->xyz[0] = cyl->getX();
-			init->xyz[1] = cyl->getY();
-			init->xyz[2] = cyl->getZ();
-			init->rgb[0] = cyl->getRed();
-			init->rgb[1] = cyl->getGreen();
-			init->rgb[2] = cyl->getBlue();
-			init->rotation = cyl->getRotation();
-			init->params.cyl.depth = cyl->getHeight();
-			init->params.cyl.radius = cyl->getRadius();
-		}
-		Triangular* tri = dynamic_cast<Triangular*> (*it);
-		if ((*it) != NULL) {
-			init->type = TRIANGULAR_PRISM;
-			init->xyz[0] = tri->getX();
-			init->xyz[1] = tri->getY();
-			init->xyz[2] = tri->getZ();
-			init->rgb[0] = tri->getRed();
-			init->rgb[1] = tri->getGreen();
-			init->rgb[2] = tri->getBlue();
-			init->rotation = tri->getRotation();
-			init->params.tri.alen = tri->getX_length();
-			init->params.tri.blen = tri->getY_length();
-			init->params.tri.angle = tri->getTheta();
-			init->params.tri.depth = tri->getZ_length();
-		}
-		Trapezoidal* tra = dynamic_cast<Trapezoidal*> (*it);
-		if ((*it) != NULL) {
-			init->type = TRAPEZOIDAL_PRISM;
-			init->xyz[0] = tra->getX();
-			init->xyz[1] = tra->getY();
-			init->xyz[2] = tra->getZ();
-			init->rgb[0] = tra->getRed();
-			init->rgb[1] = tra->getGreen();
-			init->rgb[2] = tra->getBlue();
-			init->rotation = tra->getRotation();
-			init->params.trap.alen = tra->get_a_length();
-			init->params.trap.blen = tra->get_b_length();
-			init->params.trap.aoff = tra->get_a_offset();
-			init->params.trap.depth = tra->get_depth();
-			init->params.trap.height = tra->get_height();
-		}
-	}*/
+
+	/*//front right(seen from initial position)
+	ptr = new Cylinder(0.4, 0.1, 100, 10);
+	ptr->setColor(145, 207, 255);
+	ptr->setPosition(1.1, 0, 1.1);
+	addShape(ptr);*/
+
+	init.type = CYLINDER;
+	init.xyz[0] = 1.1;
+	init.xyz[1] = 0;
+	init.xyz[2] = 1.1;
+	init.rgb[0] = 145/MAX_COLOUR;
+	init.rgb[1] = 207/ MAX_COLOUR;
+	init.rgb[2] = 255/ MAX_COLOUR;
+	init.rotation = 0;
+	init.params.cyl.depth = 0.1;
+	init.params.cyl.radius = 0.4;
+	vm.shapes.push_back(init);
+
+
+	/*//front left(seen from initial position)
+	ptr = new Cylinder(0.4, 0.1, 100, 10);
+	ptr->setColor(145, 207, 255);
+	ptr->setPosition(1.1, 0, -1.1);
+	addShape(ptr);*/
+	init.type = CYLINDER;
+	init.xyz[0] = 1.1;
+	init.xyz[1] = 0;
+	init.xyz[2] = -1.1;
+	init.rgb[0] = 145 / MAX_COLOUR;
+	init.rgb[1] = 207 / MAX_COLOUR;
+	init.rgb[2] = 255 / MAX_COLOUR;
+	init.rotation = 0;
+	init.params.cyl.depth = 0.1;
+	init.params.cyl.radius = 0.4;
+	vm.shapes.push_back(init);
+
+	//back right(seen from initial position)
+	/*ptr = new Cylinder(0.8, 0.1, 100, 10);
+	ptr->setColor(255, 224, 147);
+	ptr->setPosition(-1.1, 0, -1.1);
+	addShape(ptr);*/
+
+	init.type = CYLINDER;
+	init.xyz[0] = -1.1;
+	init.xyz[1] = 0;
+	init.xyz[2] = -1.1;
+	init.rgb[0] = 145 / MAX_COLOUR;
+	init.rgb[1] = 207 / MAX_COLOUR;
+	init.rgb[2] = 255 / MAX_COLOUR;
+	init.rotation = 0;
+	init.params.cyl.depth = 0.1;
+	init.params.cyl.radius = 0.4;
+	vm.shapes.push_back(init);
+
+	/*//back left(seen from initial position)
+	ptr = new Cylinder(0.8, 0.1, 100, 10);
+	ptr->setColor(255, 224, 147);
+	ptr->setPosition(-1.1, 0, 1.1);
+	addShape(ptr);*/
+	init.type = CYLINDER;
+	init.xyz[0] = -1.1;
+	init.xyz[1] = 0;
+	init.xyz[2] = 1.1;
+	init.rgb[0] = 145 / MAX_COLOUR;
+	init.rgb[1] = 207 / MAX_COLOUR;
+	init.rgb[2] = 255 / MAX_COLOUR;
+	init.rotation = 0;
+	init.params.cyl.depth = 0.1;
+	init.params.cyl.radius = 0.4;
+	vm.shapes.push_back(init);
+
+
+	/*ptr = new Trapezoidal(1.5, 0.5, 0.5, 0.5, 0.5, 0.5);
+	ptr->setColor(10, 201, 124);
+	ptr->setPosition(0.5, 1.4, 0);
+	addShape(ptr);*/
+	init.type = TRAPEZOIDAL_PRISM;
+	init.xyz[0] = 0.5;
+	init.xyz[1] = 1.4;
+	init.xyz[2] = 0;
+	init.rgb[0] = 10/ MAX_COLOUR;
+	init.rgb[1] = 201 / MAX_COLOUR;
+	init.rgb[2] = 124 / MAX_COLOUR;
+	init.rotation = 0;
+	init.params.trap.alen = 1.5;
+	init.params.trap.blen = 0.5;
+	init.params.trap.aoff = 0.5;
+	init.params.trap.depth = 0.5;
+	init.params.trap.height = 0.5;
+	vm.shapes.push_back(init);
+
+
+	/*ptr = new Triangular(0.5, 1.5, 0.5, PI / 6);
+	ptr->setColor(100, 11, 124);
+	ptr->setPosition(0.5, 1.9, 0);
+	addShape(ptr);*/
+	init.type = TRIANGULAR_PRISM;
+	init.xyz[0] = 0.5;
+	init.xyz[1] = 1.9;
+	init.xyz[2] = 0;
+	init.rgb[0] = 100/ MAX_COLOUR;
+	init.rgb[1] = 11 / MAX_COLOUR;
+	init.rgb[2] = 124 / MAX_COLOUR;
+	init.rotation = 0;
+	init.params.tri.alen = 0.5;
+	init.params.tri.blen = 1.5;
+	init.params.tri.angle = PI / 6;
+	init.params.tri.depth = 0.5;
+	vm.shapes.push_back(init);
+		
 }
 
 void MyVehicle::draw()

@@ -7,7 +7,7 @@ protected:
 	//Some extra variables?
 public:
 	MyVehicle();
-	MyVehicle(VehicleModel *vm , ShapeInit *init);
+	void setUp_info();
 	void draw();
 	void turning_effect();
 };
