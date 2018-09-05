@@ -72,6 +72,7 @@ MyVehicle::MyVehicle()
 
 }
 
+static double temp = 0;
 void MyVehicle::draw()
 {
 	std::vector<Shape *>::iterator it;
@@ -84,6 +85,8 @@ void MyVehicle::draw()
 				glPushMatrix();
 				positionInGL();
 				(*it)->setRotation(getSteering());
+
+				//Needs to be rolling......
 				//std::cout << "steering at " << getSteering() << std::endl;
 				(*it)->draw();
 				//glTranslated(0, -(*it)->getY(), 0);
@@ -94,18 +97,51 @@ void MyVehicle::draw()
 				positionInGL();
 				//positionInGL();
 				//setColorInGL();
-				double dt = time_elapsed;
+				/*double dt = time_elapsed;
 				double temp_s = getSpeed()*dt;
 				//static double s_1 = 0;
 				//s_1 += temp_s;
 				//std::cout << "Travel distance " << s_1 << std::endl;
 				double radian = temp_s / cyl->getRadius();
-				double theta
+				//double theta = (radian*PI
 				//Traslation transforms in to rotation
-				std::cout << "Travel temporary angle of " << theta << std::endl;
-				//glTranslated(cyl->getX(), cyl->getY(), cyl->getZ());
-				glRotated()
+				//std::cout << "Travel temporary angle of " << theta << std::endl;
+				double x = 0;
+				double y = 0;
+				double theta = radian;
+				//static double temp = 0;
+				
+
+				if (getSpeed() == 0) {
+					glPushMatrix();
+					//positionInGL();
+					//glTranslated(-1.1, cyl->getRadius(), 0);
+					//glRotated(temp, 0,cyl->getRadius(),0);
+
+					setX(-1.1);
+					setY(cyl->getRadius());
+					setZ(0);
+					setRotation(temp);
+					temp += 1;
+
+					if (temp > 99999999) {
+						temp = 0;
+					}
+					(*it)->draw();
+					glPopMatrix();
+					
+				}else {
+					(*it)->draw();
+				}
+				
+				//(*it)->setRotation(theta);
+				
+				//theta += 0.2;
+				//} while (theta < 2 * PI);*/
 				(*it)->draw();
+				
+				//glRotated()
+				
 				glPopMatrix();
 			}
 		}
