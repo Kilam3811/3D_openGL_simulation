@@ -32,7 +32,9 @@ public:
 protected:
 	double speed;     // m/s
 	double steering;  // degrees
-
+	
+					  //??
+	double time_elapsed;
 	std::vector<Shape *> shapes;
 };
 

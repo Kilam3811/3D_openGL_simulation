@@ -78,7 +78,8 @@ void MyVehicle::draw()
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
 		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
-		if (*it != NULL) {
+		if (cyl != NULL) {
+			//Indicating the front wheel
 			if ((*it)->getX() == 1.1) {
 				glPushMatrix();
 				positionInGL();
@@ -93,6 +94,17 @@ void MyVehicle::draw()
 				positionInGL();
 				//positionInGL();
 				//setColorInGL();
+				double dt = time_elapsed;
+				double temp_s = getSpeed()*dt;
+				//static double s_1 = 0;
+				//s_1 += temp_s;
+				//std::cout << "Travel distance " << s_1 << std::endl;
+				double radian = temp_s / cyl->getRadius();
+				double theta
+				//Traslation transforms in to rotation
+				std::cout << "Travel temporary angle of " << theta << std::endl;
+				//glTranslated(cyl->getX(), cyl->getY(), cyl->getZ());
+				glRotated()
 				(*it)->draw();
 				glPopMatrix();
 			}
@@ -112,7 +124,6 @@ bool MyVehicle::check_front_wheel(Cylinder * cyl) {
 	std::vector<ShapeInit>::iterator shape_it;
 	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
 		if (shape_it->params.cyl.isSteering&&shape_it->xyz[0] == cyl->getX() && shape_it->xyz[1] == cyl->getY() && shape_it->xyz[2] == cyl->getZ()) {
-			std::cout << "front wheels radius is " << cyl->getRadius() << std::endl;
 			return TRUE;
 		}
 	};

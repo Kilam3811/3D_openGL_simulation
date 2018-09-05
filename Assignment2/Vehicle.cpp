@@ -18,6 +18,7 @@ void Vehicle::update(double dt)
 	speed = clamp(MAX_BACKWARD_SPEED_MPS, speed, MAX_FORWARD_SPEED_MPS);
 	steering = clamp(MAX_LEFT_STEERING_DEGS, steering, MAX_RIGHT_STEERING_DEGS);
 
+	time_elapsed = dt;
 	// update position by integrating the speed
 	x += speed * dt * cos(rotation * 3.1415926535 / 180.0);
 	z += speed * dt * sin(rotation * 3.1415926535 / 180.0);
@@ -40,7 +41,6 @@ void Vehicle::update(double speed_, double steering_, double dt)
 {
 	speed = speed + ((speed_) - speed)*dt*4;
 	steering = steering + (steering_ - steering)*dt * 6;
-
 	update(dt);
 }
 
