@@ -20,12 +20,13 @@ Cylinder::Cylinder(double radius_, double depth_, double slices_, double stacks_
 void Cylinder::draw()
 {
 
+	//Rolling();
 	positionInGL();
 	setColorInGL();
 	//Set up cylinder variable
 	GLUquadric* cylinder = gluNewQuadric();
 	//Move to the plane(Spcific position at first)
-	glTranslated(0,getRadius(),-getHeight()/2);
+	//glTranslated(0,getRadius(),-getHeight()/2);
 	//Call the function to draw out the cylinder
 	gluCylinder(cylinder,getRadius(),getRadius(),getHeight(),getSlices(),getStacks());
 

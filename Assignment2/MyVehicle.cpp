@@ -36,26 +36,26 @@ MyVehicle::MyVehicle()
 	//front right(seen from initial position)
 	ptr = new Cylinder (0.4, 0.1, 100, 10);
 	ptr->setColor(145, 207, 255);
-	ptr->setPosition(1.1, 0, 1.1);
+	ptr->setPosition(1.1, 0.2, 1.1);
 	addShape(ptr);
 
 	//front left(seen from initial position)
 	ptr = new Cylinder (0.4, 0.1, 100, 10);
 	ptr->setColor(145, 207, 255);
-	ptr->setPosition(1.1, 0, -1.1);
+	ptr->setPosition(1.1, 0.2, -1.1);
 	addShape(ptr);
 
 	//back right(seen from initial position)
 	ptr = new Cylinder (0.8, 0.1, 100, 10);
 	ptr->setColor(255, 224, 147);
-	ptr->setPosition(-1.1, 0, -1.1);
+	ptr->setPosition(-1.1, 0.4, -1.1);
 	addShape(ptr);
 
 	//back left(seen from initial position)
 	
 	ptr = new Cylinder (0.8, 0.1, 100, 10);
 	ptr->setColor(255, 224, 147);
-	ptr->setPosition(-1.1, 0, 1.1);
+	ptr->setPosition(-1.1, 0.4, 1.1);
 	addShape(ptr);
 
 	
@@ -77,11 +77,41 @@ void MyVehicle::draw()
 {
 	std::vector<Shape *>::iterator it;
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
-		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
 		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
+		//Check if it is a cylinder
 		if (cyl != NULL) {
-			//Indicating the front wheel
-			if ((*it)->getX() == 1.1) {
+			//If it is turning. adjust the angle
+			if (getSteering() != 0) {
+				//Indicating the front wheel
+				if ((*it)->getX() == 1.1) {
+					glPushMatrix();
+					positionInGL();
+					(*it)->setRotation(getSteering());
+					//Also has to be rolling
+					(*it)->draw();
+					glPopMatrix();
+				}
+				//If it is not front wheel
+				else {
+					//Also has to be rolling
+					glPushMatrix();
+					positionInGL();
+
+
+					(*it)->setRotation(temp);
+					temp += 2;
+					if (temp > 360) temp = 0;
+
+					//Needs to be rolling......
+					//std::cout << "steering at " << getSteering() << std::endl;
+					(*it)->draw();
+					//glTranslated(0, -(*it)->getY(), 0);
+					glPopMatrix();
+				}
+
+			}
+			//else keeps rolling or stop?
+			else {
 				glPushMatrix();
 				positionInGL();
 				(*it)->setRotation(getSteering());
@@ -90,58 +120,6 @@ void MyVehicle::draw()
 				//std::cout << "steering at " << getSteering() << std::endl;
 				(*it)->draw();
 				//glTranslated(0, -(*it)->getY(), 0);
-				glPopMatrix();
-			}
-			else {
-				glPushMatrix();
-				positionInGL();
-				//positionInGL();
-				//setColorInGL();
-				/*double dt = time_elapsed;
-				double temp_s = getSpeed()*dt;
-				//static double s_1 = 0;
-				//s_1 += temp_s;
-				//std::cout << "Travel distance " << s_1 << std::endl;
-				double radian = temp_s / cyl->getRadius();
-				//double theta = (radian*PI
-				//Traslation transforms in to rotation
-				//std::cout << "Travel temporary angle of " << theta << std::endl;
-				double x = 0;
-				double y = 0;
-				double theta = radian;
-				//static double temp = 0;
-				
-
-				if (getSpeed() == 0) {
-					glPushMatrix();
-					//positionInGL();
-					//glTranslated(-1.1, cyl->getRadius(), 0);
-					//glRotated(temp, 0,cyl->getRadius(),0);
-
-					setX(-1.1);
-					setY(cyl->getRadius());
-					setZ(0);
-					setRotation(temp);
-					temp += 1;
-
-					if (temp > 99999999) {
-						temp = 0;
-					}
-					(*it)->draw();
-					glPopMatrix();
-					
-				}else {
-					(*it)->draw();
-				}
-				
-				//(*it)->setRotation(theta);
-				
-				//theta += 0.2;
-				//} while (theta < 2 * PI);*/
-				(*it)->draw();
-				
-				//glRotated()
-				
 				glPopMatrix();
 			}
 		}

@@ -374,7 +374,7 @@ void idle() {
 					addShape(ptr);*/
 					init_2.type = CYLINDER;
 					init_2.xyz[0] = 1.1;
-					init_2.xyz[1] = 0;
+					init_2.xyz[1] = 0.2;
 					init_2.xyz[2] = -1.1;
 					init_2.rgb[0] = 145 / MAX_COLOUR;
 					init_2.rgb[1] = 207 / MAX_COLOUR;
@@ -394,7 +394,7 @@ void idle() {
 					ShapeInit init_3;
 					init_3.type = CYLINDER;
 					init_3.xyz[0] = -1.1;
-					init_3.xyz[1] = 0;
+					init_3.xyz[1] = 0.4;
 					init_3.xyz[2] = -1.1;
 					init_3.rgb[0] = 255 / MAX_COLOUR;
 					init_3.rgb[1] = 224 / MAX_COLOUR;
@@ -414,7 +414,7 @@ void idle() {
 					ShapeInit init_4;
 					init_4.type = CYLINDER;
 					init_4.xyz[0] = -1.1;
-					init_4.xyz[1] = 0;
+					init_4.xyz[1] = 0.4;
 					init_4.xyz[2] = 1.1;
 					init_4.rgb[0] = 255 / MAX_COLOUR;
 					init_4.rgb[1] = 224 / MAX_COLOUR;

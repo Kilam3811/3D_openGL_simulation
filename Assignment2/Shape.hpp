@@ -33,6 +33,8 @@ public:
 	double getBlue();
 	void setColor(float red_, float green_, float blue_);
 
+	//Private func
+	void Rolling();
 protected:
 	double x, y, z;               // position
 	double rotation;              // heading of the object in the horizontal plane (degrees)
