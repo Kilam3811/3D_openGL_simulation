@@ -49,7 +49,6 @@ Remote::Remote(VehicleModel vm_)
 			double z_cor = it->xyz[2];
 			double rotate_angle = it->rotation;
 			add_to_shapeInit_list(*it);
-
 			draw_cyl(radius, depth, red, green, blue, x_cor, y_cor, z_cor, rotate_angle);
 		}
 		else if (it->type == TRIANGULAR_PRISM) {
@@ -92,18 +91,17 @@ void Remote::draw()
 	for (it = cars.begin(); it != cars.end(); ++it) {
 		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
 		if (cyl != NULL) {
-			if (check_wheel(cyl)) {
+			if (check_front_wheel(cyl)) {
 				//std::cout << "angle at" << getSteering() << std::endl;
 				glPushMatrix();
 				positionInGL();
-				// all the local drawing code
-				//setRotation(getSteering());
-				//glPushMatrix();
+				//static int count = 0;
+				//std::cout << "front wheels radius is " << cyl->getRadius() << std::endl;
 				
+				(*it)->setRotation(getSteering());
+				//std::cout << "steering at " << getSteering() << std::endl;
 				(*it)->draw();
-				
-				//glPopMatrix();
-				// move back to global frame of reference
+				//glTranslated(0, -(*it)->getY(), 0);
 				glPopMatrix();
 			}
 			else {
@@ -176,4 +174,5 @@ void Remote::add_to_shapeInit_list(ShapeInit init)
 {
 	cars_shapeInit.push_back(init);
 }
+
 

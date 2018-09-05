@@ -10,6 +10,5 @@ protected:
 public:
 	MyVehicle();
 	void draw();
-	bool check_wheel(Cylinder * cyl);
-	//void turning_effect(Shape* shape_);
+	bool check_front_wheel(Cylinder * cyl);
 };

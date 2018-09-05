@@ -345,124 +345,127 @@ void idle() {
 					init.params.rect.zlen = 2;
 					vm.shapes.push_back(init);
 
-
+					ShapeInit init_1;
 					/*//front right(seen from initial position)
 					ptr = new Cylinder(0.4, 0.1, 100, 10);
 					ptr->setColor(145, 207, 255);
 					ptr->setPosition(1.1, 0, 1.1);
 					addShape(ptr);*/
 
-					init.type = CYLINDER;
-					init.xyz[0] = 1.1;
-					init.xyz[1] = 0;
-					init.xyz[2] = 1.1;
-					init.rgb[0] = 145/MAX_COLOUR;
-					init.rgb[1] = 207/ MAX_COLOUR;
-					init.rgb[2] = 255/ MAX_COLOUR;
-					init.rotation = 0;
-					init.params.cyl.depth = 0.1;
-					init.params.cyl.radius = 0.4;
-					init.params.cyl.isSteering = TRUE;
-					init.params.cyl.isRolling = TRUE;
-					vm.shapes.push_back(init);
+					init_1.type = CYLINDER;
+					init_1.xyz[0] = 1.1;
+					init_1.xyz[1] = 0;
+					init_1.xyz[2] = 1.1;
+					init_1.rgb[0] = 145/MAX_COLOUR;
+					init_1.rgb[1] = 207/ MAX_COLOUR;
+					init_1.rgb[2] = 255/ MAX_COLOUR;
+					init_1.rotation = 0;
+					init_1.params.cyl.depth = 0.1;
+					init_1.params.cyl.radius = 0.4;
+					init_1.params.cyl.isSteering = TRUE;
+					init_1.params.cyl.isRolling = TRUE;
+					vm.shapes.push_back(init_1);
 
-
+					ShapeInit init_2;
 					/*//front left(seen from initial position)
 					ptr = new Cylinder(0.4, 0.1, 100, 10);
 					ptr->setColor(145, 207, 255);
 					ptr->setPosition(1.1, 0, -1.1);
 					addShape(ptr);*/
-					init.type = CYLINDER;
-					init.xyz[0] = 1.1;
-					init.xyz[1] = 0;
-					init.xyz[2] = -1.1;
-					init.rgb[0] = 145 / MAX_COLOUR;
-					init.rgb[1] = 207 / MAX_COLOUR;
-					init.rgb[2] = 255 / MAX_COLOUR;
-					init.rotation = 0;
-					init.params.cyl.depth = 0.1;
-					init.params.cyl.radius = 0.4;
-					init.params.cyl.isSteering = TRUE;
-					init.params.cyl.isRolling = TRUE;
-					vm.shapes.push_back(init);
+					init_2.type = CYLINDER;
+					init_2.xyz[0] = 1.1;
+					init_2.xyz[1] = 0;
+					init_2.xyz[2] = -1.1;
+					init_2.rgb[0] = 145 / MAX_COLOUR;
+					init_2.rgb[1] = 207 / MAX_COLOUR;
+					init_2.rgb[2] = 255 / MAX_COLOUR;
+					init_2.rotation = 0;
+					init_2.params.cyl.depth = 0.1;
+					init_2.params.cyl.radius = 0.4;
+					init_2.params.cyl.isSteering = TRUE;
+					init_2.params.cyl.isRolling = TRUE;
+					vm.shapes.push_back(init_2);
 
 					//back right(seen from initial position)
 					/*ptr = new Cylinder(0.8, 0.1, 100, 10);
 					ptr->setColor(255, 224, 147);
 					ptr->setPosition(-1.1, 0, -1.1);
 					addShape(ptr);*/
-
-					init.type = CYLINDER;
-					init.xyz[0] = -1.1;
-					init.xyz[1] = 0;
-					init.xyz[2] = -1.1;
-					init.rgb[0] = 255 / MAX_COLOUR;
-					init.rgb[1] = 224 / MAX_COLOUR;
-					init.rgb[2] = 147 / MAX_COLOUR;
-					init.rotation = 0;
-					init.params.cyl.depth = 0.1;
-					init.params.cyl.radius = 0.4;
-					init.params.cyl.isSteering = FALSE;
-					init.params.cyl.isRolling = TRUE;
-					vm.shapes.push_back(init);
+					ShapeInit init_3;
+					init_3.type = CYLINDER;
+					init_3.xyz[0] = -1.1;
+					init_3.xyz[1] = 0;
+					init_3.xyz[2] = -1.1;
+					init_3.rgb[0] = 255 / MAX_COLOUR;
+					init_3.rgb[1] = 224 / MAX_COLOUR;
+					init_3.rgb[2] = 147 / MAX_COLOUR;
+					init_3.rotation = 0;
+					init_3.params.cyl.depth = 0.1;
+					init_3.params.cyl.radius = 0.8;
+					init_3.params.cyl.isSteering = FALSE;
+					init_3.params.cyl.isRolling = FALSE;
+					vm.shapes.push_back(init_3);
 
 					/*//back left(seen from initial position)
 					ptr = new Cylinder(0.8, 0.1, 100, 10);
 					ptr->setColor(255, 224, 147);
 					ptr->setPosition(-1.1, 0, 1.1);
 					addShape(ptr);*/
-					init.type = CYLINDER;
-					init.xyz[0] = -1.1;
-					init.xyz[1] = 0;
-					init.xyz[2] = 1.1;
-					init.rgb[0] = 255 / MAX_COLOUR;
-					init.rgb[1] = 224 / MAX_COLOUR;
-					init.rgb[2] = 147 / MAX_COLOUR;
-					init.rotation = 0;
-					init.params.cyl.depth = 0.1;
-					init.params.cyl.radius = 0.4;
-					init.params.cyl.isSteering = FALSE;
-					init.params.cyl.isRolling = TRUE;
-					vm.shapes.push_back(init);
+					ShapeInit init_4;
+					init_4.type = CYLINDER;
+					init_4.xyz[0] = -1.1;
+					init_4.xyz[1] = 0;
+					init_4.xyz[2] = 1.1;
+					init_4.rgb[0] = 255 / MAX_COLOUR;
+					init_4.rgb[1] = 224 / MAX_COLOUR;
+					init_4.rgb[2] = 147 / MAX_COLOUR;
+					init_4.rotation = 0;
+					init_4.params.cyl.depth = 0.1;
+					init_4.params.cyl.radius = 0.8;
+					init_4.params.cyl.isSteering = FALSE;
+					init_4.params.cyl.isRolling = TRUE;
+					vm.shapes.push_back(init_4);
 
 
 					/*ptr = new Trapezoidal(1.5, 0.5, 0.5, 0.5, 0.5, 0.5);
 					ptr->setColor(10, 201, 124);
 					ptr->setPosition(0.5, 1.4, 0);
 					addShape(ptr);*/
-					init.type = TRAPEZOIDAL_PRISM;
-					init.xyz[0] = 0.5;
-					init.xyz[1] = 1.4;
-					init.xyz[2] = 0;
-					init.rgb[0] = 10/ MAX_COLOUR;
-					init.rgb[1] = 201 / MAX_COLOUR;
-					init.rgb[2] = 124 / MAX_COLOUR;
-					init.rotation = 0;
-					init.params.trap.alen = 1.5;
-					init.params.trap.blen = 0.5;
-					init.params.trap.aoff = 0.5;
-					init.params.trap.depth = 0.5;
-					init.params.trap.height = 0.5;
-					vm.shapes.push_back(init);
+					ShapeInit init_5;
+					init_5.type = TRAPEZOIDAL_PRISM;
+					init_5.xyz[0] = 0.5;
+					init_5.xyz[1] = 1.4;
+					init_5.xyz[2] = 0;
+					init_5.rgb[0] = 10/ MAX_COLOUR;
+					init_5.rgb[1] = 201 / MAX_COLOUR;
+					init_5.rgb[2] = 124 / MAX_COLOUR;
+					init_5.rotation = 0;
+					init_5.params.trap.alen = 1.5;
+					init_5.params.trap.blen = 0.5;
+					init_5.params.trap.aoff = 0.5;
+					init_5.params.trap.depth = 0.5;
+					init_5.params.trap.height = 0.5;
+					vm.shapes.push_back(init_5);
 
 
 					/*ptr = new Triangular(0.5, 1.5, 0.5, PI / 6);
 					ptr->setColor(100, 11, 124);
 					ptr->setPosition(0.5, 1.9, 0);
 					addShape(ptr);*/
-					init.type = TRIANGULAR_PRISM;
-					init.xyz[0] = 0.5;
-					init.xyz[1] = 1.9;
-					init.xyz[2] = 0;
-					init.rgb[0] = 100/ MAX_COLOUR;
-					init.rgb[1] = 11 / MAX_COLOUR;
-					init.rgb[2] = 124 / MAX_COLOUR;
-					init.rotation = 0;
-					init.params.tri.alen = 0.5;
-					init.params.tri.blen = 1.5;
-					init.params.tri.angle = PI / 6;
-					init.params.tri.depth = 0.5;
-					vm.shapes.push_back(init);
+					ShapeInit init_6;
+					init_6.type = TRIANGULAR_PRISM;
+					init_6.xyz[0] = 0.5;
+					init_6.xyz[1] = 1.9;
+					init_6.xyz[2] = 0;
+					init_6.rgb[0] = 100/ MAX_COLOUR;
+					init_6.rgb[1] = 11 / MAX_COLOUR;
+					init_6.rgb[2] = 124 / MAX_COLOUR;
+					init_6.rotation = 0;
+					init_6.params.tri.alen = 0.5;
+					init_6.params.tri.blen = 1.5;
+					init_6.params.tri.angle = PI / 6;
+					init_6.params.tri.depth = 0.5;
+					vm.shapes.push_back(init_6);
 
 				
 					// student code goes here
@@ -519,7 +522,6 @@ void idle() {
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
 
-								std::cout << "Steering at " << vs.steering << std::endl;
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
 									Vehicle * veh = iter->second;

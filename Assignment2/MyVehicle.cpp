@@ -77,15 +77,15 @@ void MyVehicle::draw()
 	std::vector<Shape *>::iterator it;
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
-		Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
+		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
 		if (*it != NULL) {
-			if (check_wheel(temp_ptr)) {
-				std::cout << "steering at " << getSteering() << std::endl;
+			if ((*it)->getX() == 1.1) {
 				glPushMatrix();
 				positionInGL();
-				//positionInGL();
-				//setColorInGL();
+				(*it)->setRotation(getSteering());
+				//std::cout << "steering at " << getSteering() << std::endl;
 				(*it)->draw();
+				//glTranslated(0, -(*it)->getY(), 0);
 				glPopMatrix();
 			}
 			else {
@@ -107,15 +107,13 @@ void MyVehicle::draw()
 		}
 	};
 }
-
-bool MyVehicle::check_wheel(Cylinder * cyl)
-{
+bool MyVehicle::check_front_wheel(Cylinder * cyl) {
+	//static double count = 0;
 	std::vector<ShapeInit>::iterator shape_it;
-	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); ++shape_it) {
-		if (((shape_it)->type == CYLINDER) && (shape_it)->params.cyl.radius == cyl->getRadius()) {
-			if (shape_it->params.cyl.isSteering) {
-				return TRUE;
-			}
+	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
+		if (shape_it->params.cyl.isSteering&&shape_it->xyz[0] == cyl->getX() && shape_it->xyz[1] == cyl->getY() && shape_it->xyz[2] == cyl->getZ()) {
+			std::cout << "front wheels radius is " << cyl->getRadius() << std::endl;
+			return TRUE;
 		}
 	};
 	return FALSE;
