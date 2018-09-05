@@ -70,6 +70,7 @@ MyVehicle::MyVehicle()
 	ptr->setPosition(0.5, 1.9, 0);
 	addShape(ptr);
 
+	//SPOKES
 	ptr = new Rectangular(cos(PI/4)*0.5, sin(PI / 4)*0.5, 0.8);
 	ptr->setPosition(-1.1, 0.4, -(0.4+1.1));
 	addShape(ptr);
@@ -171,51 +172,24 @@ void MyVehicle::draw()
 			}
 			//front wheel
 			else if ((rec->getX() == 1.1 && (rec->getZ() == -(0.4 + 1.1)) || rec->getZ() == (0.4 + 1.1))) {
-				if (getSteering() != 0) {
-					glPushMatrix();
-					positionInGL();
+				glPushMatrix();
+				positionInGL();
 
-					double front_radius = 0.4;
+				double front_radius = 0.4;
 
-					double instant_distance = getSpeed() * time_elapsed;
-					static double total_distance = 0;
-					total_distance += instant_distance;
-					double theta = total_distance / front_radius;
+				double instant_distance = getSpeed() * time_elapsed;
+				static double total_distance = 0;
+				total_distance += instant_distance;
+				double theta = total_distance / front_radius;
 
-					theta *= 180 / PI;
-					//glRotated(-getSteering(), 0, 1, 0);
-
-					//std::cout << "dis is " << instant_distance << std::endl;
-					rec->setRotation(theta);
-					rec->draw_rolling();
-					glPopMatrix();
-					
-				}
-				else {
-					glPushMatrix();
-					positionInGL();
-
-					double front_radius = 0.4;
-
-					double instant_distance = getSpeed() * time_elapsed;
-					static double total_distance = 0;
-					total_distance += instant_distance;
-					double theta = total_distance / front_radius;
-
-					theta *= 180 / PI;
-
-
-					//std::cout << "dis is " << instant_distance << std::endl;
-					rec->setRotation(theta);
-					rec->draw_rolling();
-					glPopMatrix();
-				}
+				theta *= 180 / PI;
+				rec->setRotation(theta);
+				rec->draw_rolling();
+				glPopMatrix();
 			}
 			else {
 				glPushMatrix();
 				positionInGL();
-				//positionInGL();
-				//setColorInGL();
 				(*it)->draw();
 				glPopMatrix();
 			}
@@ -223,8 +197,6 @@ void MyVehicle::draw()
 		else {
 			glPushMatrix();
 			positionInGL();
-			//positionInGL();
-			//setColorInGL();
 			(*it)->draw();
 			glPopMatrix();
 		}

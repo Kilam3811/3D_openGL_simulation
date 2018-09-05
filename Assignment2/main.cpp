@@ -468,6 +468,75 @@ void idle() {
 					vm.shapes.push_back(init_6);
 
 				
+
+					/*ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+					ptr->setPosition(-1.1, 0.4, -(0.4 + 1.1));
+					addShape(ptr);*/
+					ShapeInit init_7;
+					init_7.type = RECTANGULAR_PRISM;
+					init_7.xyz[0] = -1.1;
+					init_7.xyz[1] = 0.4;
+					init_7.xyz[2] = -1.5;
+					init_7.rgb[0] = 244 / MAX_COLOUR;
+					init_7.rgb[1] = 119 / MAX_COLOUR;
+					init_7.rgb[2] = 66 / MAX_COLOUR;
+					init_7.rotation = 0;
+					init_7.params.rect.xlen = cos(PI / 4)*0.5;
+					init_7.params.rect.ylen = sin(PI / 4)*0.5;
+					init_7.params.rect.zlen = 0.8;
+					vm.shapes.push_back(init_7);
+
+
+					/*ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+					ptr->setPosition(-1.1, 0.4, (0.4 + 1.1));
+					addShape(ptr);*/
+					ShapeInit init_8;
+					init_8.type = RECTANGULAR_PRISM;
+					init_8.xyz[0] = -1.1;
+					init_8.xyz[1] = 0.2;
+					init_8.xyz[2] = 1.5;
+					init_8.rgb[0] = 244 / MAX_COLOUR;
+					init_8.rgb[1] = 119 / MAX_COLOUR;
+					init_8.rgb[2] = 66 / MAX_COLOUR;
+					init_8.rotation = 0;
+					init_8.params.rect.xlen = cos(PI / 4)*0.5;
+					init_8.params.rect.ylen = sin(PI / 4)*0.5;
+					init_8.params.rect.zlen = 0.8;
+					vm.shapes.push_back(init_8);
+
+					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
+					ptr->setPosition(1.1, 0.2, (0.4 + 1.1));
+					addShape(ptr);*/
+					ShapeInit init_9;
+					init_9.type = RECTANGULAR_PRISM;
+					init_9.xyz[0] = -1.1;
+					init_9.xyz[1] = 0.2;
+					init_9.xyz[2] = 1.5;
+					init_9.rgb[0] = 244 / MAX_COLOUR;
+					init_9.rgb[1] = 119 / MAX_COLOUR;
+					init_9.rgb[2] = 66 / MAX_COLOUR;
+					init_9.rotation = 0;
+					init_9.params.rect.xlen = cos(PI / 4)*0.5;
+					init_9.params.rect.ylen = sin(PI / 4)*0.5;
+					init_9.params.rect.zlen = 0.8;
+					vm.shapes.push_back(init_9);
+
+					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
+					ptr->setPosition(1.1, 0.2, -(0.4 + 1.1));
+					addShape(ptr);*/
+					ShapeInit init_10;
+					init_10.type = RECTANGULAR_PRISM;
+					init_10.xyz[0] = -1.1;
+					init_10.xyz[1] = 0.2;
+					init_10.xyz[2] = -1.5;
+					init_10.rgb[0] = 244 / MAX_COLOUR;
+					init_10.rgb[1] = 119 / MAX_COLOUR;
+					init_10.rgb[2] = 66 / MAX_COLOUR;
+					init_10.rotation = 0;
+					init_10.params.rect.xlen = cos(PI / 4)*0.5;
+					init_10.params.rect.ylen = sin(PI / 4)*0.5;
+					init_10.params.rect.zlen = 0.8;
+					vm.shapes.push_back(init_10);
 					// student code goes here
 					//
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
