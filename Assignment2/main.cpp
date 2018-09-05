@@ -343,9 +343,7 @@ void idle() {
 					init.params.rect.xlen = 3;
 					init.params.rect.ylen = 1;
 					init.params.rect.zlen = 2;
-					init.params.rect.normal = TRUE;
-					init.params.rect.isSteering = FALSE;
-					init.params.rect.isRolling = FALSE;
+					init.isSpoke = FALSE;
 					vm.shapes.push_back(init);
 
 					ShapeInit init_1;
@@ -367,6 +365,7 @@ void idle() {
 					init_1.params.cyl.radius = 0.4;
 					init_1.params.cyl.isSteering = TRUE;
 					init_1.params.cyl.isRolling = TRUE;
+					init_1.isSpoke = FALSE;
 					vm.shapes.push_back(init_1);
 
 					ShapeInit init_2;
@@ -387,6 +386,7 @@ void idle() {
 					init_2.params.cyl.radius = 0.4;
 					init_2.params.cyl.isSteering = TRUE;
 					init_2.params.cyl.isRolling = TRUE;
+					init_2.isSpoke = FALSE;
 					vm.shapes.push_back(init_2);
 
 					//back right(seen from initial position)
@@ -407,6 +407,7 @@ void idle() {
 					init_3.params.cyl.radius = 0.8;
 					init_3.params.cyl.isSteering = FALSE;
 					init_3.params.cyl.isRolling = FALSE;
+					init_3.isSpoke = FALSE;
 					vm.shapes.push_back(init_3);
 
 					/*//back left(seen from initial position)
@@ -427,6 +428,7 @@ void idle() {
 					init_4.params.cyl.radius = 0.8;
 					init_4.params.cyl.isSteering = FALSE;
 					init_4.params.cyl.isRolling = TRUE;
+					init_4.isSpoke = FALSE;
 					vm.shapes.push_back(init_4);
 
 
@@ -448,6 +450,7 @@ void idle() {
 					init_5.params.trap.aoff = 0.5;
 					init_5.params.trap.depth = 0.5;
 					init_5.params.trap.height = 0.5;
+					init_5.isSpoke = FALSE;
 					vm.shapes.push_back(init_5);
 
 
@@ -468,6 +471,7 @@ void idle() {
 					init_6.params.tri.blen = 1.5;
 					init_6.params.tri.angle = PI / 6;
 					init_6.params.tri.depth = 0.5;
+					init_6.isSpoke = FALSE;
 					vm.shapes.push_back(init_6);
 
 				
@@ -490,6 +494,8 @@ void idle() {
 
 					init_7.params.rect.isRolling = TRUE;
 					init_7.params.rect.isSteering = FALSE;
+					init_7.params.rect.normal = FALSE;
+					init_7.isSpoke = TRUE;
 					vm.shapes.push_back(init_7);
 
 
@@ -510,6 +516,8 @@ void idle() {
 					init_8.params.rect.zlen = 0.8;
 					init_8.params.rect.isRolling = TRUE;
 					init_8.params.rect.isSteering = FALSE;
+					init_8.params.rect.normal = FALSE;
+					init_8.isSpoke = TRUE;
 					vm.shapes.push_back(init_8);
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
@@ -529,6 +537,8 @@ void idle() {
 					init_9.params.rect.zlen = 0.8;
 					init_9.params.rect.isRolling = TRUE;
 					init_9.params.rect.isSteering = FALSE;
+					init_9.params.rect.normal = FALSE;
+					init_9.isSpoke = TRUE;
 					vm.shapes.push_back(init_9);
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
@@ -548,6 +558,8 @@ void idle() {
 					init_10.params.rect.zlen = 0.8;
 					init_10.params.rect.isRolling = TRUE;
 					init_10.params.rect.isSteering = FALSE;
+					init_10.params.rect.normal = FALSE;
+					init_10.isSpoke = TRUE;
 					vm.shapes.push_back(init_10);
 					
 					// student code goes here

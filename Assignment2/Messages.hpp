@@ -77,6 +77,8 @@ struct ShapeInit
 	float xyz[3];
 	float rotation;
 	float rgb[3];
+
+	bool isSpoke;
 };
 
 struct VehicleModel
