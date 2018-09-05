@@ -6,6 +6,7 @@
 #include "VectorMaths.hpp"
 #include "Messages.hpp"
 #include "RemoteDataManager.hpp"
+#include "Remote.h"
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -76,21 +77,46 @@ void MyVehicle::draw()
 	std::vector<Shape *>::iterator it;
 	for (it = shapes.begin(); it != shapes.end(); ++it) {
 		//Vehicle* temp_ptr = dynamic_cast<Vehicle*> (*it);
-		//Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
-		//if (*it != NULL) {
+		Cylinder* temp_ptr = dynamic_cast<Cylinder*> (*it);
+		if (*it != NULL) {
+			if (check_wheel(temp_ptr)) {
+				std::cout << "steering at " << getSteering() << std::endl;
+				glPushMatrix();
+				positionInGL();
+				//positionInGL();
+				//setColorInGL();
+				(*it)->draw();
+				glPopMatrix();
+			}
+			else {
+				glPushMatrix();
+				positionInGL();
+				//positionInGL();
+				//setColorInGL();
+				(*it)->draw();
+				glPopMatrix();
+			}
+		}
+		else {
 			glPushMatrix();
 			positionInGL();
 			//positionInGL();
 			//setColorInGL();
 			(*it)->draw();
 			glPopMatrix();
-		//}
-	}
+		}
+	};
 }
 
-/*void MyVehicle::turning_effect(Shape* shape_)
+bool MyVehicle::check_wheel(Cylinder * cyl)
 {
-	Cylinder *cyl = static_cast<Cylinder *> (shape_);
-	
-	
-}*/
+	std::vector<ShapeInit>::iterator shape_it;
+	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); ++shape_it) {
+		if (((shape_it)->type == CYLINDER) && (shape_it)->params.cyl.radius == cyl->getRadius()) {
+			if (shape_it->params.cyl.isSteering) {
+				return TRUE;
+			}
+		}
+	};
+	return FALSE;
+}

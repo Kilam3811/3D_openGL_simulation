@@ -12,7 +12,6 @@ class Remote : public MyVehicle {
 protected:
 	VehicleModel vm;
 	std::vector<Shape *> cars;
-	std::vector<ShapeInit> cars_shapeInit;
 public:
 	Remote(VehicleModel vm_);
 	void draw();
@@ -22,5 +21,4 @@ public:
 	void draw_cyl(double radius,double depth,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);
 	void add_to_draw_list(Shape*);
 	void add_to_shapeInit_list(ShapeInit init);
-	bool check_wheel(Cylinder * cyl);
 };

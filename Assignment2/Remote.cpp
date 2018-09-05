@@ -101,12 +101,12 @@ void Remote::draw()
 				//glPushMatrix();
 				
 				(*it)->draw();
-				//setRotation(getSteering());
+				
 				//glPopMatrix();
 				// move back to global frame of reference
 				glPopMatrix();
 			}
-			/*else {
+			else {
 				// move to the vehicle¡¦s local frame of reference
 				glPushMatrix();
 				positionInGL();
@@ -114,7 +114,7 @@ void Remote::draw()
 				(*it)->draw();
 				// move back to global frame of reference
 				glPopMatrix();
-			}*/
+			}
 		}
 		else {
 			// move to the vehicle¡¦s local frame of reference
@@ -177,15 +177,3 @@ void Remote::add_to_shapeInit_list(ShapeInit init)
 	cars_shapeInit.push_back(init);
 }
 
-bool Remote::check_wheel(Cylinder * cyl)
-{
-	std::vector<ShapeInit>::iterator shape_it;
-	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); ++shape_it) {
-		if (((shape_it)->type == CYLINDER) && (shape_it)->params.cyl.radius == cyl->getRadius()) {
-			if (shape_it->params.cyl.isSteering) {
-				return TRUE;
-			}
-		}
-	};
-	return FALSE;
-}
