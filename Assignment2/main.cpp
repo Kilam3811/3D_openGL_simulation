@@ -349,12 +349,12 @@ void idle() {
 					/*//front right(seen from initial position)
 					ptr = new Cylinder(0.4, 0.1, 100, 10);
 					ptr->setColor(145, 207, 255);
-					ptr->setPosition(1.1, 0, 1.1);
+					ptr->setPosition(1.1, 0.2, 1.1);
 					addShape(ptr);*/
 
 					init_1.type = CYLINDER;
 					init_1.xyz[0] = 1.1;
-					init_1.xyz[1] = 0;
+					init_1.xyz[1] = 0.2;
 					init_1.xyz[2] = 1.1;
 					init_1.rgb[0] = 145/MAX_COLOUR;
 					init_1.rgb[1] = 207/ MAX_COLOUR;
@@ -493,7 +493,7 @@ void idle() {
 					ShapeInit init_8;
 					init_8.type = RECTANGULAR_PRISM;
 					init_8.xyz[0] = -1.1;
-					init_8.xyz[1] = 0.2;
+					init_8.xyz[1] = 0.4;
 					init_8.xyz[2] = 1.5;
 					init_8.rgb[0] = 244 / MAX_COLOUR;
 					init_8.rgb[1] = 119 / MAX_COLOUR;
@@ -509,7 +509,7 @@ void idle() {
 					addShape(ptr);*/
 					ShapeInit init_9;
 					init_9.type = RECTANGULAR_PRISM;
-					init_9.xyz[0] = -1.1;
+					init_9.xyz[0] = 1.1;
 					init_9.xyz[1] = 0.2;
 					init_9.xyz[2] = 1.5;
 					init_9.rgb[0] = 244 / MAX_COLOUR;
@@ -526,7 +526,7 @@ void idle() {
 					addShape(ptr);*/
 					ShapeInit init_10;
 					init_10.type = RECTANGULAR_PRISM;
-					init_10.xyz[0] = -1.1;
+					init_10.xyz[0] = 1.1;
 					init_10.xyz[1] = 0.2;
 					init_10.xyz[2] = -1.5;
 					init_10.rgb[0] = 244 / MAX_COLOUR;

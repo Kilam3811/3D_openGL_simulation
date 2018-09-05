@@ -91,28 +91,38 @@ void Remote::draw()
 	for (it = cars.begin(); it != cars.end(); ++it) {
 		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
 		if (cyl != NULL) {
-			if (check_front_wheel(cyl)) {
-				//std::cout << "angle at" << getSteering() << std::endl;
-				glPushMatrix();
-				positionInGL();
-				//static int count = 0;
-				//std::cout << "front wheels radius is " << cyl->getRadius() << std::endl;
-				
-				(*it)->setRotation(getSteering());
-				//std::cout << "steering at " << getSteering() << std::endl;
-				(*it)->draw();
-				//glTranslated(0, -(*it)->getY(), 0);
-				glPopMatrix();
+			//If a cylinder is a wheel
+			if (check_wheel(cyl)) {
+				//Check if it is front wheel
+				if (check_front_wheel(cyl)) {
+					glPushMatrix();
+					positionInGL();
+					(*it)->setRotation(getSteering());
+					//std::cout << "steering at " << getSteering() << std::endl;
+					cyl->draw_rolling();
+					//glTranslated(0, -(*it)->getY(), 0);
+					glPopMatrix();
+				}
+				else {
+					// move to the vehicle・s local frame of reference
+					glPushMatrix();
+					positionInGL();
+					// all the local drawing code
+					cyl->draw_rolling();
+					// move back to global frame of reference
+					glPopMatrix();
+				}
 			}
-			else {
-				// move to the vehicle・s local frame of reference
-				glPushMatrix();
-				positionInGL();
-				// all the local drawing code
-				(*it)->draw();
-				// move back to global frame of reference
-				glPopMatrix();
-			}
+		}
+		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
+		if (rec != NULL) {
+			// move to the vehicle・s local frame of reference
+			glPushMatrix();
+			positionInGL();
+			// all the local drawing code
+			(*it)->draw();
+			// move back to global frame of reference
+			glPopMatrix();
 		}
 		else {
 			// move to the vehicle・s local frame of reference
@@ -173,6 +183,17 @@ void Remote::add_to_draw_list(Shape * shape)
 void Remote::add_to_shapeInit_list(ShapeInit init)
 {
 	cars_shapeInit.push_back(init);
+}
+
+bool Remote::check_wheel(Cylinder * cyl)
+{
+	std::vector<ShapeInit>::iterator shape_it;
+	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
+		if (shape_it->params.cyl.isRolling&&shape_it->xyz[0] == cyl->getX() && shape_it->xyz[1] == cyl->getY() && shape_it->xyz[2] == cyl->getZ()) {
+			return TRUE;
+		}
+	};
+	return FALSE;
 }
 
 
