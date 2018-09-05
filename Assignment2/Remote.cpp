@@ -36,9 +36,9 @@ Remote::Remote(VehicleModel vm_)
 			double z_cor = it->xyz[2];
 			double angle = it->rotation;
 			static int count = 0;
-			if (it->isSpoke) {
+			/*if (!it->isSpoke) {
 				std::cout << "spokes " << count++ << std::endl;
-			}
+			}*/
 			add_to_shapeInit_list(*it);
 			draw_rec(xLength, yLength, zLength, red, green, blue, x_cor, y_cor, z_cor, angle);
 		}
@@ -118,7 +118,7 @@ void Remote::draw()
 				}
 			}
 		}
-		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
+		/*Rectangular* rec = dynamic_cast<Rectangular*> (*it);
 		if (rec != NULL) {
 			if (check_spoke(*it)) {
 				glPushMatrix();
@@ -145,7 +145,7 @@ void Remote::draw()
 				// move back to global frame of reference
 				glPopMatrix();
 			}
-		}
+		}*/
 		
 		else {
 			// move to the vehicle¡¦s local frame of reference
@@ -225,7 +225,7 @@ bool Remote::check_spoke(Shape * shape)
 	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
 		Rectangular *rec = dynamic_cast<Rectangular*> (shape);
 		if (rec != NULL) {
-			if (shape_it->isSpoke && shape_it->type == RECTANGULAR_PRISM) {
+			if (!shape_it->isSpoke) {
 				return TRUE;
 			}
 		}
