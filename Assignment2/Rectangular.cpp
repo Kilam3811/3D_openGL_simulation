@@ -88,6 +88,75 @@ void Rectangular::draw()
 	glEnd();
 
 }
+void Rectangular::draw_rolling()
+{
+	//positionInGL();
+	rolling();
+	setColorInGL();
+	//	Draw 4 sides of the rectangle
+	//Calculating the offset realtive to the origin of the rectangle
+
+	//Left
+	glBegin(GL_QUADS);
+	glColor3d(100/255.0, 100 / 255.0, 100 / 255.0);
+	glVertex3d(get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
+	glVertex3d(get_x_length() / 2.0, get_y_length(), get_z_length() / 2);
+	glVertex3d(get_x_length() / 2.0, 0, get_z_length() / 2);
+	glVertex3d(get_x_length() / 2.0, 0, -get_z_length() / 2);
+	glEnd();
+
+	//front
+	glBegin(GL_QUADS);
+	glColor3d(100 / 255.0, 100 / 255.0, 200 / 255.0);
+	glVertex3d(get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
+	glVertex3d(get_x_length() / 2.0, 0, -get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2.0, 0, -get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
+	glEnd();
+
+	//Right
+	glBegin(GL_QUADS);
+	glColor3d(100 / 255.0, 200 / 255.0, 100 / 255.0);
+	glVertex3d(-get_x_length() / 2.0, 0, get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2.0, get_y_length(), get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2.0, 0, -get_z_length() / 2);
+	glEnd();
+
+	//back
+	glBegin(GL_QUADS);
+	glColor3d(100 / 255.0, 240 / 255.0, 100 / 255.0);
+	glVertex3d(-get_x_length() / 2, 0, get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);
+	glVertex3d(get_x_length() / 2, get_y_length(), get_z_length() / 2);
+	glVertex3d(get_x_length() / 2, 0, get_z_length() / 2);
+	glEnd();
+	//=======================================================================
+	//Draw Top and bottom layer of the rectangle
+	//TOP LAYER
+	glBegin(GL_QUADS);
+	glColor3d(31 / 255.0, 11 / 255.0, 110 / 255.0);
+	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2, get_y_length(), -get_z_length() / 2);
+	glVertex3d(get_x_length() / 2, get_y_length(), -get_z_length() / 2);
+	glVertex3d(get_x_length() / 2, get_y_length(), get_z_length() / 2);
+	glEnd();
+
+	//BOTTOM LAYER
+	glBegin(GL_QUADS);
+	glColor3d(10 / 255.0, 100 / 255.0, 100 / 255.0);
+	glVertex3d(-get_x_length() / 2, 0, get_z_length() / 2);
+	glVertex3d(-get_x_length() / 2, 0, -get_z_length() / 2);
+
+	glVertex3d(get_x_length() / 2, 0, -get_z_length() / 2);
+	glVertex3d(get_x_length() / 2, 0, get_z_length() / 2);
+	glEnd();
+}
+void Rectangular::rolling()
+{
+	glTranslated(x, y, z);
+	glRotated(rotation, 0, 0, -1);
+}
 double Rectangular::get_x_length()
 {
 	return x_length;

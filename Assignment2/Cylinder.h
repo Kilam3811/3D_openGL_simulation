@@ -13,6 +13,8 @@ public:
 	//Draw cylinder
 	void draw();
 
+	void Rolling();
+	void draw_rolling();
 	//Setter
 	void set_Dimension(double radius_,double depth_,double slices_,double stacks_);
 

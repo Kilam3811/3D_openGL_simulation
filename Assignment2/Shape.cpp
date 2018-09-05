@@ -124,10 +124,5 @@ void Shape::setColor(float red_, float green_, float blue_) {
 	green = green_temp;
 	blue = blue_temp;
 }
-void Shape::Rolling()
-{
-	glTranslated(x, y, z);
-	glRotated(rotation, 0, 0, -1);
-}
 
 
