@@ -484,6 +484,9 @@ void idle() {
 					init_7.params.rect.xlen = cos(PI / 4)*0.5;
 					init_7.params.rect.ylen = sin(PI / 4)*0.5;
 					init_7.params.rect.zlen = 0.8;
+
+					init_7.params.rect.isRolling = TRUE;
+					init_7.params.rect.isSteering = TRUE;
 					vm.shapes.push_back(init_7);
 
 
@@ -502,6 +505,8 @@ void idle() {
 					init_8.params.rect.xlen = cos(PI / 4)*0.5;
 					init_8.params.rect.ylen = sin(PI / 4)*0.5;
 					init_8.params.rect.zlen = 0.8;
+					init_8.params.rect.isRolling = TRUE;
+					init_8.params.rect.isSteering = TRUE;
 					vm.shapes.push_back(init_8);
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
@@ -519,6 +524,8 @@ void idle() {
 					init_9.params.rect.xlen = cos(PI / 4)*0.5;
 					init_9.params.rect.ylen = sin(PI / 4)*0.5;
 					init_9.params.rect.zlen = 0.8;
+					init_9.params.rect.isRolling = TRUE;
+					init_9.params.rect.isSteering = TRUE;
 					vm.shapes.push_back(init_9);
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
@@ -537,6 +544,8 @@ void idle() {
 					init_10.params.rect.ylen = sin(PI / 4)*0.5;
 					init_10.params.rect.zlen = 0.8;
 					vm.shapes.push_back(init_10);
+					init_10.params.rect.isRolling = TRUE;
+					init_10.params.rect.isSteering = TRUE;
 					// student code goes here
 					//
 					RemoteDataManager::Write(GetVehicleModelStr(vm));

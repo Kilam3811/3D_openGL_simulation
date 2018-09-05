@@ -116,14 +116,33 @@ void Remote::draw()
 		}
 		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
 		if (rec != NULL) {
-			// move to the vehicle¡¦s local frame of reference
-			glPushMatrix();
-			positionInGL();
-			// all the local drawing code
-			(*it)->draw();
-			// move back to global frame of reference
-			glPopMatrix();
+			if (check_spoke(*it)) {
+				glPushMatrix();
+				positionInGL();
+
+				double front_radius = 0.4;
+
+				double instant_distance = getSpeed() * time_elapsed;
+				static double total_distance = 0;
+				total_distance += instant_distance;
+				double theta = total_distance / front_radius;
+
+				theta *= 180 / PI;
+				rec->setRotation(theta);
+				rec->draw_rolling();
+				glPopMatrix();
+			}
+			else {
+				// move to the vehicle¡¦s local frame of reference
+				glPushMatrix();
+				positionInGL();
+				// all the local drawing code
+				(*it)->draw();
+				// move back to global frame of reference
+				glPopMatrix();
+			}
 		}
+		
 		else {
 			// move to the vehicle¡¦s local frame of reference
 			glPushMatrix();
@@ -192,6 +211,25 @@ bool Remote::check_wheel(Cylinder * cyl)
 		if (shape_it->params.cyl.isRolling&&shape_it->xyz[0] == cyl->getX() && shape_it->xyz[1] == cyl->getY() && shape_it->xyz[2] == cyl->getZ()) {
 			return TRUE;
 		}
+	};
+	return FALSE;
+}
+
+bool Remote::check_spoke(Shape * shape)
+{
+	std::vector<ShapeInit>::iterator shape_it;
+	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
+		Rectangular *rec = dynamic_cast<Rectangular*> (shape);
+		if (rec != NULL) {
+			if (shape_it->type == RECTANGULAR_PRISM && shape_it->params.rect.isRolling) {
+				return TRUE;
+			}
+		}
+
+
+
+
+		
 	};
 	return FALSE;
 }

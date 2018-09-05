@@ -22,4 +22,5 @@ public:
 	void add_to_draw_list(Shape*);
 	void add_to_shapeInit_list(ShapeInit init);
 	bool check_wheel(Cylinder* cyl);
+	bool check_spoke(Shape *shape);
 };

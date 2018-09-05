@@ -35,6 +35,8 @@ union ShapeParameter
 		float xlen;		// length along x-axis
 		float ylen;		// length along y-axis
 		float zlen;		// length along z-axis
+		bool isRolling;	// needs to roll with vehicle?
+		bool isSteering;// needs to steer with vehicle?
 	} rect;
 
 	struct TriangularParameters
