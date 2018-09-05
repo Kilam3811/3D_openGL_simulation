@@ -35,6 +35,10 @@ Remote::Remote(VehicleModel vm_)
 			double y_cor = it->xyz[1];
 			double z_cor = it->xyz[2];
 			double angle = it->rotation;
+			static int count = 0;
+			if (!it->params.rect.isSteering && !it->params.rect.normal) {
+				std::cout << "spokes " << count++ << std::endl;
+			}
 			add_to_shapeInit_list(*it);
 			draw_rec(xLength, yLength, zLength, red, green, blue, x_cor, y_cor, z_cor, angle);
 		}
@@ -221,15 +225,10 @@ bool Remote::check_spoke(Shape * shape)
 	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
 		Rectangular *rec = dynamic_cast<Rectangular*> (shape);
 		if (rec != NULL) {
-			if (shape_it->type == RECTANGULAR_PRISM && shape_it->params.rect.isRolling) {
+			if (shape_it->type == RECTANGULAR_PRISM && !shape_it->params.rect.isSteering &&!shape_it->params.rect.normal) {
 				return TRUE;
 			}
 		}
-
-
-
-
-		
 	};
 	return FALSE;
 }

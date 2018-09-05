@@ -343,6 +343,9 @@ void idle() {
 					init.params.rect.xlen = 3;
 					init.params.rect.ylen = 1;
 					init.params.rect.zlen = 2;
+					init.params.rect.normal = TRUE;
+					init.params.rect.isSteering = FALSE;
+					init.params.rect.isRolling = FALSE;
 					vm.shapes.push_back(init);
 
 					ShapeInit init_1;
@@ -486,7 +489,7 @@ void idle() {
 					init_7.params.rect.zlen = 0.8;
 
 					init_7.params.rect.isRolling = TRUE;
-					init_7.params.rect.isSteering = TRUE;
+					init_7.params.rect.isSteering = FALSE;
 					vm.shapes.push_back(init_7);
 
 
@@ -506,7 +509,7 @@ void idle() {
 					init_8.params.rect.ylen = sin(PI / 4)*0.5;
 					init_8.params.rect.zlen = 0.8;
 					init_8.params.rect.isRolling = TRUE;
-					init_8.params.rect.isSteering = TRUE;
+					init_8.params.rect.isSteering = FALSE;
 					vm.shapes.push_back(init_8);
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
@@ -525,7 +528,7 @@ void idle() {
 					init_9.params.rect.ylen = sin(PI / 4)*0.5;
 					init_9.params.rect.zlen = 0.8;
 					init_9.params.rect.isRolling = TRUE;
-					init_9.params.rect.isSteering = TRUE;
+					init_9.params.rect.isSteering = FALSE;
 					vm.shapes.push_back(init_9);
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
@@ -543,9 +546,10 @@ void idle() {
 					init_10.params.rect.xlen = cos(PI / 4)*0.5;
 					init_10.params.rect.ylen = sin(PI / 4)*0.5;
 					init_10.params.rect.zlen = 0.8;
-					vm.shapes.push_back(init_10);
 					init_10.params.rect.isRolling = TRUE;
-					init_10.params.rect.isSteering = TRUE;
+					init_10.params.rect.isSteering = FALSE;
+					vm.shapes.push_back(init_10);
+					
 					// student code goes here
 					//
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
