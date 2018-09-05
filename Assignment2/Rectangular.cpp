@@ -98,7 +98,7 @@ void Rectangular::draw_rolling()
 
 	//Left
 	glBegin(GL_QUADS);
-	glColor3d(100/255.0, 100 / 255.0, 100 / 255.0);
+	//glColor3d(100/255.0, 100 / 255.0, 100 / 255.0);
 	glVertex3d(get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
 	glVertex3d(get_x_length() / 2.0, get_y_length(), get_z_length() / 2);
 	glVertex3d(get_x_length() / 2.0, 0, get_z_length() / 2);
@@ -107,7 +107,7 @@ void Rectangular::draw_rolling()
 
 	//front
 	glBegin(GL_QUADS);
-	glColor3d(100 / 255.0, 100 / 255.0, 200 / 255.0);
+	//glColor3d(100 / 255.0, 100 / 255.0, 200 / 255.0);
 	glVertex3d(get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
 	glVertex3d(get_x_length() / 2.0, 0, -get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2.0, 0, -get_z_length() / 2);
@@ -116,7 +116,7 @@ void Rectangular::draw_rolling()
 
 	//Right
 	glBegin(GL_QUADS);
-	glColor3d(100 / 255.0, 200 / 255.0, 100 / 255.0);
+	//glColor3d(100 / 255.0, 200 / 255.0, 100 / 255.0);
 	glVertex3d(-get_x_length() / 2.0, 0, get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2.0, get_y_length(), get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2.0, get_y_length(), -get_z_length() / 2);
@@ -125,7 +125,7 @@ void Rectangular::draw_rolling()
 
 	//back
 	glBegin(GL_QUADS);
-	glColor3d(100 / 255.0, 240 / 255.0, 100 / 255.0);
+	//glColor3d(100 / 255.0, 240 / 255.0, 100 / 255.0);
 	glVertex3d(-get_x_length() / 2, 0, get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);
 	glVertex3d(get_x_length() / 2, get_y_length(), get_z_length() / 2);
@@ -135,7 +135,7 @@ void Rectangular::draw_rolling()
 	//Draw Top and bottom layer of the rectangle
 	//TOP LAYER
 	glBegin(GL_QUADS);
-	glColor3d(31 / 255.0, 11 / 255.0, 110 / 255.0);
+	//glColor3d(31 / 255.0, 11 / 255.0, 110 / 255.0);
 	glVertex3d(-get_x_length() / 2, get_y_length(), get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, get_y_length(), -get_z_length() / 2);
 	glVertex3d(get_x_length() / 2, get_y_length(), -get_z_length() / 2);
@@ -144,10 +144,9 @@ void Rectangular::draw_rolling()
 
 	//BOTTOM LAYER
 	glBegin(GL_QUADS);
-	glColor3d(10 / 255.0, 100 / 255.0, 100 / 255.0);
+	//glColor3d(10 / 255.0, 100 / 255.0, 100 / 255.0);
 	glVertex3d(-get_x_length() / 2, 0, get_z_length() / 2);
 	glVertex3d(-get_x_length() / 2, 0, -get_z_length() / 2);
-
 	glVertex3d(get_x_length() / 2, 0, -get_z_length() / 2);
 	glVertex3d(get_x_length() / 2, 0, get_z_length() / 2);
 	glEnd();
