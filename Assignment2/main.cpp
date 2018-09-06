@@ -406,7 +406,7 @@ void idle() {
 					init_3.params.cyl.depth = 0.1;
 					init_3.params.cyl.radius = 0.8;
 					init_3.params.cyl.isSteering = FALSE;
-					init_3.params.cyl.isRolling = FALSE;
+					init_3.params.cyl.isRolling = TRUE;
 					//init_3.isSpoke = FALSE;
 					vm.shapes.push_back(init_3);
 

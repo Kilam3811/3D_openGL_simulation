@@ -96,8 +96,28 @@ void Remote::draw()
 		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
 		if (cyl != NULL) {
 			//If a cylinder is a wheel
-			if (check_wheel(cyl)) {
+			if (getSteering() != 0 && getSpeed() == 0) {
 				//Check if it is front wheel
+				if (check_front_wheel(cyl)) {
+					glPushMatrix();
+					positionInGL();
+					(*it)->setRotation(getSteering());
+					//std::cout << "steering at " << getSteering() << std::endl;
+					cyl->draw();
+					//glTranslated(0, -(*it)->getY(), 0);
+					glPopMatrix();
+				}
+				else {
+					// move to the vehicle¡¦s local frame of reference
+					glPushMatrix();
+					positionInGL();
+					// all the local drawing code
+					cyl->draw();
+					// move back to global frame of reference
+					glPopMatrix();
+				}
+			}
+			else if (getSpeed() != 0 && getSteering()!=0) {
 				if (check_front_wheel(cyl)) {
 					glPushMatrix();
 					positionInGL();
@@ -116,6 +136,15 @@ void Remote::draw()
 					// move back to global frame of reference
 					glPopMatrix();
 				}
+			}
+			else {
+				// move to the vehicle¡¦s local frame of reference
+				glPushMatrix();
+				positionInGL();
+				// all the local drawing code
+				cyl->draw_rolling();
+				// move back to global frame of reference
+				glPopMatrix();
 			}
 		}
 		/*Rectangular* rec = dynamic_cast<Rectangular*> (*it);

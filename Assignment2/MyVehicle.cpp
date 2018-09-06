@@ -72,7 +72,7 @@ MyVehicle::MyVehicle()
 
 	//SPOKES
 	ptr = new Rectangular(cos(PI/4)*0.5, sin(PI / 4)*0.5, 0.8);
-	ptr->setPosition(-1.1, 0.4, -(0.4+1.1));
+	ptr->setPosition(-1.1, 0.2, -(0.4+1.1));
 	ptr->setColor(244, 119, 66);
 	addShape(ptr);
 
@@ -109,7 +109,7 @@ void MyVehicle::draw()
 					positionInGL();
 					(*it)->setRotation(getSteering());
 					//Also has to be rolling
-					(*it)->draw();
+					cyl->draw();
 					glPopMatrix();
 				}
 				//If it is not front wheel
@@ -133,7 +133,7 @@ void MyVehicle::draw()
 					positionInGL();
 					(*it)->setRotation(getSteering());
 					//Also has to be rolling
-					(*it)->draw();
+					cyl->draw_rolling();
 					glPopMatrix();
 				}
 				//If it is not front wheel
