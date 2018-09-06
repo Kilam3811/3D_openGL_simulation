@@ -133,7 +133,7 @@ void MyVehicle::draw()
 					positionInGL();
 					(*it)->setRotation(getSteering());
 					//Also has to be rolling
-					cyl->draw_rolling();
+					cyl->draw();
 					glPopMatrix();
 				}
 				//If it is not front wheel
@@ -143,12 +143,20 @@ void MyVehicle::draw()
 					positionInGL();
 					//Needs to be rolling......
 					//std::cout << "steering at " << getSteering() << std::endl;
-					(*it)->setRotation(0);
-					//glRotated(temp, 0, 0, -1);
+					double back_radius = 0.8;
 
+					double instant_distance = getSpeed() * time_elapsed;
+					static double total_distance = 0;
+					total_distance += instant_distance;
+					double theta = total_distance / back_radius;
+
+					theta *= 180 / PI;
+					//glRotated(theta, 0, 0, -1);
+					//glRotated(temp, 0, 0, -1);
+					(*it)->setRotation(theta);
 					//temp += 2;
 					//if (temp > 360) temp = 0;
-					cyl->draw_rolling();
+					cyl->draw();
 					//glTranslated(0, -(*it)->getY(), 0);
 					glPopMatrix();
 				}

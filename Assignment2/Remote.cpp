@@ -88,6 +88,7 @@ Remote::Remote(VehicleModel vm_)
 		}
 }
 
+double temp_angle = 0;
 void Remote::draw()
 {
 	//Draw function will be keep calling...
@@ -95,6 +96,7 @@ void Remote::draw()
 	for (it = cars.begin(); it != cars.end(); ++it) {
 		Cylinder* cyl = dynamic_cast<Cylinder*> (*it);
 		if (cyl != NULL) {
+
 			//If a cylinder is a wheel
 			if (getSteering() != 0 && getSpeed() == 0) {
 				//Check if it is front wheel
@@ -117,7 +119,7 @@ void Remote::draw()
 					glPopMatrix();
 				}
 			}
-			else if (getSpeed() != 0 && getSteering()!=0) {
+			else if (getSpeed() != 0) {
 				if (check_front_wheel(cyl)) {
 					glPushMatrix();
 					positionInGL();
@@ -132,18 +134,25 @@ void Remote::draw()
 					glPushMatrix();
 					positionInGL();
 					// all the local drawing code
-					cyl->draw_rolling();
+					double back_radius = cyl->getRadius();
+
+					double instant_distance = getSpeed() * time_elapsed;
+					static double total_distance = 0;
+					total_distance += instant_distance;
+					double theta = total_distance / back_radius;
+					theta *= 180 / PI;
+				
+					cyl->setRotation(theta);
+					cyl->draw();
 					// move back to global frame of reference
 					glPopMatrix();
 				}
 			}
 			else {
-				// move to the vehicle¡¦s local frame of reference
 				glPushMatrix();
 				positionInGL();
-				// all the local drawing code
-				cyl->draw_rolling();
-				// move back to global frame of reference
+				cyl->draw();
+				//glTranslated(0, -(*it)->getY(), 0);
 				glPopMatrix();
 			}
 		}
