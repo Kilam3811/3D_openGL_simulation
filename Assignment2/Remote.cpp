@@ -114,7 +114,7 @@ void Remote::draw()
 					glPushMatrix();
 					positionInGL();
 					// all the local drawing code
-					cyl->draw();
+					cyl->draw_rolling();
 					// move back to global frame of reference
 					glPopMatrix();
 				}
@@ -141,7 +141,6 @@ void Remote::draw()
 					total_distance += instant_distance;
 					double theta = total_distance / back_radius;
 					theta *= 180 / PI;
-				
 					cyl->setRotation(theta);
 					cyl->draw();
 					// move back to global frame of reference
