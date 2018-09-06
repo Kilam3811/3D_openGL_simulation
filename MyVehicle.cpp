@@ -23,38 +23,34 @@ MyVehicle::~MyVehicle() {};
 void MyVehicle::draw()
 {
 	//SAMPLE CAR
-	
 
 
-	
+
 	// move to the vehicle¡¦s local frame of reference
 	glPushMatrix();
-	glRotated(-rotation,0,1,0);
 	glTranslated(x, y, z);
-	positionInGL();
+	glRotated(-rotation, 0, 1, 0);
 	// all the local drawing code
 
 	//Body
-	//glPushMatrix();
 	Rectangular rec1;
 	rec1.setLength(3, 1, 2);
 	rec1.setPosition(0, 0.4, 0);
 	rec1.positionInGL();
 	rec1.setColor(255, 186, 221);
 	rec1.setColorInGL();
-	positionInGL();
 	rec1.draw();
 	//glPopMatrix();
 
-	//front right(seen from initial position)
 	//glPushMatrix();
+
+	//front right(seen from initial position)
 	Cylinder cy1;
 	cy1.set_Dimension(0.4, 0.1, 100, 10);
 	cy1.setColor(145,207,255);
-	cy1.setPosition(1.1, 0, 1.1);
-	//glTranslated(1.2, 0, 1.1);
+	cy1.setPosition(1.1, -0.4, 1.1);
+	cy1.positionInGL();
 	cy1.setColorInGL();
-	positionInGL();
 	cy1.draw();
 	//glPopMatrix();
 
@@ -63,10 +59,9 @@ void MyVehicle::draw()
 	Cylinder cy2;
 	cy2.set_Dimension(0.4, 0.1, 100, 10);
 	cy2.setColor(145,207,255);
-	cy2.setPosition(1.1, 0, -1.1);
-	//glTranslated(1.1, 0, -1.1);
+	cy2.setPosition(0, 0, -2.2);
+	cy2.positionInGL();
 	cy2.setColorInGL();
-	positionInGL();
 	cy2.draw();
 	//glPopMatrix();
 
@@ -75,10 +70,9 @@ void MyVehicle::draw()
 	Cylinder cy3;
 	cy3.set_Dimension(0.8, 0.1, 100, 10);
 	cy3.setColor(255, 224, 147);
-	cy3.setPosition(-1.2, 0, -1.1);
-	//glTranslated(-1.1, 0, -1.1);
+	cy3.setPosition(-2.2, 0, 0);
+	cy3.positionInGL();
 	cy3.setColorInGL();
-	positionInGL();
 	cy3.draw();
 	//glPopMatrix();
 
@@ -87,10 +81,9 @@ void MyVehicle::draw()
 	Cylinder cy4;
 	cy4.set_Dimension(0.8, 0.1, 100, 10);
 	cy4.setColor(255, 224, 147);
-	cy4.setPosition(-1.1, 0, 1.1);
-	//glTranslated(-1.2, 0, 1.1);
+	cy4.setPosition(0, 0, 2.2);
+	cy4.positionInGL();
 	cy4.setColorInGL();
-	positionInGL();
 	cy4.draw();
 	glPopMatrix();
 
@@ -112,7 +105,7 @@ void MyVehicle::draw()
 	cy5.setColor(17, 57, 122);
 	glRotated(90, -1, 0, 0);
 	cy5.setPosition(-0.7, 10, 0.1);
-	
+
 	glTranslated(0, -10.15, 1.35);
 	cy5.positionInGL();
 	cy5.setColorInGL();
@@ -145,30 +138,30 @@ void MyVehicle::draw()
 	glPopMatrix();*/
 
 
+	/*glPushMatrix();
 
-	
-	/*glBegin(GL_POLYGON);
-	
-	
+	glBegin(GL_POLYGON);
+
+
 	int z = 1;
 	while (z < 10) {
-		double theta = 0;
-		do {
-			x = (3 * sin(theta))*cos(3 * theta);
-			y = (14 * sin(theta))*sin(6 * theta);
-			glVertex3d(x, y, z);
+	double theta = 0;
+	do {
+	x = (3 * sin(theta))*cos(3 * theta);
+	y = (14 * sin(theta))*sin(6 * theta);
+	glVertex3d(x, y, z);
 
-			glColor3d(209 / 255.0, 244 / 255.0, 66.0 / 255);
-			theta += 0.01;
-		} while (theta < 2 * PI);
+	glColor3d(209 / 255.0, 244 / 255.0, 66.0 / 255);
+	theta += 0.01;
+	} while (theta < 2 * PI);
 
-		z+=1;
+	z+=1;
 	}
-	glEnd();*/
+	glEnd();
 
-	//glPopMatrix();
+	glPopMatrix();*/
 
 	// move back to global frame of reference
-
+	
 	
 }
