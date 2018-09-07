@@ -160,7 +160,6 @@ void MyVehicle::draw()
 					positionInGL();
 
 					double back_radius = 0.8;
-
 					double instant_distance = (double)getSpeed() * time_elapsed;
 					
 					total_distance += instant_distance;

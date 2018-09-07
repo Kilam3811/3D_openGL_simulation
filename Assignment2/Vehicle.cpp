@@ -23,7 +23,7 @@ void Vehicle::update(double dt)
 	x += speed * dt * cos(rotation * 3.1415926535 / 180.0);
 	z += speed * dt * sin(rotation * 3.1415926535 / 180.0);
 
-
+	//printf("Rm_speed is %f\n", speed);
 	// update heading
 	rotation += dt * steering * speed;
 	while (rotation > 360) rotation -= 360;

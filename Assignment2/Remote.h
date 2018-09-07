@@ -24,5 +24,6 @@ public:
 	void add_to_shapeInit_list(ShapeInit init);
 	bool check_wheel(Cylinder* cyl);
 	bool check_spoke(Shape *shape);
+	friend void set_speed(double speed_);
 	//friend void get_speed_from_server(VehicleState vs);
 };

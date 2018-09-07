@@ -484,7 +484,7 @@ void idle() {
 					/*ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
 					ptr->setPosition(-1.1, 0.4, -(0.4 + 1.1));
 					addShape(ptr);*/
-					ShapeInit init_7;
+					/*ShapeInit init_7;
 					init_7.type = RECTANGULAR_PRISM;
 					init_7.xyz[0] = -1.1;
 					init_7.xyz[1] = 0.4;
@@ -506,7 +506,7 @@ void idle() {
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
 					ptr->setPosition(-1.1, 0.4, (0.4 + 1.1));
-					addShape(ptr);*/
+					addShape(ptr);
 					ShapeInit init_8;
 					init_8.type = RECTANGULAR_PRISM;
 					init_8.xyz[0] = -1.1;
@@ -527,7 +527,7 @@ void idle() {
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
 					ptr->setPosition(1.1, 0.2, (0.4 + 1.1));
-					addShape(ptr);*/
+					addShape(ptr);
 					ShapeInit init_9;
 					init_9.type = RECTANGULAR_PRISM;
 					init_9.xyz[0] = 1.1;
@@ -548,7 +548,7 @@ void idle() {
 
 					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
 					ptr->setPosition(1.1, 0.2, -(0.4 + 1.1));
-					addShape(ptr);*/
+					addShape(ptr);
 					ShapeInit init_10;
 					init_10.type = RECTANGULAR_PRISM;
 					init_10.xyz[0] = 1.1;
@@ -565,7 +565,7 @@ void idle() {
 					//init_10.params.rect.isSteering = FALSE;
 					//init_10.params.rect.normal = FALSE;
 					//init_10.isSpoke = TRUE;
-					vm.shapes.push_back(init_10);
+					vm.shapes.push_back(init_10);*/
 					
 					// student code goes here
 					//

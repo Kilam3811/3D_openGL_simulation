@@ -132,7 +132,7 @@ void Remote::draw()
 					positionInGL();
 					(*it)->setRotation(getSteering());
 					//std::cout << "steering at " << getSteering() << std::endl;
-					cyl->draw_rolling();
+					cyl->draw();
 					//glTranslated(0, -(*it)->getY(), 0);
 					glPopMatrix();
 				}  
@@ -142,9 +142,9 @@ void Remote::draw()
 					positionInGL();
 					// all the local drawing code
 					double back_radius = cyl->getRadius();
-
-					double instant_distance = (double)getSpeed() * time_elapsed;
-					//printf("speed is %f\n", getSpeed());
+					double instant_distance = (double)getSpeed()* time_elapsed;
+					
+					
 					total_distance += instant_distance;
 					double theta = total_distance / back_radius;
 
@@ -185,7 +185,7 @@ void Remote::draw()
 					rec4.draw_rolling();
 					glPopMatrix();
 
-					cyl->draw();
+					cyl->draw_rolling();
 					// move back to global frame of reference
 					glPopMatrix();
 				}
