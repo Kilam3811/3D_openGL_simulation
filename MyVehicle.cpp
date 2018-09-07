@@ -43,8 +43,10 @@ void MyVehicle::draw()
 	//glPopMatrix();
 
 	//glPushMatrix();
-
+	glRotated(-steering, 0, 1, 0);
+	//glRotated(-rotation, 0, 0, 1);
 	//front right(seen from initial position)
+
 	Cylinder cy1;
 	cy1.set_Dimension(0.4, 0.1, 100, 10);
 	cy1.setColor(145,207,255);
@@ -85,6 +87,18 @@ void MyVehicle::draw()
 	cy4.positionInGL();
 	cy4.setColorInGL();
 	cy4.draw();
+
+	// for test rotate;
+	Rectangular rec3;
+	rec3.setLength(0.5,0.1,0.2);
+	rec3.setColor(1, 1, 1);
+	rec3.setPosition(0, 0.3, 0.35);
+	rec3.setRotation(90);
+	rec3.positionInGL();
+	rec3.setColorInGL();
+	rec3.draw();
+
+
 	glPopMatrix();
 
 
