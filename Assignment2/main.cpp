@@ -33,7 +33,6 @@
 
 #include "Shape.hpp"
 #include "Vehicle.hpp"
-
 #include "RemoteDataManager.hpp"
 #include "Messages.hpp"
 #include "HUD.hpp"
@@ -46,6 +45,7 @@
 #include "Cylinder.h"
 #include "MyVehicle.h"
 #include "Remote.h"
+
 #define MAX_COLOUR 255.0
 
 
@@ -164,7 +164,12 @@ void drawGoals()
 }
 void testing_Draw() {
 	//CUSTOMIZED VEHICLE
+	//Rectangular rec(10,10,10);
+	//rec.setPosition(10, 10, 0);
+	//rec.draw();
 
+	//Cylinder cyl(10, 10, 100, 10);
+	//cyl.draw();
 	//MyVehicle F1;
 	//F1.setPosition(0,0,0);
 	//F1.positionInGL();
@@ -343,7 +348,7 @@ void idle() {
 					init.params.rect.xlen = 3;
 					init.params.rect.ylen = 1;
 					init.params.rect.zlen = 2;
-					//init.isSpoke = FALSE;
+					//init.params.rect.isSpoke = FALSE;
 					vm.shapes.push_back(init);
 
 					ShapeInit init_1;
@@ -492,8 +497,8 @@ void idle() {
 					init_7.params.rect.ylen = sin(PI / 4)*0.5;
 					init_7.params.rect.zlen = 0.8;
 
-					init_7.params.rect.isRolling = TRUE;
-					init_7.params.rect.isSteering = FALSE;
+					init_7.params.rect.isSpoke = TRUE;
+					//init_7.params.rect.isSteering = FALSE;
 					//init_7.params.rect.normal = FALSE;
 					//init_7.isSpoke = TRUE;
 					vm.shapes.push_back(init_7);
@@ -514,8 +519,8 @@ void idle() {
 					init_8.params.rect.xlen = cos(PI / 4)*0.5;
 					init_8.params.rect.ylen = sin(PI / 4)*0.5;
 					init_8.params.rect.zlen = 0.8;
-					init_8.params.rect.isRolling = TRUE;
-					init_8.params.rect.isSteering = FALSE;
+					//init_8.params.rect.isSpoke = TRUE;
+					//init_8.params.rect.isSteering = FALSE;
 					//init_8.params.rect.normal = FALSE;
 					//init_8.isSpoke = TRUE;
 					vm.shapes.push_back(init_8);
@@ -532,11 +537,11 @@ void idle() {
 					init_9.rgb[1] = 119 / MAX_COLOUR;
 					init_9.rgb[2] = 66 / MAX_COLOUR;
 					init_9.rotation = 0;
-					init_9.params.rect.xlen = cos(PI / 4)*0.5;
-					init_9.params.rect.ylen = sin(PI / 4)*0.5;
+					init_9.params.rect.xlen = cos(PI / 4)*0.3;
+					init_9.params.rect.ylen = sin(PI / 4)*0.3;
 					init_9.params.rect.zlen = 0.8;
-					init_9.params.rect.isRolling = TRUE;
-					init_9.params.rect.isSteering = FALSE;
+					//init_9.params.rect.isSpoke = TRUE;
+					//init_9.params.rect.isSteering = FALSE;
 					//init_9.params.rect.normal = FALSE;
 					//init_9.isSpoke = TRUE;
 					vm.shapes.push_back(init_9);
@@ -553,11 +558,11 @@ void idle() {
 					init_10.rgb[1] = 119 / MAX_COLOUR;
 					init_10.rgb[2] = 66 / MAX_COLOUR;
 					init_10.rotation = 0;
-					init_10.params.rect.xlen = cos(PI / 4)*0.5;
-					init_10.params.rect.ylen = sin(PI / 4)*0.5;
+					init_10.params.rect.xlen = cos(PI / 4)*0.3;
+					init_10.params.rect.ylen = sin(PI / 4)*0.3;
 					init_10.params.rect.zlen = 0.8;
-					init_10.params.rect.isRolling = TRUE;
-					init_10.params.rect.isSteering = FALSE;
+					//init_10.params.rect.is = TRUE;
+					//init_10.params.rect.isSteering = FALSE;
 					//init_10.params.rect.normal = FALSE;
 					//init_10.isSpoke = TRUE;
 					vm.shapes.push_back(init_10);
@@ -605,6 +610,8 @@ void idle() {
 								//
 								// more student code goes here
 								//
+								//DO we need this?
+								//vm.remoteID++;
 							}
 							break;
 						}
@@ -615,12 +622,12 @@ void idle() {
 							std::vector<VehicleState> states = GetVehicleStates(msg.payload);
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
-
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
 									Vehicle * veh = iter->second;
 									remoteDriver(veh, vs.x, vs.z, vs.rotation, vs.speed, vs.steering);
 								}
+
 							}
 							break;
 						}
@@ -754,5 +761,3 @@ void motion(int x, int y) {
 	prev_mouse_x = x;
 	prev_mouse_y = y;
 };
-
-

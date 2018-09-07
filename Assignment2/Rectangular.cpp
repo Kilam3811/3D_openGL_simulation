@@ -153,8 +153,13 @@ void Rectangular::draw_rolling()
 }
 void Rectangular::rolling()
 {
-	glTranslated(x, y, z);
+	
+	glTranslated(x, y_length/2, z);
 	glRotated(rotation, 0, 0, -1);
+	glTranslated(0, -y_length/2, 0);
+	//glTranslated(x, 0, z);
+	
+	
 }
 double Rectangular::get_x_length()
 {

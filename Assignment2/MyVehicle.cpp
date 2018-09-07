@@ -72,13 +72,13 @@ MyVehicle::MyVehicle()
 
 	//SPOKES
 	ptr = new Rectangular(cos(PI/4)*0.5, sin(PI / 4)*0.5, 0.8);
-	ptr->setPosition(-1.1, 0.2, -(0.4+1.1));
+	ptr->setPosition(-1.1, 100, -(0.4+1.1));
 	ptr->setColor(244, 119, 66);
 	addShape(ptr);
 
 
 	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
-	ptr->setPosition(-1.1, 0.4, (0.4 + 1.1));
+	ptr->setPosition(-1.1, 1000, (0.4 + 1.1));
 	ptr->setColor(244, 119, 66);
 	addShape(ptr);
 
@@ -93,7 +93,7 @@ MyVehicle::MyVehicle()
 	addShape(ptr);
 }
 
-static double temp = 0;
+static double total_distance = 0;
 void MyVehicle::draw()
 {
 	std::vector<Shape *>::iterator it;
@@ -128,7 +128,7 @@ void MyVehicle::draw()
 			}
 			else if (getSpeed() != 0) {
 				//Indicating the front wheel
-				if ((*it)->getX() == 1.1) {
+				if (cyl->getX() == 1.1) {
 					glPushMatrix();
 					positionInGL();
 					(*it)->setRotation(getSteering());
@@ -143,23 +143,13 @@ void MyVehicle::draw()
 					positionInGL();
 					//Needs to be rolling......
 					//std::cout << "steering at " << getSteering() << std::endl;
-					double back_radius = 0.8;
-
-					double instant_distance = getSpeed() * time_elapsed;
-					static double total_distance = 0;
-					total_distance += instant_distance;
-					double theta = total_distance / back_radius;
-
-					theta *= 180 / PI;
-					//glRotated(theta, 0, 0, -1);
-					//glRotated(temp, 0, 0, -1);
-					(*it)->setRotation(theta);
+					(*it)->setRotation(0);
 					//temp += 2;
 					//if (temp > 360) temp = 0;
-					cyl->draw();
+					cyl->draw_rolling();
 					//glTranslated(0, -(*it)->getY(), 0);
 					glPopMatrix();
-				}
+				};
 			}
 		}
 		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
@@ -171,8 +161,8 @@ void MyVehicle::draw()
 
 					double back_radius = 0.8;
 
-					double instant_distance = getSpeed() * time_elapsed;
-					static double total_distance = 0;
+					double instant_distance = (double)getSpeed() * time_elapsed;
+					
 					total_distance += instant_distance;
 					double theta = total_distance / back_radius;
 
@@ -190,7 +180,6 @@ void MyVehicle::draw()
 				double front_radius = 0.4;
 
 				double instant_distance = getSpeed() * time_elapsed;
-				static double total_distance = 0;
 				total_distance += instant_distance;
 				double theta = total_distance / front_radius;
 

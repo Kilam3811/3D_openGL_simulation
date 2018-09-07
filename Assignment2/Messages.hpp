@@ -35,9 +35,7 @@ union ShapeParameter
 		float xlen;		// length along x-axis
 		float ylen;		// length along y-axis
 		float zlen;		// length along z-axis
-		bool isRolling;	// needs to roll with vehicle?
-		bool isSteering;// needs to steer with vehicle?
-		bool normal;
+		bool isSpoke;
 	} rect;
 
 	struct TriangularParameters
@@ -77,8 +75,6 @@ struct ShapeInit
 	float xyz[3];
 	float rotation;
 	float rgb[3];
-
-	bool isSpoke;
 };
 
 struct VehicleModel

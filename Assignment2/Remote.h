@@ -12,6 +12,7 @@ class Remote : public MyVehicle {
 protected:
 	VehicleModel vm;
 	std::vector<Shape *> cars;
+	double rm_speed;
 public:
 	Remote(VehicleModel vm_);
 	void draw();
@@ -23,4 +24,5 @@ public:
 	void add_to_shapeInit_list(ShapeInit init);
 	bool check_wheel(Cylinder* cyl);
 	bool check_spoke(Shape *shape);
+	//friend void get_speed_from_server(VehicleState vs);
 };

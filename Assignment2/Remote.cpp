@@ -87,7 +87,7 @@ Remote::Remote(VehicleModel vm_)
 			draw_tra(a_len, b_len, depth, height, offset, red, green, blue, x_cor, y_cor, z_cor, rotate_angle);
 		}
 }
-
+static double total_distance = 0;
 double temp_angle = 0;
 void Remote::draw()
 {
@@ -114,7 +114,14 @@ void Remote::draw()
 					glPushMatrix();
 					positionInGL();
 					// all the local drawing code
-					cyl->draw_rolling();
+					//Shape* ptr = NULL
+
+					/* = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+					ptr->setPosition(-1.1, 1000, (0.4 + 1.1));
+					ptr->setColor(244, 119, 66);
+					addShape(ptr);*/
+
+					cyl->draw();
 					// move back to global frame of reference
 					glPopMatrix();
 				}
@@ -128,7 +135,7 @@ void Remote::draw()
 					cyl->draw_rolling();
 					//glTranslated(0, -(*it)->getY(), 0);
 					glPopMatrix();
-				}
+				}  
 				else {
 					// move to the vehicle¡¦s local frame of reference
 					glPushMatrix();
@@ -136,12 +143,48 @@ void Remote::draw()
 					// all the local drawing code
 					double back_radius = cyl->getRadius();
 
-					double instant_distance = getSpeed() * time_elapsed;
-					static double total_distance = 0;
+					double instant_distance = (double)getSpeed() * time_elapsed;
+					//printf("speed is %f\n", getSpeed());
 					total_distance += instant_distance;
 					double theta = total_distance / back_radius;
+
 					theta *= 180 / PI;
-					cyl->setRotation(theta);
+					//Get the comment theta
+					//If they are rolling adding local spoke to indicate the fact.
+
+
+					glPushMatrix();
+					Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+					rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
+					rec1.setColor(244, 119, 66);
+					rec1.setRotation(theta);
+					rec1.draw_rolling();
+					glPopMatrix();
+
+					glPushMatrix();
+					Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+					rec2.setPosition(-1.1, 100, (0.4 + 1.1));
+					rec2.setColor(244, 119, 66);
+					rec2.setRotation(theta);
+					rec2.draw_rolling();
+					glPopMatrix();
+
+					glPushMatrix();
+					Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+					rec3.setPosition(1.1, 100, (0.4 + 1.1));
+					rec3.setColor(244, 119, 66);
+					rec3.setRotation(theta);
+					rec3.draw_rolling();
+					glPopMatrix();
+
+					glPushMatrix();
+					Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+					rec4.setPosition(1.1, 100, -(0.4 + 1.1));
+					rec4.setColor(244, 119, 66);
+					rec4.setRotation(theta);
+					rec4.draw_rolling();
+					glPopMatrix();
+
 					cyl->draw();
 					// move back to global frame of reference
 					glPopMatrix();
@@ -150,45 +193,53 @@ void Remote::draw()
 			else {
 				glPushMatrix();
 				positionInGL();
+				//Get the comment theta
+				//If they are rolling adding local spoke to indicate the fact.
+
+
+				glPushMatrix();
+				Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+				rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
+				rec1.setColor(244, 119, 66);
+				rec1.setRotation(0);
+				rec1.draw_rolling();
+				glPopMatrix();
+
+				glPushMatrix();
+				Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+				rec2.setPosition(-1.1, 100, (0.4 + 1.1));
+				rec2.setColor(244, 119, 66);
+				rec2.setRotation(0);
+				rec2.draw_rolling();
+				glPopMatrix();
+
+				glPushMatrix();
+				Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+				rec3.setPosition(1.1, 100, (0.4 + 1.1));
+				rec3.setColor(244, 119, 66);
+				rec3.setRotation(0);
+				rec3.draw_rolling();
+				glPopMatrix();
+
+				glPushMatrix();
+				Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
+				rec4.setPosition(1.1, 100, -(0.4 + 1.1));
+				rec4.setColor(244, 119, 66);
+				rec4.setRotation(0);
+				rec4.draw_rolling();
+				glPopMatrix();
 				cyl->draw();
 				//glTranslated(0, -(*it)->getY(), 0);
 				glPopMatrix();
 			}
 		}
-		/*Rectangular* rec = dynamic_cast<Rectangular*> (*it);
-		if (rec != NULL) {
-			if (check_spoke(*it)) {
-				glPushMatrix();
-				positionInGL();
-
-				double front_radius = 0.4;
-
-				double instant_distance = getSpeed() * time_elapsed;
-				static double total_distance = 0;
-				total_distance += instant_distance;
-				double theta = total_distance / front_radius;
-
-				theta *= 180 / PI;
-				rec->setRotation(theta);
-				rec->draw_rolling();
-				glPopMatrix();
-			}
-			else {
-				// move to the vehicle¡¦s local frame of reference
-				glPushMatrix();
-				positionInGL();
-				// all the local drawing code
-				(*it)->draw();
-				// move back to global frame of reference
-				glPopMatrix();
-			}
-		}*/
 		
 		else {
 			// move to the vehicle¡¦s local frame of reference
 			glPushMatrix();
 			positionInGL();
 			// all the local drawing code
+
 			(*it)->draw();
 			// move back to global frame of reference
 			glPopMatrix();
@@ -262,7 +313,7 @@ bool Remote::check_spoke(Shape * shape)
 	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
 		Rectangular *rec = dynamic_cast<Rectangular*> (shape);
 		if (rec != NULL) {
-			if (!shape_it->isSpoke) {
+			if (shape_it->params.rect.isSpoke) {
 				return TRUE;
 			}
 		}

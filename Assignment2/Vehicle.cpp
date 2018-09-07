@@ -26,7 +26,6 @@ void Vehicle::update(double dt)
 
 	// update heading
 	rotation += dt * steering * speed;
-
 	while (rotation > 360) rotation -= 360;
 	while (rotation < 0) rotation += 360;
 
