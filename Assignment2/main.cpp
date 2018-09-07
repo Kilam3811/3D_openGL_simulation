@@ -163,6 +163,9 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
+	//Cylinder cyl(10, 10, 100, 10);
+	//cyl.setPosition(0, 0, 0);
+	//cyl.draw();
 	//CUSTOMIZED VEHICLE
 	//Rectangular rec(10,10,10);
 	//rec.setPosition(10, 10, 0);

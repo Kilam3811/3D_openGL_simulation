@@ -153,7 +153,7 @@ void Remote::draw()
 					//If they are rolling adding local spoke to indicate the fact.
 
 
-					glPushMatrix();
+					/*glPushMatrix();
 					Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 					rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
 					rec1.setColor(244, 119, 66);
@@ -183,8 +183,10 @@ void Remote::draw()
 					rec4.setColor(244, 119, 66);
 					rec4.setRotation(theta);
 					rec4.draw_rolling();
-					glPopMatrix();
+					glPopMatrix();*/
 
+					//glPopMatrix(); 
+					cyl->setRotation(theta);
 					cyl->draw_rolling();
 					// move back to global frame of reference
 					glPopMatrix();
@@ -197,7 +199,7 @@ void Remote::draw()
 				//If they are rolling adding local spoke to indicate the fact.
 
 
-				glPushMatrix();
+				/*glPushMatrix();
 				Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 				rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
 				rec1.setColor(244, 119, 66);
@@ -227,7 +229,8 @@ void Remote::draw()
 				rec4.setColor(244, 119, 66);
 				rec4.setRotation(0);
 				rec4.draw_rolling();
-				glPopMatrix();
+				glPopMatrix();*/
+				cyl->setRotation(0);
 				cyl->draw();
 				//glTranslated(0, -(*it)->getY(), 0);
 				glPopMatrix();

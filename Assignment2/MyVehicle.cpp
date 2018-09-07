@@ -39,13 +39,13 @@ MyVehicle::MyVehicle()
 	ptr->setPosition(1.1, 0.2, 1.1);
 	addShape(ptr);
 
-	//front left(seen from initial position)
+	//front right(seen from initial position)
 	ptr = new Cylinder (0.4, 0.1, 100, 10);
 	ptr->setColor(145, 207, 255);
 	ptr->setPosition(1.1, 0.2, -1.1);
 	addShape(ptr);
 
-	//back right(seen from initial position)
+	//back left(seen from initial position)
 	ptr = new Cylinder (0.8, 0.1, 100, 10);
 	ptr->setColor(255, 224, 147);
 	ptr->setPosition(-1.1, 0.4, -1.1);
@@ -57,7 +57,6 @@ MyVehicle::MyVehicle()
 	ptr->setColor(255, 224, 147);
 	ptr->setPosition(-1.1, 0.4, 1.1);
 	addShape(ptr);
-
 	
 	ptr = new Trapezoidal (1.5, 0.5, 0.5, 0.5, 0.5, 0.5);
 	ptr->setColor(10, 201, 124);
