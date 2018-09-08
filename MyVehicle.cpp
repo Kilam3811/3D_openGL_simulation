@@ -36,67 +36,58 @@ void MyVehicle::draw()
 	Rectangular rec1;
 	rec1.setLength(3, 1, 2);
 	rec1.setPosition(0, 0.4, 0);
-	rec1.positionInGL();
 	rec1.setColor(255, 186, 221);
-	rec1.setColorInGL();
 	rec1.draw();
 	//glPopMatrix();
 
-	//glPushMatrix();
+
 	glRotated(-steering, 0, 1, 0);
-	//glRotated(-rotation, 0, 0, 1);
+	//glRotated(-rotation, 1, 0, 0);
+	
 	//front right(seen from initial position)
 
 	Cylinder cy1;
 	cy1.set_Dimension(0.4, 0.1, 100, 10);
 	cy1.setColor(145,207,255);
-	cy1.setPosition(1.1, -0.4, 1.1);
-	cy1.positionInGL();
-	cy1.setColorInGL();
+	cy1.setPosition(1.1, 0, 1.1);
 	cy1.draw();
-	//glPopMatrix();
 
 	//front left(seen from initial position)
-	//glPushMatrix();
+
 	Cylinder cy2;
 	cy2.set_Dimension(0.4, 0.1, 100, 10);
 	cy2.setColor(145,207,255);
-	cy2.setPosition(0, 0, -2.2);
-	cy2.positionInGL();
-	cy2.setColorInGL();
+	cy2.setPosition(1.1, 0, -1.1);
 	cy2.draw();
 	//glPopMatrix();
 
 	//back right(seen from initial position)
-	//glPushMatrix();
+
+	glRotated(steering, 0, 1, 0);
 	Cylinder cy3;
 	cy3.set_Dimension(0.8, 0.1, 100, 10);
 	cy3.setColor(255, 224, 147);
-	cy3.setPosition(-2.2, 0, 0);
-	cy3.positionInGL();
-	cy3.setColorInGL();
+	cy3.setPosition(-1.1, 0, -1.1);
 	cy3.draw();
 	//glPopMatrix();
 
 	//back left(seen from initial position)
-	//glPushMatrix();
+
 	Cylinder cy4;
 	cy4.set_Dimension(0.8, 0.1, 100, 10);
 	cy4.setColor(255, 224, 147);
-	cy4.setPosition(0, 0, 2.2);
-	cy4.positionInGL();
-	cy4.setColorInGL();
+	cy4.setPosition(-1.1, 0, 1.1);
 	cy4.draw();
 
 	// for test rotate;
+
 	Rectangular rec3;
 	rec3.setLength(0.5,0.1,0.2);
 	rec3.setColor(1, 1, 1);
-	rec3.setPosition(0, 0.3, 0.35);
+	rec3.setPosition(-1.1, 0.8, 1.45);
 	rec3.setRotation(90);
-	rec3.positionInGL();
-	rec3.setColorInGL();
 	rec3.draw();
+
 
 
 	glPopMatrix();
