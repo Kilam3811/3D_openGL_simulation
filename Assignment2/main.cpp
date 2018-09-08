@@ -130,7 +130,7 @@ int main(int argc, char ** argv) {
 	GoalState g;
 	g.x = 25;
 	g.z = 0;
-	goals.push_back(g);
+	goals.push_back(g);	
 
 
 	glutMainLoop();
@@ -340,7 +340,6 @@ void idle() {
 					ptr->setColor(255, 186, 221);
 					addShape(ptr);*/
 					init.type = RECTANGULAR_PRISM;
-					//Might have probs?
 					init.xyz[0] = 0;
 					init.xyz[1] = 0.4;
 					init.xyz[2] = 0;
@@ -609,12 +608,10 @@ void idle() {
 								//Testing ..... I know what to do now..
 								
 								
-								otherVehicles[vm.remoteID] = new Remote(vm);
+								otherVehicles[vm.remoteID] = new Remote(vm,vm.remoteID);
 								//
 								// more student code goes here
 								//
-								//DO we need this?
-								//vm.remoteID++;
 							}
 							break;
 						}
@@ -625,12 +622,16 @@ void idle() {
 							std::vector<VehicleState> states = GetVehicleStates(msg.payload);
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
+
+								
+								//std::cout << "id " << vs.remoteID << " Speed is " << vs.speed << std::endl;
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
 									Vehicle * veh = iter->second;
+									
 									remoteDriver(veh, vs.x, vs.z, vs.rotation, vs.speed, vs.steering);
 								}
-
+								
 							}
 							break;
 						}
@@ -764,3 +765,7 @@ void motion(int x, int y) {
 	prev_mouse_x = x;
 	prev_mouse_y = y;
 };
+void Remote::getVehicleState(VehicleState vs)
+{
+	cars_states.push_back(vs);
+}

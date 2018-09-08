@@ -1,5 +1,12 @@
 #include "Remote.h"
 #include "Shape.hpp"
+#include "Triangular.h"
+#include "Rectangular.h"
+#include "Cylinder.h"
+#include "Trapezoidal.h"
+#include "VectorMaths.hpp"
+#include "Messages.hpp"
+#include "RemoteDataManager.hpp"
 #include <cassert>
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -16,9 +23,10 @@
 #include <GL/glut.h>
 #endif
 Shape * shape_ptr = NULL;
-Remote::Remote(VehicleModel vm_)
+Remote::Remote(VehicleModel vm_,int remote_id)
 {
 	//Each model has a vector, which contains informations about the shapes..
+	//printf("id %d has been created\n", remote_ID);
 	vm = vm_;
 	std::vector<ShapeInit>::iterator it;
 	//Assume the exteral car would have one shape for now?..
@@ -120,7 +128,7 @@ void Remote::draw()
 					ptr->setPosition(-1.1, 1000, (0.4 + 1.1));
 					ptr->setColor(244, 119, 66);
 					addShape(ptr);*/
-
+					cyl->setRotation(0);
 					cyl->draw();
 					// move back to global frame of reference
 					glPopMatrix();
@@ -142,9 +150,9 @@ void Remote::draw()
 					positionInGL();
 					// all the local drawing code
 					double back_radius = cyl->getRadius();
-					double instant_distance = (double)getSpeed()* time_elapsed;
+					double instant_distance = getSpeed()* time_elapsed;
 					
-					
+					//std::cout << "id " << vs_.remoteID << " Speed is " << getSpeed() << std::endl;
 					total_distance += instant_distance;
 					double theta = total_distance / back_radius;
 
@@ -153,10 +161,10 @@ void Remote::draw()
 					//If they are rolling adding local spoke to indicate the fact.
 
 
-					/*glPushMatrix();
+					glPushMatrix();
 					Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 					rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
-					rec1.setColor(244, 119, 66);
+					rec1.setColor(101, 244, 66);
 					rec1.setRotation(theta);
 					rec1.draw_rolling();
 					glPopMatrix();
@@ -164,7 +172,7 @@ void Remote::draw()
 					glPushMatrix();
 					Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 					rec2.setPosition(-1.1, 100, (0.4 + 1.1));
-					rec2.setColor(244, 119, 66);
+					rec2.setColor(101, 244, 66);
 					rec2.setRotation(theta);
 					rec2.draw_rolling();
 					glPopMatrix();
@@ -172,7 +180,7 @@ void Remote::draw()
 					glPushMatrix();
 					Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 					rec3.setPosition(1.1, 100, (0.4 + 1.1));
-					rec3.setColor(244, 119, 66);
+					rec3.setColor(101, 244, 66);
 					rec3.setRotation(theta);
 					rec3.draw_rolling();
 					glPopMatrix();
@@ -180,10 +188,10 @@ void Remote::draw()
 					glPushMatrix();
 					Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 					rec4.setPosition(1.1, 100, -(0.4 + 1.1));
-					rec4.setColor(244, 119, 66);
+					rec4.setColor(101, 244, 66);
 					rec4.setRotation(theta);
 					rec4.draw_rolling();
-					glPopMatrix();*/
+					glPopMatrix();
 
 					//glPopMatrix(); 
 					cyl->setRotation(theta);
@@ -199,10 +207,10 @@ void Remote::draw()
 				//If they are rolling adding local spoke to indicate the fact.
 
 
-				/*glPushMatrix();
+				glPushMatrix();
 				Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 				rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
-				rec1.setColor(244, 119, 66);
+				rec1.setColor(101, 244, 66);
 				rec1.setRotation(0);
 				rec1.draw_rolling();
 				glPopMatrix();
@@ -210,7 +218,7 @@ void Remote::draw()
 				glPushMatrix();
 				Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 				rec2.setPosition(-1.1, 100, (0.4 + 1.1));
-				rec2.setColor(244, 119, 66);
+				rec2.setColor(101, 244, 66);
 				rec2.setRotation(0);
 				rec2.draw_rolling();
 				glPopMatrix();
@@ -218,7 +226,7 @@ void Remote::draw()
 				glPushMatrix();
 				Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 				rec3.setPosition(1.1, 100, (0.4 + 1.1));
-				rec3.setColor(244, 119, 66);
+				rec3.setColor(101, 244, 66);
 				rec3.setRotation(0);
 				rec3.draw_rolling();
 				glPopMatrix();
@@ -226,10 +234,10 @@ void Remote::draw()
 				glPushMatrix();
 				Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
 				rec4.setPosition(1.1, 100, -(0.4 + 1.1));
-				rec4.setColor(244, 119, 66);
+				rec4.setColor(101, 244, 66);
 				rec4.setRotation(0);
 				rec4.draw_rolling();
-				glPopMatrix();*/
+				glPopMatrix();
 				cyl->setRotation(0);
 				cyl->draw();
 				//glTranslated(0, -(*it)->getY(), 0);
@@ -323,5 +331,20 @@ bool Remote::check_spoke(Shape * shape)
 	};
 	return FALSE;
 }
+
+/*double Remote::return_specific_speed(int remote_id)
+{
+	double exact_speed = 0;
+	std::vector<VehicleState>::iterator it;
+	for (it = cars_states.begin(); it != cars_states.end(); ++it) {
+		printf("!!!!!!!!!!!!!!\n");
+		if (it->remoteID == remote_id) {
+			//printf("FIND?\n");
+			//std::cout << "id " << it->remoteID << " Speed is " << it->speed << std::endl;
+			return it->speed;
+		}
+	}
+	return exact_speed;
+}*/
 
 
