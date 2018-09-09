@@ -19,7 +19,38 @@
 #include <GL/glut.h>
 #endif
 MyVehicle::MyVehicle() {};
-MyVehicle::~MyVehicle() {};
+MyVehicle::~MyVehicle() {}
+
+void MyVehicle::for_spin()
+{
+	spin = spin + speed;
+	
+	while (spin > 360) {
+		spin = spin - 360;
+	}
+	
+	while (spin < 0) {
+		spin = spin + 360;
+	}
+}
+void MyVehicle::jud_spin(double X,double Y,double Z)
+{
+	if (speed >= 0) {
+		for_spin();
+		glTranslated(X, Y, Z);
+		glRotated(-spin, 0, 0, 1);
+		glTranslated(-X, -Y, -Z);
+	}
+
+	if (speed < 0) {
+		for_spin();
+		glTranslated(X, Y, Z);
+		glRotated(-spin, 0, 0, 1);
+		glTranslated(-X, -Y, -Z);
+	}
+
+}
+;
 void MyVehicle::draw()
 {
 	//SAMPLE CAR
@@ -36,111 +67,139 @@ void MyVehicle::draw()
 	Rectangular rec1;
 	rec1.setLength(3, 1, 2);
 	rec1.setPosition(0, 0.4, 0);
-	rec1.setColor(255, 186, 221);
+	rec1.setColor(209, 110, 256);
 	rec1.draw();
 	//glPopMatrix();
 
-
-	glRotated(-steering, 0, 1, 0);
-	//glRotated(-rotation, 1, 0, 0);
+	
 	
 	//front right(seen from initial position)
-
+	glPushMatrix();
 	Cylinder cy1;
 	cy1.set_Dimension(0.4, 0.1, 100, 10);
 	cy1.setColor(145,207,255);
+	
+	// Rotate follow the steering
+	glTranslated(1.1, 0.4, 1.1);
+	glRotated(-steering, 0, 1, 0);
+	glTranslated(-1.1, -0.4, -1.1);
+
+	// judge the spin
+	jud_spin(1.1, 0.4, 1.1);
+	
 	cy1.setPosition(1.1, 0, 1.1);
 	cy1.draw();
+	glPopMatrix();
 
 	//front left(seen from initial position)
-
+	glPushMatrix();
 	Cylinder cy2;
 	cy2.set_Dimension(0.4, 0.1, 100, 10);
 	cy2.setColor(145,207,255);
+
+	glTranslated(1.1, 0.4, -1.1);
+	glRotated(-steering, 0, 1, 0);
+	glTranslated(-1.1, -0.4, 1.1);
+
+	jud_spin(1.1, 0.4, -1.1);
+
 	cy2.setPosition(1.1, 0, -1.1);
 	cy2.draw();
-	//glPopMatrix();
+	glPopMatrix();
+
+
 
 	//back right(seen from initial position)
 
-	glRotated(steering, 0, 1, 0);
+	glPushMatrix();
 	Cylinder cy3;
 	cy3.set_Dimension(0.8, 0.1, 100, 10);
 	cy3.setColor(255, 224, 147);
+
+	jud_spin(-1.1, 0.8, -1.1);
+
 	cy3.setPosition(-1.1, 0, -1.1);
 	cy3.draw();
-	//glPopMatrix();
+	glPopMatrix();
 
+	
 	//back left(seen from initial position)
 
+	glPushMatrix();
 	Cylinder cy4;
 	cy4.set_Dimension(0.8, 0.1, 100, 10);
 	cy4.setColor(255, 224, 147);
+
+	jud_spin(-1.1, 0.8, 1.1);
+
 	cy4.setPosition(-1.1, 0, 1.1);
 	cy4.draw();
-
-	// for test rotate;
-
-	Rectangular rec3;
-	rec3.setLength(0.5,0.1,0.2);
-	rec3.setColor(1, 1, 1);
-	rec3.setPosition(-1.1, 0.8, 1.45);
-	rec3.setRotation(90);
-	rec3.draw();
-
-
-
 	glPopMatrix();
 
-
-
-	/*glPushMatrix();
-	Rectangular rec2;
-	rec2.setLength(1.5, 0.05, 0.05);
-	rec2.setColor(0, 201, 124);
-	rec2.setPosition(0.5, 1.4, 0);
-	rec2.positionInGL();
-	rec2.setColorInGL();
-	rec2.draw();
-	glPopMatrix();
-
+	// for test rotate //////////////////////////////////////////////////////////////////////////////////////
+	
 	glPushMatrix();
-	Cylinder cy5;
-	cy5.set_Dimension(0.15, 0.05, 100, 10);
-	cy5.setColor(17, 57, 122);
-	glRotated(90, -1, 0, 0);
-	cy5.setPosition(-0.7, 10, 0.1);
+	Rectangular F_R;
+	F_R.setLength(0.5, 0.1, 0.2);
+	F_R.setColor(1, 1, 1);
 
-	glTranslated(0, -10.15, 1.35);
-	cy5.positionInGL();
-	cy5.setColorInGL();
-	cy5.draw();
+	glTranslated(1.1, 0.4, 1.45);
+	glRotated(-steering, 0, 1, 0);
+	glTranslated(-1.1, -0.4, -1.45);
+
+	jud_spin(1.1, 0.4, 1.45);
+
+	F_R.setPosition(1.1, 0.4, 1.45);
+	F_R.setRotation(90);
+	F_R.draw();
+	glPopMatrix();
+///////////////////////////////////
+	glPushMatrix();
+	Rectangular F_L;
+	F_L.setLength(0.5, 0.1, 0.2);
+	F_L.setColor(1, 1, 1);
+
+	glTranslated(1.1, 0.4, -1.45);
+	glRotated(-steering, 0, 1, 0);
+	glTranslated(-1.1, -0.4, 1.45);
+
+	jud_spin(1.1, 0.4, -1.45);
+
+	F_L.setPosition(1.1, 0.4, -1.45);
+	F_L.setRotation(90);
+	F_L.draw();
+	glPopMatrix();
+///////////////////////////////////
+	glPushMatrix();
+	Rectangular B_R;
+	B_R.setLength(0.5,0.1,0.2);
+	B_R.setColor(1, 1, 1);
+
+	jud_spin(-1.1, 0.8, 1.45);
+
+	B_R.setPosition(-1.1, 0.8, 1.45);
+	B_R.setRotation(90);
+	B_R.draw();
+	glPopMatrix();
+///////////////////////////////////
+	glPushMatrix();
+	Rectangular B_L;
+	B_L.setLength(0.5, 0.1, 0.2);
+	B_L.setColor(1, 1, 1);
+
+	jud_spin(-1.1, 0.8, -1.45);
+
+	B_L.setPosition(-1.1, 0.8, -1.45);
+	B_L.setRotation(90);
+	B_L.draw();
 	glPopMatrix();
 
-	glPushMatrix();
-	Cylinder cy6;
-	cy6.set_Dimension(0.25, 0.05, 100, 10);
-	cy6.setColor(255, 255, 255);
-	cy6.setPosition(-0.7, 10, 0.1);
-	glRotated(90, -1, 0, 0);
-	glTranslated(0, -10.25, 1.30);
-	cy6.positionInGL();
-	cy6.setColorInGL();
-	cy6.draw();
-
 	glPopMatrix();
 
-	glPushMatrix();
-	Cylinder cy7;
-	cy7.set_Dimension(0.35, 0.05, 100, 10);
-	cy7.setColor(17, 57, 122);
-	cy7.setPosition(-0.7, 10, 0.13);
-	glRotated(90, -1, 0, 0);
-	glTranslated(0, -10.35, 1.25);
-	cy7.positionInGL();
-	cy7.setColorInGL();
-	cy7.draw();
-	glPopMatrix();*/
+
+
+	
+
 
 
 	/*glPushMatrix();
@@ -168,5 +227,6 @@ void MyVehicle::draw()
 
 	// move back to global frame of reference
 	
-	
+	
+
 }

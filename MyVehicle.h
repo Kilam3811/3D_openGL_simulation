@@ -7,4 +7,9 @@ public:
 	void draw();
 	MyVehicle();
 	~MyVehicle();
+	void for_spin();
+	void jud_spin(double X,double Y,double Z);
+
+private:
+	double spin;
 };
