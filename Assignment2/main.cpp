@@ -608,7 +608,7 @@ void idle() {
 								//Testing ..... I know what to do now..
 								
 								
-								otherVehicles[vm.remoteID] = new Remote(vm,vm.remoteID);
+								otherVehicles[vm.remoteID] = new Remote(vm);
 								//
 								// more student code goes here
 								//

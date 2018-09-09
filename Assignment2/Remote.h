@@ -18,7 +18,7 @@ protected:
 	double rm_speed;
 public:
 	//Remote(VehicleState vs);
-	Remote(VehicleModel vm_ , int remote_id);
+	Remote(VehicleModel vm_);
 	void draw();
 	void draw_rec(double xLength,double yLength,double zLength,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);
 	void draw_tri(double a_len,double b_len,double depth,double theta,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);

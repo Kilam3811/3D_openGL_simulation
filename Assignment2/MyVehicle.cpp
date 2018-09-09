@@ -71,13 +71,13 @@ MyVehicle::MyVehicle()
 
 	//SPOKES
 	ptr = new Rectangular(cos(PI/4)*0.5, sin(PI / 4)*0.5, 0.8);
-	ptr->setPosition(-1.1, 100, -(0.4+1.1));
+	ptr->setPosition(-1.1, 0.4, -(0.4+1.1));
 	ptr->setColor(244, 119, 66);
 	addShape(ptr);
 
 
 	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
-	ptr->setPosition(-1.1, 1000, (0.4 + 1.1));
+	ptr->setPosition(-1.1, 0.4, (0.4 + 1.1));
 	ptr->setColor(244, 119, 66);
 	addShape(ptr);
 
