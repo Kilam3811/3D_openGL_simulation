@@ -171,13 +171,21 @@ void testing_Draw() {
 	//rec.setPosition(10, 10, 0);
 	//rec.draw();
 
-	//Cylinder cyl(10, 10, 100, 10);
+	//Cylinder cyl(10, 100, 100, 10);
+	//cyl.setPosition(0, 0, 0);
+	//cyl.setColor(244, 121, 121);
 	//cyl.draw();
-	//MyVehicle F1;
-	//F1.setPosition(0,0,0);
+	MyVehicle F1;
+	F1.setPosition(0,0,0);
 	//F1.positionInGL();
-	//F1.draw();
+	F1.draw();
 	//==========================================
+
+	/*Triangular tri(1, 1, 2.5, 90);
+	tri.setColor(0, 1, 0);
+	tri.setRotation(0);
+	tri.setPosition(0, 0, 0);
+	tri.draw();*/
 }
 
 
@@ -222,7 +230,8 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	testing_Draw();
+
+	//testing_Draw();
 	glutSwapBuffers();
 };
 
@@ -363,7 +372,7 @@ void idle() {
 
 					init_1.type = CYLINDER;
 					init_1.xyz[0] = 1.1;
-					init_1.xyz[1] = 0.2;
+					init_1.xyz[1] = 0;
 					init_1.xyz[2] = 1.1;
 					init_1.rgb[0] = 145/MAX_COLOUR;
 					init_1.rgb[1] = 207/ MAX_COLOUR;
@@ -384,7 +393,7 @@ void idle() {
 					addShape(ptr);*/
 					init_2.type = CYLINDER;
 					init_2.xyz[0] = 1.1;
-					init_2.xyz[1] = 0.2;
+					init_2.xyz[1] = 0;
 					init_2.xyz[2] = -1.1;
 					init_2.rgb[0] = 145 / MAX_COLOUR;
 					init_2.rgb[1] = 207 / MAX_COLOUR;
@@ -405,7 +414,7 @@ void idle() {
 					ShapeInit init_3;
 					init_3.type = CYLINDER;
 					init_3.xyz[0] = -1.1;
-					init_3.xyz[1] = 0.4;
+					init_3.xyz[1] = 0;
 					init_3.xyz[2] = -1.1;
 					init_3.rgb[0] = 255 / MAX_COLOUR;
 					init_3.rgb[1] = 224 / MAX_COLOUR;
@@ -426,7 +435,7 @@ void idle() {
 					ShapeInit init_4;
 					init_4.type = CYLINDER;
 					init_4.xyz[0] = -1.1;
-					init_4.xyz[1] = 0.4;
+					init_4.xyz[1] = 0;
 					init_4.xyz[2] = 1.1;
 					init_4.rgb[0] = 255 / MAX_COLOUR;
 					init_4.rgb[1] = 224 / MAX_COLOUR;

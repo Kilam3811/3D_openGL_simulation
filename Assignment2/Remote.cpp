@@ -155,7 +155,7 @@ void Remote::draw()
 
 					/*glPushMatrix();
 					Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
+					rec1.setPosition(-cyl->getX(), cyl->getY(), -cyl->getZ());
 					rec1.setColor(244, 119, 66);
 					rec1.setRotation(theta);
 					rec1.draw_rolling();
@@ -163,7 +163,7 @@ void Remote::draw()
 
 					glPushMatrix();
 					Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec2.setPosition(-1.1, 100, (0.4 + 1.1));
+					rec2.setPosition(-cyl->getX(), cyl->getY(), -cyl->getZ());
 					rec2.setColor(244, 119, 66);
 					rec2.setRotation(theta);
 					rec2.draw_rolling();
@@ -171,7 +171,7 @@ void Remote::draw()
 
 					glPushMatrix();
 					Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec3.setPosition(1.1, 100, (0.4 + 1.1));
+					rec3.setPosition(cyl->getX(), cyl->getY(), cyl->getZ());
 					rec3.setColor(244, 119, 66);
 					rec3.setRotation(theta);
 					rec3.draw_rolling();
@@ -179,15 +179,15 @@ void Remote::draw()
 
 					glPushMatrix();
 					Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec4.setPosition(1.1, 100, -(0.4 + 1.1));
+					rec4.setPosition(cyl->getX(), cyl->getY(), -cyl->getZ());
 					rec4.setColor(244, 119, 66);
 					rec4.setRotation(theta);
 					rec4.draw_rolling();
-					glPopMatrix();*/
+					glPopMatrix();
 
 					//glPopMatrix(); 
-					cyl->setRotation(theta);
-					cyl->draw_rolling();
+					cyl->setRotation(theta);*/
+					cyl->draw();
 					// move back to global frame of reference
 					glPopMatrix();
 				}
@@ -241,8 +241,8 @@ void Remote::draw()
 			// move to the vehicle¡¦s local frame of reference
 			glPushMatrix();
 			positionInGL();
+			//glTranslated((*it)->getX(), (*it)->getY(), (*it)->getZ());
 			// all the local drawing code
-
 			(*it)->draw();
 			// move back to global frame of reference
 			glPopMatrix();

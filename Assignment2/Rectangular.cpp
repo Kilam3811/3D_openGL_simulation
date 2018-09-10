@@ -91,6 +91,8 @@ void Rectangular::draw()
 void Rectangular::draw_rolling()
 {
 	//positionInGL();
+	
+	//glTranslated(x, y, z);
 	rolling();
 	setColorInGL();
 	//	Draw 4 sides of the rectangle
@@ -150,6 +152,7 @@ void Rectangular::draw_rolling()
 	glVertex3d(get_x_length() / 2, 0, -get_z_length() / 2);
 	glVertex3d(get_x_length() / 2, 0, get_z_length() / 2);
 	glEnd();
+	glTranslated(0, 0, 0);
 }
 void Rectangular::rolling()
 {

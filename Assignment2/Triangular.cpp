@@ -21,10 +21,11 @@ Triangular::Triangular(double x_length, double y_length, double z_length, double
 }
 void Triangular::draw()
 {
-	positionInGL();
+	//positionInGL();
+	glTranslated(x, y, z);
 	setColorInGL();
 	//Draw two triangular sides
-	double angle = getTheta();
+	//double angle = getTheta();
 	glBegin(GL_TRIANGLES);
 	//side
 	glVertex3d(getX_length() / 2, 0, -getZ_length() / 2);
