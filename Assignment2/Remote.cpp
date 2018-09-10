@@ -1,5 +1,6 @@
 #include "Remote.h"
 #include "Shape.hpp"
+#include "Wheel.h"
 #include <cassert>
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -103,26 +104,16 @@ void Remote::draw()
 				if (check_front_wheel(cyl)) {
 					glPushMatrix();
 					positionInGL();
-					(*it)->setRotation(getSteering());
-					//std::cout << "steering at " << getSteering() << std::endl;
-					cyl->draw();
-					//glTranslated(0, -(*it)->getY(), 0);
+					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), getSteering());
+					w.draw();
 					glPopMatrix();
 				}
 				else {
 					// move to the vehicle¡¦s local frame of reference
 					glPushMatrix();
 					positionInGL();
-					// all the local drawing code
-					//Shape* ptr = NULL
-
-					/* = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
-					ptr->setPosition(-1.1, 1000, (0.4 + 1.1));
-					ptr->setColor(244, 119, 66);
-					addShape(ptr);*/
-
-					cyl->draw();
-					// move back to global frame of reference
+					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), 0);
+					w.draw();
 					glPopMatrix();
 				}
 			}
@@ -130,109 +121,24 @@ void Remote::draw()
 				if (check_front_wheel(cyl)) {
 					glPushMatrix();
 					positionInGL();
-					(*it)->setRotation(getSteering());
-					//std::cout << "steering at " << getSteering() << std::endl;
-					cyl->draw();
-					//glTranslated(0, -(*it)->getY(), 0);
+					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), getSteering());
+					w.draw();
 					glPopMatrix();
 				}  
 				else {
 					// move to the vehicle¡¦s local frame of reference
 					glPushMatrix();
 					positionInGL();
-					// all the local drawing code
-					double back_radius = cyl->getRadius();
-					double instant_distance = (double)getSpeed()* time_elapsed;
-					
-					
-					total_distance += instant_distance;
-					double theta = total_distance / back_radius;
-
-					theta *= 180 / PI;
-					//Get the comment theta
-					//If they are rolling adding local spoke to indicate the fact.
-
-
-					/*glPushMatrix();
-					Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec1.setPosition(-cyl->getX(), cyl->getY(), -cyl->getZ());
-					rec1.setColor(244, 119, 66);
-					rec1.setRotation(theta);
-					rec1.draw_rolling();
-					glPopMatrix();
-
-					glPushMatrix();
-					Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec2.setPosition(-cyl->getX(), cyl->getY(), -cyl->getZ());
-					rec2.setColor(244, 119, 66);
-					rec2.setRotation(theta);
-					rec2.draw_rolling();
-					glPopMatrix();
-
-					glPushMatrix();
-					Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec3.setPosition(cyl->getX(), cyl->getY(), cyl->getZ());
-					rec3.setColor(244, 119, 66);
-					rec3.setRotation(theta);
-					rec3.draw_rolling();
-					glPopMatrix();
-
-					glPushMatrix();
-					Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-					rec4.setPosition(cyl->getX(), cyl->getY(), -cyl->getZ());
-					rec4.setColor(244, 119, 66);
-					rec4.setRotation(theta);
-					rec4.draw_rolling();
-					glPopMatrix();
-
-					//glPopMatrix(); 
-					cyl->setRotation(theta);*/
-					cyl->draw();
-					// move back to global frame of reference
+					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), 0);
+					w.draw();
 					glPopMatrix();
 				}
 			}
 			else {
 				glPushMatrix();
 				positionInGL();
-				//Get the comment theta
-				//If they are rolling adding local spoke to indicate the fact.
-
-
-				/*glPushMatrix();
-				Rectangular rec1(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-				rec1.setPosition(-1.1, 100, -(0.4 + 1.1));
-				rec1.setColor(244, 119, 66);
-				rec1.setRotation(0);
-				rec1.draw_rolling();
-				glPopMatrix();
-
-				glPushMatrix();
-				Rectangular rec2(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-				rec2.setPosition(-1.1, 100, (0.4 + 1.1));
-				rec2.setColor(244, 119, 66);
-				rec2.setRotation(0);
-				rec2.draw_rolling();
-				glPopMatrix();
-
-				glPushMatrix();
-				Rectangular rec3(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-				rec3.setPosition(1.1, 100, (0.4 + 1.1));
-				rec3.setColor(244, 119, 66);
-				rec3.setRotation(0);
-				rec3.draw_rolling();
-				glPopMatrix();
-
-				glPushMatrix();
-				Rectangular rec4(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 1.5);
-				rec4.setPosition(1.1, 100, -(0.4 + 1.1));
-				rec4.setColor(244, 119, 66);
-				rec4.setRotation(0);
-				rec4.draw_rolling();
-				glPopMatrix();*/
-				cyl->setRotation(0);
-				cyl->draw();
-				//glTranslated(0, -(*it)->getY(), 0);
+				Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), 0);
+				w.draw();
 				glPopMatrix();
 			}
 		}
