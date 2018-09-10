@@ -11,9 +11,13 @@
 class Remote : public MyVehicle {
 protected:
 	VehicleModel vm;
+	VehicleState vs_;
 	std::vector<Shape *> cars;
+	std::vector<VehicleState> cars_states;
+	int remote_ID;
 	double rm_speed;
 public:
+	//Remote(VehicleState vs);
 	Remote(VehicleModel vm_);
 	void draw();
 	void draw_rec(double xLength,double yLength,double zLength,double red,double green,double blue,double x_cor,double y_cor,double z_cor,double rotate_angle);
@@ -24,6 +28,9 @@ public:
 	void add_to_shapeInit_list(ShapeInit init);
 	bool check_wheel(Cylinder* cyl);
 	bool check_spoke(Shape *shape);
-	friend void set_speed(double speed_);
+	void getVehicleState(VehicleState vs);
+
+	//double return_specific_speed(int remote_id);
+
 	//friend void get_speed_from_server(VehicleState vs);
 };

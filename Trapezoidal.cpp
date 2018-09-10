@@ -24,6 +24,7 @@ void Trapezoidal::setDimension(double L, double W, double H, double OF1, double 
 
 void Trapezoidal::draw() {
 	setColorInGL();
+	glPushMatrix();
 	positionInGL();
 
 	//bottom
@@ -74,6 +75,7 @@ void Trapezoidal::draw() {
 	glVertex3d(x + 0.5*Len, y, z + 0.5*Wid);
 	glEnd();
 
+	glPopMatrix();
 }
 /*void Trapezoidal::setLength(double a_length_,double b_length_, double height_, double depth_,double a_offset_,double b_offset_)
 {
