@@ -49,7 +49,7 @@ void Wheel::draw()
 	//Move to the plane(Spcific position at first)
 	glTranslated(0, r, -h / 2);
 	//Call the function to draw out the cylinder
-	gluCylinder(cylinder, r, r, h,100, 10);
+	gluCylinder(cylinder, r, r, h/1.5,100, 10);
 
 	glPushMatrix();
 	Rectangular rec(1.9 * r, 0.15 * 2 * r, h/1.5);

@@ -92,7 +92,7 @@ void Rectangular::draw_rolling()
 {
 	//positionInGL();
 	
-	//glTranslated(x, y, z);
+	glTranslated(0, y, 0);
 	rolling();
 	setColorInGL();
 	//	Draw 4 sides of the rectangle

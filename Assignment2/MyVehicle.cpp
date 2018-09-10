@@ -70,6 +70,26 @@ MyVehicle::MyVehicle()
 	ptr->setPosition(0.5, 1.9, 0);
 	addShape(ptr);
 
+	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+	ptr->setColor(123, 11, 41);
+	ptr->setPosition(-1.1, 0.4, -(0.4 + 1.1));
+	addShape(ptr);
+
+	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+	ptr->setColor(123, 11, 41);
+	ptr->setPosition(1.1, 0.4, -(0.4 + 1.1));
+	addShape(ptr);
+
+	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+	ptr->setColor(123, 11, 41);
+	ptr->setPosition(1.1, 0.4, (0.4 + 1.1));
+	addShape(ptr);
+
+	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
+	ptr->setColor(123, 11, 41);
+	ptr->setPosition(-1.1, 0.4, (0.4 + 1.1));
+	addShape(ptr);
+
 }
 
 static double total_distance = 0;
@@ -86,8 +106,8 @@ void MyVehicle::draw()
 				if ((*it)->getX() == 1.1) {
 					glPushMatrix();
 					positionInGL();
-					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), getSteering());
-					w.draw();
+					cyl->setRotation(getSteering());
+					cyl->draw();
 					glPopMatrix();
 				}
 				//If it is not front wheel
@@ -95,8 +115,7 @@ void MyVehicle::draw()
 					//Also has to be rolling
 					glPushMatrix();
 					positionInGL();
-					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(),0);
-					w.draw();
+					cyl->draw();
 					//glTranslated(0, -(*it)->getY(), 0);
 					glPopMatrix();
 				}
@@ -107,32 +126,7 @@ void MyVehicle::draw()
 				if (cyl->getX() == 1.1) {
 					glPushMatrix();
 					positionInGL();
-					//Also has to be rolling
-					double instant_distance = getSpeed() * time_elapsed;
-
-
-					total_distance += instant_distance;
-					double theta = total_distance / r;
-
-					theta *= 180 / PI;
-					setPosition(x, y, z);
-					setRotation(0);
-					setColor(1, 0.51, 0.4);
-					positionInGL();
-					setColorInGL();
-					//Set up cylinder variable
-					GLUquadric* cylinder = gluNewQuadric();
-					//Move to the plane(Spcific position at first)
-					glTranslated(0, r, -h / 2);
-					//Call the function to draw out the cylinder
-					gluCylinder(cylinder, r, r, h, 100, 10);
-
-					glPushMatrix();
-					Rectangular rec(1.9 * r, 0.15 * 2 * r, h / 1.5);
-					rec.setColor(0.10, 0.10, 0.4);
-					rec.setRotation(angle);
-					rec.draw_rolling();
-					glPopMatrix();
+					cyl->draw();
 					glPopMatrix();
 				}
 				//If it is not front wheel
@@ -140,16 +134,50 @@ void MyVehicle::draw()
 					//Also has to be rolling
 					glPushMatrix();
 					positionInGL();
-					Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), getSpeed(), time_elapsed, cyl->getRadius(), cyl->getHeight(), 0);
-					w.draw();
+					cyl->draw();
 					glPopMatrix();
 				};
 			}
 			else {
 				glPushMatrix();
 				positionInGL();
-				Wheel w(cyl->getX(), cyl->getY(), cyl->getZ(), 0, time_elapsed, cyl->getRadius(), cyl->getHeight(), 0);
-				w.draw();
+				cyl->draw();
+				glPopMatrix();
+			}
+		}
+
+		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
+		if (rec != NULL) {
+			// if it is front
+			if (rec->getX() == 1.1) {
+				glPushMatrix();
+				positionInGL();
+				double radius = 0.4;
+				double instant_distance = getSpeed() * time_elapsed;
+				total_distance += instant_distance;
+				double theta = total_distance / radius;
+				theta *= 180 / PI;
+				rec->setRotation(theta);
+				rec->draw_rolling();
+				glPopMatrix();
+			}
+			else if(rec->getX() == -1.1) {
+				glPushMatrix();
+				positionInGL();
+				double radius = 0.8;
+				double instant_distance = getSpeed() * time_elapsed;
+				total_distance += instant_distance;
+				double theta = total_distance / radius;
+				theta *= 180 / PI;
+				rec->setRotation(theta);
+				rec->draw_rolling();
+				glPopMatrix();
+			}
+			else {
+				glPushMatrix();
+				positionInGL();
+				rec->setRotation(0);
+				rec->draw();
 				glPopMatrix();
 			}
 		}
