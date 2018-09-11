@@ -334,19 +334,8 @@ void idle() {
 
 	if (KeyManager::get()->isAsciiKeyPressed('L')||trigger == TRUE) {
 		printf("ID 1 steering at %f\n", ID1_steering);
-
-		//Different method to trace the car;
-		//double temp_str = 0;
-		//if(ID1_x != 0)temp_str = atan2(ID1_z, ID1_x);
-
-
-		// 1.z and x are bigger than 0
-		//if (ID1_x > 0 && ID1_z > 0) {
-			//double distance_between = sqrt(ID1_x*ID1_x + ID1_z * ID1_z);
-			
-			//steering = temp_str;
-			speed = ID1_speed;
-		
+		//if (ID1_steering != 0)ID1_x += ;
+		remoteDriver(vehicle, ID1_x-4.5, ID1_z ,ID1_rotation, ID1_speed-2, ID1_steering/2);
 		trigger = TRUE;
 	}
 
