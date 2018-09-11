@@ -1,4 +1,4 @@
-
+﻿
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
@@ -48,6 +48,7 @@
 #include "MyVehicle.h"
 #include "Remote.h"
 #include "XBoxController.h"
+#include <cmath>
 
 #define MAX_COLOUR 255.0
 
@@ -64,6 +65,8 @@ void special_keyup(int keycode, int x, int y);
 void mouse(int button, int state, int x, int y);
 void dragged(int x, int y);
 void motion(int x, int y);
+double get_chase_steering(VehicleState vs);
+void setRemote(double x, double y, double z);
 
 using namespace std;
 using namespace scos;
@@ -121,7 +124,6 @@ int main(int argc, char ** argv) {
 	// -------------------------------------------------------------------------
 
 	vehicle = new MyVehicle();
-
 
 	// add test obstacles
 	ObstacleManager::get()->addObstacle(Obstacle(10,10, 1));
@@ -190,7 +192,6 @@ void testing_Draw() {
 	tri.setPosition(0, 0, 0);
 	tri.draw();*/
 }
-
 
 void display() {
 	frameCounter++;
@@ -279,7 +280,13 @@ double getTime()
 }
 XInputWrapper xinput;
 GamePad::XBoxController x_control(&xinput, 0);
-
+double ID1_steering = 0;
+double ID1_speed = 0;
+double ID1_x = 0;
+double ID1_y = 0;
+double ID1_z = 0;
+double ID1_rotation = 0;
+bool trigger = FALSE;
 void idle() {
 
 	if (x_control.PressedLeftDpad()) {
@@ -318,7 +325,6 @@ void idle() {
 	double mag_2 = sqrt(pt_2.GetX()*pt_2.GetX() + pt_2.GetY()*pt_2.GetY());
 
 	if (pt_1.GetX() < 0) {
-		
 		steering = Vehicle::MAX_LEFT_STEERING_DEGS * (pt_1.GetX()/MAX_RANGE);
 	}
 
@@ -326,11 +332,25 @@ void idle() {
 		steering = Vehicle::MAX_RIGHT_STEERING_DEGS *-1 *(pt_1.GetX() / MAX_RANGE);
 	}
 
-	if (pt_2.GetY()>0 ) {
-		speed = Vehicle::MAX_FORWARD_SPEED_MPS * pt_2.GetY() / MAX_RANGE;
+	if (KeyManager::get()->isAsciiKeyPressed('L')||trigger == TRUE) {
+		printf("ID 1 steering at %f\n", ID1_steering);
+
+		//Different method to trace the car;
+		//double temp_str = 0;
+		//if(ID1_x != 0)temp_str = atan2(ID1_z, ID1_x);
+
+
+		// 1.z and x are bigger than 0
+		//if (ID1_x > 0 && ID1_z > 0) {
+			//double distance_between = sqrt(ID1_x*ID1_x + ID1_z * ID1_z);
+			
+			//steering = temp_str;
+			speed = ID1_speed;
+		
+		trigger = TRUE;
 	}
 
-	if (pt_2.GetY()<0 ) {
+	if (pt_2.GetY() < 0 ) {
 		speed = Vehicle::MAX_BACKWARD_SPEED_MPS * fabs(pt_2.GetY()) / MAX_RANGE;
 	}
 	if (x_control.PressedBack()) {
@@ -628,10 +648,8 @@ void idle() {
 							std::vector<VehicleModel> models = GetVehicleModels(msg.payload);
 							for(unsigned int i = 0; i < models.size(); i++) {
 								VehicleModel vm = models[i];
-								
-								// uncomment the line below to create remote vehicles
-								//Testing ..... I know what to do now..
 								otherVehicles[vm.remoteID] = new Remote(vm);
+
 								//
 								// more student code goes here
 								//
@@ -645,11 +663,14 @@ void idle() {
 							std::vector<VehicleState> states = GetVehicleStates(msg.payload);
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
-
 								if (i > 0) {
-									std::cout << "ID 1 is now at " << "[" << states[0].x << "," << 0 << "," << states[0].z << "]" << std::endl;
+									//  std::cout << "ID 2 is now at " << "[" << states[1].x << "," << 0 << "," << states[1].z << "]" << std::endl;
 								}
-								//std::cout << "id " << vs.remoteID << " Speed is " << vs.speed << std::endl;
+								ID1_steering = states[0].steering;
+								ID1_speed = states[0].speed;
+								ID1_x = states[0].x;
+								ID1_z = states[0].z;
+								ID1_rotation = states[0].rotation;
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
 									Vehicle * veh = iter->second;
@@ -749,10 +770,6 @@ void keydown(unsigned char key, int x, int y) {
 	case 'p':
 		Camera::get()->togglePursuitMode();
 		break;
-	case 'L':
-		printf("TRYing to chase\n");
-
-		break;
 	}
 
 };
@@ -793,8 +810,5 @@ void motion(int x, int y) {
 
 	prev_mouse_x = x;
 	prev_mouse_y = y;
-};
-void Remote::getVehicleState(VehicleState vs)
-{
-	cars_states.push_back(vs);
+}
 

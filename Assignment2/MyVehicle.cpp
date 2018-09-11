@@ -134,6 +134,7 @@ void MyVehicle::draw()
 					//Also has to be rolling
 					glPushMatrix();
 					positionInGL();
+					//cyl->setPosition(++x, ++y, z++);
 					cyl->draw();
 					glPopMatrix();
 				};
@@ -141,6 +142,7 @@ void MyVehicle::draw()
 			else {
 				glPushMatrix();
 				positionInGL();
+				//cyl->setPosition(10, 0, 0);
 				cyl->draw();
 				glPopMatrix();
 			}
