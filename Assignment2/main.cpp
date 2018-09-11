@@ -6,6 +6,8 @@
 #include <sstream>
 #include <map>
 #include <cassert>
+
+
 #ifdef __APPLE__
 	#include <OpenGL/gl.h>
 	#include <OpenGL/glu.h>
@@ -45,6 +47,7 @@
 #include "Cylinder.h"
 #include "MyVehicle.h"
 #include "Remote.h"
+#include "XBoxController.h"
 
 #define MAX_COLOUR 255.0
 
@@ -274,52 +277,65 @@ double getTime()
 	return t.tv_sec + (t.tv_usec / 1000000.0);
 #endif
 }
+XInputWrapper xinput;
+GamePad::XBoxController x_control(&xinput, 0);
 
 void idle() {
 
-	if (KeyManager::get()->isAsciiKeyPressed('a')) {
+	if (x_control.PressedLeftDpad()) {
 		Camera::get()->strafeLeft();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('c')) {
+	if (x_control.PressedLeftShoulder()) {
 		Camera::get()->strafeDown();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('d')) {
+	if (x_control.PressedRightDpad()) {
 		Camera::get()->strafeRight();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('s')) {
+	if (x_control.PressedDownDpad()) {
 		Camera::get()->moveBackward();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('w')) {
+	if (x_control.PressedUpDpad()) {
 		Camera::get()->moveForward();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed(' ')) {
+	if (x_control.PressedRightShoulder()) {
 		Camera::get()->strafeUp();
 	}
+	if (x_control.PressedB()) {
+		Camera::get()->togglePursuitMode();
+	}
 
+#define MAX_RANGE 32767.0
 	speed = 0;
 	steering = 0;
+	GamePad::Coordinate pt_1 = x_control.RightThumbLocation();
+	GamePad::Coordinate pt_2 = x_control.LeftThumbLocation();
+	double mag_1 = sqrt(pt_1.GetX()*pt_1.GetX() + pt_1.GetY()*pt_1.GetY());
+	double mag_2 = sqrt(pt_2.GetX()*pt_2.GetX() + pt_2.GetY()*pt_2.GetY());
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_LEFT)) {
-		steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;   
+	if (pt_1.GetX() < 0) {
+		
+		steering = Vehicle::MAX_LEFT_STEERING_DEGS * (pt_1.GetX()/MAX_RANGE);
 	}
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
-		steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
+	if (pt_1.GetX() > 0) {
+		steering = Vehicle::MAX_RIGHT_STEERING_DEGS *-1 *(pt_1.GetX() / MAX_RANGE);
 	}
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_UP)) {
-		speed = Vehicle::MAX_FORWARD_SPEED_MPS;
+	if (pt_2.GetY()>0 ) {
+		speed = Vehicle::MAX_FORWARD_SPEED_MPS * pt_2.GetY() / MAX_RANGE;
 	}
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN)) {
-		speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
+	if (pt_2.GetY()<0 ) {
+		speed = Vehicle::MAX_BACKWARD_SPEED_MPS * fabs(pt_2.GetY()) / MAX_RANGE;
 	}
-
+	if (x_control.PressedBack()) {
+		exit(0);
+	}
 	// attempt to do data communications every 4 frames if we've created a local vehicle
 	if(frameCounter % 4 == 0 && vehicle != NULL) {
 
@@ -615,8 +631,6 @@ void idle() {
 								
 								// uncomment the line below to create remote vehicles
 								//Testing ..... I know what to do now..
-								
-								
 								otherVehicles[vm.remoteID] = new Remote(vm);
 								//
 								// more student code goes here
@@ -632,7 +646,9 @@ void idle() {
 							for(unsigned int i = 0; i < states.size(); i++) {
 								VehicleState vs = states[i];
 
-								
+								if (i > 0) {
+									std::cout << "ID 1 is now at " << "[" << states[0].x << "," << 0 << "," << states[0].z << "]" << std::endl;
+								}
 								//std::cout << "id " << vs.remoteID << " Speed is " << vs.speed << std::endl;
 								std::map<int, Vehicle*>::iterator iter = otherVehicles.find(vs.remoteID);
 								if(iter != otherVehicles.end()) {
@@ -733,6 +749,10 @@ void keydown(unsigned char key, int x, int y) {
 	case 'p':
 		Camera::get()->togglePursuitMode();
 		break;
+	case 'L':
+		printf("TRYing to chase\n");
+
+		break;
 	}
 
 };
@@ -777,4 +797,4 @@ void motion(int x, int y) {
 void Remote::getVehicleState(VehicleState vs)
 {
 	cars_states.push_back(vs);
-}
+
