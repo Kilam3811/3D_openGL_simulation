@@ -143,6 +143,7 @@ void Remote::draw()
 				glPopMatrix();
 			}
 		}
+<<<<<<< HEAD
 		Triangular* tri = dynamic_cast<Triangular*> (*it);
 		if (tri != NULL) {
 			// move to the vehicle¡¦s local frame of reference
@@ -163,6 +164,9 @@ void Remote::draw()
 		}
 		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
 		if (rec != NULL) {
+=======
+		else {
+>>>>>>> e31a67a2d425366766d74ebda7f6b456f8b0b575
 			// move to the vehicle¡¦s local frame of reference
 			glPushMatrix();
 			positionInGL();

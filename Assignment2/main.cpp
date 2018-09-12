@@ -1,5 +1,4 @@
-﻿
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
@@ -65,6 +64,10 @@ void special_keyup(int keycode, int x, int y);
 void mouse(int button, int state, int x, int y);
 void dragged(int x, int y);
 void motion(int x, int y);
+<<<<<<< HEAD
+=======
+
+>>>>>>> e31a67a2d425366766d74ebda7f6b456f8b0b575
 
 using namespace std;
 using namespace scos;
@@ -286,6 +289,10 @@ double ID1_z = 0;
 double ID1_rotation = 0;
 double My_x = 0;
 double My_z = 0;
+<<<<<<< HEAD
+=======
+static double turning = 0;
+>>>>>>> e31a67a2d425366766d74ebda7f6b456f8b0b575
 bool trigger = FALSE;
 void idle() {
 
@@ -332,7 +339,9 @@ void idle() {
 		steering = Vehicle::MAX_RIGHT_STEERING_DEGS *-1 *(pt_1.GetX() / MAX_RANGE);
 	}
 
+	
 	if (KeyManager::get()->isAsciiKeyPressed('L')||trigger == TRUE) {
+<<<<<<< HEAD
 
 		//printf("ID 1 steering at %f\n", ID1_steering);
 		//if (ID1_steering != 0)ID1_x += ;
@@ -356,6 +365,60 @@ void idle() {
 			speed = ID1_speed;
 		}
 		steering = ID1_steering;
+=======
+		double dx = ID1_x - My_x;
+		double dz = ID1_z - My_z;
+		const double kSmoothingFactor = 0.5;
+		//printf("ID 1 steering at %f\n", ID1_steering);
+		//if (ID1_steering != 0)ID1_x += ;
+
+		if (dx == 0 && dz > 0) {
+			ID1_speed *= 0.8;
+			ID1_steering *= 0.5;
+		}
+		if (dx == 0 && dz < 0) {
+			ID1_speed *= 0.8;
+			ID1_steering *= 0.5;
+		}
+
+		remoteDriver(vehicle, ID1_x-4.9, ID1_z ,ID1_rotation, ID1_speed, ID1_steering);
+		//double theta = atan2(dz, dx);
+		//double degree = (theta * 180) / PI;
+		//POSITIVE x axis
+		
+		/*if(dx > 0.5){
+			speed = ID1_speed;
+			steering = 0;
+			if (dz > 0) {
+				speed = ID1_speed*0.8;
+				steering = ID1_steering;
+			}
+		}
+		else if (dz > 0) {
+			speed = ID1_speed;
+			steering = 0;
+			if (dx < 0) {
+				speed = ID1_speed*0.8;
+				steering = ID1_steering;
+			}
+		}
+		else if (dz < 0) {
+			speed = ID1_speed;
+			steering = 0;
+			if (dx < 0) {
+				speed = ID1_speed;
+				steering = ID1_steering;
+			}
+
+		}
+		/*if (dz > 1) {
+			vehicle->setRotation(ID1_rotation);
+			speed = ID1_speed*0.9;
+			vehicle->setX(My_x * kSmoothingFactor + (ID1_x-3) * (1 - kSmoothingFactor));
+			vehicle->setZ(My_z * kSmoothingFactor + ID1_z * (1 - kSmoothingFactor));
+
+		}*/
+>>>>>>> e31a67a2d425366766d74ebda7f6b456f8b0b575
 		trigger = TRUE;
 	}
 
