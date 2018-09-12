@@ -68,6 +68,7 @@ MyVehicle::MyVehicle()
 	ptr = new Triangular (0.5, 1.5, 0.5, PI / 6);
 	ptr->setColor(100, 11, 124);
 	ptr->setPosition(0.5, 1.9, 0);
+	ptr->setRotation(0);
 	addShape(ptr);
 
 	ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
@@ -101,7 +102,7 @@ void MyVehicle::draw()
 		//Check if it is a cylinder
 		if (cyl != NULL) {
 			//If it is turning and does not move. adjust the angle
-			if (getSteering() != 0 && getSpeed() == 0) {
+			if (getSteering() != 0) {
 				//Indicating the front wheel
 				if ((*it)->getX() == 1.1) {
 					glPushMatrix();

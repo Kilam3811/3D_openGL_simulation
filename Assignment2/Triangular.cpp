@@ -21,8 +21,9 @@ Triangular::Triangular(double x_length, double y_length, double z_length, double
 }
 void Triangular::draw()
 {
-	//positionInGL();
-	glTranslated(x, y, z);
+	positionInGL();
+	//glRotated(-rotation, 0, 1, 0);
+	//glTranslated(x, y, z);
 	setColorInGL();
 	//Draw two triangular sides
 	//double angle = getTheta();

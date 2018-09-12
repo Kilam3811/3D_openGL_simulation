@@ -67,9 +67,10 @@ Remote::Remote(VehicleModel vm_)
 			double x_cor = it->xyz[0];
 			double y_cor = it->xyz[1];
 			double z_cor = it->xyz[2];
-			double rotate_angle = it->rotation;
+			//double rotate_angle = it->rotation;
+			//printf("x is %f y is %f z %f\n", x_cor, y_cor, z_cor);
+			draw_tri(a_len, b_len, depth, theta, red, green, blue, x_cor, y_cor, z_cor, it->rotation);
 			add_to_shapeInit_list(*it);
-			draw_tri(a_len, b_len, depth, theta, red, green, blue, x_cor, y_cor, z_cor, rotate_angle);
 		}
 		else if (it->type == TRAPEZOIDAL_PRISM) {
 			double a_len = it->params.trap.alen;
@@ -142,14 +143,31 @@ void Remote::draw()
 				glPopMatrix();
 			}
 		}
-		
-		else {
+		Triangular* tri = dynamic_cast<Triangular*> (*it);
+		if (tri != NULL) {
 			// move to the vehicle¡¦s local frame of reference
 			glPushMatrix();
 			positionInGL();
-			//glTranslated((*it)->getX(), (*it)->getY(), (*it)->getZ());
-			// all the local drawing code
-			(*it)->draw();
+			tri->draw();
+			// move back to global frame of reference
+			glPopMatrix();
+		}
+		Trapezoidal* tra = dynamic_cast<Trapezoidal*> (*it);
+		if (tra != NULL) {
+			// move to the vehicle¡¦s local frame of reference
+			glPushMatrix();
+			positionInGL();
+			tra->draw();
+			// move back to global frame of reference
+			glPopMatrix();
+		}
+		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
+		if (rec != NULL) {
+			// move to the vehicle¡¦s local frame of reference
+			glPushMatrix();
+			positionInGL();
+			//glTranslated(rec->getX(), rec->getY(), rec->getZ());
+			rec->draw();
 			// move back to global frame of reference
 			glPopMatrix();
 		}
@@ -160,6 +178,7 @@ void Remote::draw()
 
 void Remote::draw_rec(double xLength, double yLength, double zLength, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
 {
+	//IF have problems just comment out setRot
 	shape_ptr = new Rectangular(xLength, yLength, zLength);
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);
@@ -211,20 +230,6 @@ bool Remote::check_wheel(Cylinder * cyl)
 	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
 		if (shape_it->params.cyl.isRolling&&shape_it->xyz[0] == cyl->getX() && shape_it->xyz[1] == cyl->getY() && shape_it->xyz[2] == cyl->getZ()) {
 			return TRUE;
-		}
-	};
-	return FALSE;
-}
-
-bool Remote::check_spoke(Shape * shape)
-{
-	std::vector<ShapeInit>::iterator shape_it;
-	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
-		Rectangular *rec = dynamic_cast<Rectangular*> (shape);
-		if (rec != NULL) {
-			if (shape_it->params.rect.isSpoke) {
-				return TRUE;
-			}
 		}
 	};
 	return FALSE;

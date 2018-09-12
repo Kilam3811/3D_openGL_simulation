@@ -65,8 +65,6 @@ void special_keyup(int keycode, int x, int y);
 void mouse(int button, int state, int x, int y);
 void dragged(int x, int y);
 void motion(int x, int y);
-double get_chase_steering(VehicleState vs);
-void setRemote(double x, double y, double z);
 
 using namespace std;
 using namespace scos;
@@ -180,17 +178,17 @@ void testing_Draw() {
 	//cyl.setPosition(0, 0, 0);
 	//cyl.setColor(244, 121, 121);
 	//cyl.draw();
-	MyVehicle F1;
-	F1.setPosition(0,0,0);
+	//MyVehicle F1;
+	//F1.setPosition(0,0,0);
 	//F1.positionInGL();
-	F1.draw();
+	//F1.draw();
 	//==========================================
 
-	/*Triangular tri(1, 1, 2.5, 90);
-	tri.setColor(0, 1, 0);
-	tri.setRotation(0);
-	tri.setPosition(0, 0, 0);
-	tri.draw();*/
+	//Triangular tri(1, 1, 2.5, 90);
+	//tri.setColor(0, 1, 0);
+	//tri.setRotation(180);
+	//tri.setPosition(0, 0, 0);
+	//tri.draw();
 }
 
 void display() {
@@ -279,13 +277,15 @@ double getTime()
 #endif
 }
 XInputWrapper xinput;
-GamePad::XBoxController x_control(&xinput, 0);
+GamePad::XBoxController x_control(&xinput, 2);
 double ID1_steering = 0;
 double ID1_speed = 0;
 double ID1_x = 0;
 double ID1_y = 0;
 double ID1_z = 0;
 double ID1_rotation = 0;
+double My_x = 0;
+double My_z = 0;
 bool trigger = FALSE;
 void idle() {
 
@@ -333,13 +333,40 @@ void idle() {
 	}
 
 	if (KeyManager::get()->isAsciiKeyPressed('L')||trigger == TRUE) {
-		printf("ID 1 steering at %f\n", ID1_steering);
+
+		//printf("ID 1 steering at %f\n", ID1_steering);
 		//if (ID1_steering != 0)ID1_x += ;
-		remoteDriver(vehicle, ID1_x-4.5, ID1_z ,ID1_rotation, ID1_speed-2, ID1_steering/2);
+		//remoteDriver(vehicle, ID1_x-4.5, ID1_z ,ID1_rotation, ID1_speed-2, ID1_steering/2);
+		double dx = ID1_x - My_x;
+		double dz = ID1_z - My_z;
+		//printf("dx is %f dz is %f\n", dx, dz);
+		double rotation_radian = atan2(dz, dx);
+		double rotation_degree = (rotation_radian * 180) / PI;
+
+		if (rotation_degree > PI / 2)rotation_degree -= PI / 2;
+		vehicle->setRotation(rotation_degree);
+
+		if (fabs(dx) < 1.5 || fabs(dz) < 1.5) {
+			speed = ID1_speed * 0.93;
+		}
+		else if (ID1_speed < 2.5) {
+			speed = 0;
+		}
+		else {
+			speed = ID1_speed;
+		}
+		steering = ID1_steering;
 		trigger = TRUE;
 	}
 
-	if (pt_2.GetY() < 0 ) {
+	if (KeyManager::get()->isAsciiKeyPressed('C')) {
+		trigger = FALSE;
+	}
+	
+	if (pt_2.GetY() > 0) {
+		speed = Vehicle::MAX_FORWARD_SPEED_MPS * fabs(pt_2.GetY()) / MAX_RANGE;
+	}
+	if (pt_2.GetY() < 0) {
 		speed = Vehicle::MAX_BACKWARD_SPEED_MPS * fabs(pt_2.GetY()) / MAX_RANGE;
 	}
 	if (x_control.PressedBack()) {
@@ -616,6 +643,8 @@ void idle() {
 			vs.remoteID = 0;
 			vs.x = vehicle->getX();
 			vs.z = vehicle->getZ();
+			My_x = vs.x;
+			My_z = vs.z;
 			vs.rotation = vehicle->getRotation();
 			vs.speed = vehicle->getSpeed();
 			vs.steering = vehicle->getSteering();

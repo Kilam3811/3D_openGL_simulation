@@ -15,5 +15,4 @@ public:
 	MyVehicle();
 	void draw();
 	bool check_front_wheel(Cylinder * cyl);
-	void setRemote(double x, double y ,double z);
 };
