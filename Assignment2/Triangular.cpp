@@ -23,6 +23,7 @@ void Triangular::draw()
 {
 	//positionInGL();
 	glTranslated(x, y, z);
+	
 	setColorInGL();
 	//Draw two triangular sides
 	//double angle = getTheta();

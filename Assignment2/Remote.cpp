@@ -142,7 +142,6 @@ void Remote::draw()
 				glPopMatrix();
 			}
 		}
-		
 		else {
 			// move to the vehicle¡¦s local frame of reference
 			glPushMatrix();
