@@ -176,7 +176,6 @@ void Remote::draw()
 
 void Remote::draw_rec(double xLength, double yLength, double zLength, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
 {
-	//IF have problems just comment out setRot
 	shape_ptr = new Rectangular(xLength, yLength, zLength);
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);
