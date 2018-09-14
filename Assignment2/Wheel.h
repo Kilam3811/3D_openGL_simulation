@@ -3,6 +3,7 @@
 #include "Rectangular.h"
 #include "Vehicle.hpp"
 
+//New wheel class to handle turing wheel..
 class Wheel : public Vehicle{
 protected:
 	double x;

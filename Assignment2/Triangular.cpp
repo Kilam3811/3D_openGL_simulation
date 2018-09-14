@@ -22,13 +22,8 @@ Triangular::Triangular(double x_length, double y_length, double z_length, double
 void Triangular::draw()
 {	
 	positionInGL();
-	//glTranslated(x, y, z);
-	//glRotated(-rotation, 0, 1, 0);
-	
-	
 	setColorInGL();
 	//Draw two triangular sides
-	//double angle = getTheta();
 	glBegin(GL_TRIANGLES);
 	//side
 	glVertex3d(getX_length() / 2, 0, -getZ_length() / 2);
@@ -77,6 +72,7 @@ void Triangular::set_dimension(double x_length, double y_length, double z_length
 	a_length = x_length;
 	b_length = y_length;
 	depth = z_length;
+	//Normalized degrees to radian.
 	if (angle == 90) {
 		angle = PI / 2;
 	}
@@ -109,15 +105,15 @@ double Triangular::getZ_length()
 double Triangular::getNormal_X_Cor()
 {
 	double x_cor;
-	if (theta < PI / 2) {
+	if (theta < PI / 2.0) {
 		x_cor = (getX_length() / 2.0) - cos(theta)*getY_length();
 	}
-	else if (theta == PI / 2) {
-		x_cor = getX_length() / 2;
+	else if (theta == PI / 2.0) {
+		x_cor = getX_length() / 2.0;
 	}
 	else {
 		double temp_angle = PI - getTheta();
-		x_cor = getX_length() / 2 + cos(temp_angle)*getY_length();
+		x_cor = getX_length() / 2.0 + cos(temp_angle)*getY_length();
 	}
 	return x_cor;
 }
@@ -125,10 +121,10 @@ double Triangular::getNormal_X_Cor()
 double Triangular::getNormal_Y_Cor()
 {
 	double y_cor;
-	if (theta < PI / 2) {
+	if (theta < PI / 2.0) {
 		y_cor = sin(theta)*getY_length();
 	}
-	else if (theta == PI / 2) {
+	else if (theta == PI / 2.0) {
 		y_cor = getY_length();
 	}
 	else {

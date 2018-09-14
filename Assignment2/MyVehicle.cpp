@@ -25,6 +25,7 @@
 
 Shape *ptr = NULL;
 #define MAX_COLOUR 255.0
+#define BIG_NUM 0xfffff
 MyVehicle::MyVehicle()
 {
 	//SAMPLE CAR
@@ -117,7 +118,6 @@ void MyVehicle::draw()
 					glPushMatrix();
 					positionInGL();
 					cyl->draw();
-					//glTranslated(0, -(*it)->getY(), 0);
 					glPopMatrix();
 				}
 
@@ -135,7 +135,6 @@ void MyVehicle::draw()
 					//Also has to be rolling
 					glPushMatrix();
 					positionInGL();
-					//cyl->setPosition(++x, ++y, z++);
 					cyl->draw();
 					glPopMatrix();
 				};
@@ -143,21 +142,24 @@ void MyVehicle::draw()
 			else {
 				glPushMatrix();
 				positionInGL();
-				//cyl->setPosition(10, 0, 0);
 				cyl->draw();
 				glPopMatrix();
 			}
 		}
-
+		//Rectangular prisms are my spokes..
 		Rectangular* rec = dynamic_cast<Rectangular*> (*it);
 		if (rec != NULL) {
 			// if it is front
 			if (rec->getX() == 1.1) {
 				glPushMatrix();
 				positionInGL();
+				//Calulate how much the wheel has been rotating.
 				double radius = 0.4;
 				double instant_distance = getSpeed() * time_elapsed;
 				total_distance += instant_distance;
+				if (total_distance > BIG_NUM) {
+					total_distance = 0;
+				}
 				double theta = total_distance / radius;
 				theta *= 180 / PI;
 				rec->setRotation(theta);
@@ -167,15 +169,20 @@ void MyVehicle::draw()
 			else if(rec->getX() == -1.1) {
 				glPushMatrix();
 				positionInGL();
+				//Calulate how much the wheel has been rotating.
 				double radius = 0.8;
 				double instant_distance = getSpeed() * time_elapsed;
 				total_distance += instant_distance;
 				double theta = total_distance / radius;
+				if (total_distance > BIG_NUM) {
+					total_distance = 0;
+				}
 				theta *= 180 / PI;
 				rec->setRotation(theta);
 				rec->draw_rolling();
 				glPopMatrix();
 			}
+			//If it is not a spoke then draw it normally.
 			else {
 				glPushMatrix();
 				positionInGL();
@@ -184,6 +191,7 @@ void MyVehicle::draw()
 				glPopMatrix();
 			}
 		}
+		
 		else {
 			glPushMatrix();
 			positionInGL();
@@ -193,7 +201,6 @@ void MyVehicle::draw()
 	};
 }
 bool MyVehicle::check_front_wheel(Cylinder * cyl) {
-	//static double count = 0;
 	std::vector<ShapeInit>::iterator shape_it;
 	for (shape_it = cars_shapeInit.begin(); shape_it != cars_shapeInit.end(); shape_it++) {
 		if (shape_it->params.cyl.isSteering&&shape_it->xyz[0] == cyl->getX() && shape_it->xyz[1] == cyl->getY() && shape_it->xyz[2] == cyl->getZ()) {

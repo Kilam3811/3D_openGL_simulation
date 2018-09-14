@@ -107,6 +107,7 @@ double Shape::getBlue() {
 };
 
 void Shape::setColor(float red_, float green_, float blue_) {
+	//if inputs are greater than 1 than normalise them.
 	double red_temp = red_;
 	double green_temp = green_;
 	double blue_temp = blue_;

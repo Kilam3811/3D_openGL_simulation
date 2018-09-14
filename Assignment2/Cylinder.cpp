@@ -19,12 +19,9 @@ Cylinder::Cylinder(double radius_, double depth_, double slices_, double stacks_
 }
 void Cylinder::draw()
 {
-
-	//Rolling();
+	//Adjust the position of the cylinder.
 	positionInGL();
 	setColorInGL();
-
-
 
 	//Set up cylinder variable
 	GLUquadric* cylinder = gluNewQuadric();
@@ -34,17 +31,15 @@ void Cylinder::draw()
 	gluCylinder(cylinder,getRadius(),getRadius(),getHeight(),getSlices(),getStacks());
 
 	//Draw the disk to cover top and bottom side(circles)
-	//glColor3f(1, 2, 0);
 	gluDisk(cylinder,0,getRadius(),getSlices(),10);
-
 	glTranslated(0, 0, getHeight());
-	//glColor3f(0, 2, 2);
 	gluDisk(cylinder, 0, getRadius(), getSlices(), 10);
 
 }
 
 void Cylinder::Rolling()
 {
+	//Move to the centre of the wheel and rotate about -z axis
 	glTranslated(x, y, z);
 	glRotated(rotation, 0, 0, -1);
 	glTranslated(0, 0, 0);
@@ -53,24 +48,20 @@ void Cylinder::Rolling()
 
 void Cylinder::draw_rolling()
 {
+	//Rolling each time..
 	Rolling();
-	//positionInGL();
 	setColorInGL();
 
 
 	//Set up cylinder variable
 	GLUquadric* cylinder = gluNewQuadric();
 	//Move to the plane(Spcific position at first)
-	glTranslated(0,0,-getHeight()/2);
+	glTranslated(0, getRadius(),-getHeight()/2);
 	//Call the function to draw out the cylinder
 	gluCylinder(cylinder, getRadius(), getRadius(), getHeight(), getSlices(), getStacks());
-
 	//Draw the disk to cover top and bottom side(circles)
-	//glColor3f(1, 2, 0);
 	gluDisk(cylinder, 0, getRadius(), getSlices(), 10);
-
 	glTranslated(0, 0, getHeight());
-	//glColor3f(0, 2, 2);
 	gluDisk(cylinder, 0, getRadius(), getSlices(), 10);
 }
 

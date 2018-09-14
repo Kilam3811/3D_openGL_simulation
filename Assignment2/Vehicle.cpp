@@ -17,13 +17,12 @@ void Vehicle::update(double dt)
 {
 	speed = clamp(MAX_BACKWARD_SPEED_MPS, speed, MAX_FORWARD_SPEED_MPS);
 	steering = clamp(MAX_LEFT_STEERING_DEGS, steering, MAX_RIGHT_STEERING_DEGS);
-
+	//Private function to store time variable.
 	time_elapsed = dt;
 	// update position by integrating the speed
 	x += speed * dt * cos(rotation * 3.1415926535 / 180.0);
 	z += speed * dt * sin(rotation * 3.1415926535 / 180.0);
 
-	//printf("Rm_speed is %f\n", speed);
 	// update heading
 	rotation += dt * steering * speed;
 	while (rotation > 360) rotation -= 360;

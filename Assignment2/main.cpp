@@ -39,6 +39,7 @@
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
 
+
 //Private #include
 #include "Rectangular.h"
 #include "Triangular.h"
@@ -165,31 +166,7 @@ void drawGoals()
 	}
 }
 void testing_Draw() {
-	//Cylinder cyl(10, 10, 100, 10);
-	//cyl.setPosition(0, 0, 0);
-	//cyl.draw();
-	//CUSTOMIZED VEHICLE
-	//Rectangular rec(10,10,10);
-	//rec.setPosition(10, 10, 0);
-	//rec.draw();
-
-	//Cylinder cyl(10, 100, 100, 10);
-	//cyl.setPosition(0, 0, 0);
-	//cyl.setColor(244, 121, 121);
-	//cyl.draw();
-	//MyVehicle F1;
-	//F1.setPosition(0,0,0);
-	//F1.positionInGL();
-	//F1.draw();
-	//==========================================
-
-	//Triangular tri(60, 80, 2.4, 36);
-	//tri.setColor(0, 1, 0);
-	//tri.setRotation(180);
-	//tri.setPosition(0, 0, 0);
-	//tri.positionInGL();
-	
-	//tri.draw();
+	//Doing nothing for now..
 }
 
 void display() {
@@ -277,8 +254,12 @@ double getTime()
 	return t.tv_sec + (t.tv_usec / 1000000.0);
 #endif
 }
+
+//Create instance of xbox controller.
 XInputWrapper xinput;
 GamePad::XBoxController x_control(&xinput, 2);
+
+//Create global variables that store the infomation we need to trace the ID1 car.
 double ID1_steering = 0;
 double ID1_speed = 0;
 double ID1_x = 0;
@@ -287,7 +268,7 @@ double ID1_z = 0;
 double ID1_rotation = 0;
 double My_x = 0;
 double My_z = 0;
-static double turning = 0;
+//Once the trigger == TRUE then start tracing.
 bool trigger = FALSE;
 void idle() {
 
@@ -317,7 +298,7 @@ void idle() {
 	if (x_control.PressedB()) {
 		Camera::get()->togglePursuitMode();
 	}
-
+	//Thunmb range
 #define MAX_RANGE 32767.0
 	speed = 0;
 	steering = 0;
@@ -336,6 +317,7 @@ void idle() {
 
 	
 	if (KeyManager::get()->isAsciiKeyPressed('L')||trigger == TRUE) {
+		//A method to trace the car by calculating angle.
 		double dx = ID1_x - My_x;
 		double dz = ID1_z - My_z;
 		double rotation_radian = atan2(dz, dx);
@@ -356,7 +338,7 @@ void idle() {
 		steering = ID1_steering;
 		trigger = TRUE;
 	}
-
+	//If pressed "C" to stop tracing.
 	if (KeyManager::get()->isAsciiKeyPressed('C')) {
 		trigger = FALSE;
 	}
@@ -390,14 +372,10 @@ void idle() {
 				if (RemoteDataManager::IsConnected()) {
 					ObstacleManager::get()->removeAll();
 
+					//Sending each shapes of my car to the server.
 					VehicleModel vm;
 					vm.remoteID = 0;
 					ShapeInit init;
-					/*//Body
-					ptr = new Rectangular(3, 1, 2);
-					ptr->setPosition(0, 0.4, 0);
-					ptr->setColor(255, 186, 221);
-					addShape(ptr);*/
 					init.type = RECTANGULAR_PRISM;
 					init.xyz[0] = 0;
 					init.xyz[1] = 0.4;
@@ -409,16 +387,10 @@ void idle() {
 					init.params.rect.xlen = 3;
 					init.params.rect.ylen = 1;
 					init.params.rect.zlen = 2;
-					//init.params.rect.isSpoke = FALSE;
 					vm.shapes.push_back(init);
 
-					ShapeInit init_1;
-					/*//front right(seen from initial position)
-					ptr = new Cylinder(0.4, 0.1, 100, 10);
-					ptr->setColor(145, 207, 255);
-					ptr->setPosition(1.1, 0.2, 1.1);
-					addShape(ptr);*/
 
+					ShapeInit init_1;
 					init_1.type = CYLINDER;
 					init_1.xyz[0] = 1.1;
 					init_1.xyz[1] = 0;
@@ -431,15 +403,9 @@ void idle() {
 					init_1.params.cyl.radius = 0.4;
 					init_1.params.cyl.isSteering = TRUE;
 					init_1.params.cyl.isRolling = TRUE;
-					//init_1.isSpoke = FALSE;
 					vm.shapes.push_back(init_1);
 
 					ShapeInit init_2;
-					/*//front left(seen from initial position)
-					ptr = new Cylinder(0.4, 0.1, 100, 10);
-					ptr->setColor(145, 207, 255);
-					ptr->setPosition(1.1, 0, -1.1);
-					addShape(ptr);*/
 					init_2.type = CYLINDER;
 					init_2.xyz[0] = 1.1;
 					init_2.xyz[1] = 0;
@@ -452,14 +418,8 @@ void idle() {
 					init_2.params.cyl.radius = 0.4;
 					init_2.params.cyl.isSteering = TRUE;
 					init_2.params.cyl.isRolling = TRUE;
-					//init_2.isSpoke = FALSE;
 					vm.shapes.push_back(init_2);
 
-					//back right(seen from initial position)
-					/*ptr = new Cylinder(0.8, 0.1, 100, 10);
-					ptr->setColor(255, 224, 147);
-					ptr->setPosition(-1.1, 0, -1.1);
-					addShape(ptr);*/
 					ShapeInit init_3;
 					init_3.type = CYLINDER;
 					init_3.xyz[0] = -1.1;
@@ -473,14 +433,8 @@ void idle() {
 					init_3.params.cyl.radius = 0.8;
 					init_3.params.cyl.isSteering = FALSE;
 					init_3.params.cyl.isRolling = TRUE;
-					//init_3.isSpoke = FALSE;
 					vm.shapes.push_back(init_3);
 
-					/*//back left(seen from initial position)
-					ptr = new Cylinder(0.8, 0.1, 100, 10);
-					ptr->setColor(255, 224, 147);
-					ptr->setPosition(-1.1, 0, 1.1);
-					addShape(ptr);*/
 					ShapeInit init_4;
 					init_4.type = CYLINDER;
 					init_4.xyz[0] = -1.1;
@@ -494,14 +448,8 @@ void idle() {
 					init_4.params.cyl.radius = 0.8;
 					init_4.params.cyl.isSteering = FALSE;
 					init_4.params.cyl.isRolling = TRUE;
-					//init_4.isSpoke = FALSE;
 					vm.shapes.push_back(init_4);
 
-
-					/*ptr = new Trapezoidal(1.5, 0.5, 0.5, 0.5, 0.5, 0.5);
-					ptr->setColor(10, 201, 124);
-					ptr->setPosition(0.5, 1.4, 0);
-					addShape(ptr);*/
 					ShapeInit init_5;
 					init_5.type = TRAPEZOIDAL_PRISM;
 					init_5.xyz[0] = 0.5;
@@ -516,14 +464,9 @@ void idle() {
 					init_5.params.trap.aoff = 0.5;
 					init_5.params.trap.depth = 0.5;
 					init_5.params.trap.height = 0.5;
-					//init_5.isSpoke = FALSE;
 					vm.shapes.push_back(init_5);
 
 
-					/*ptr = new Triangular(0.5, 1.5, 0.5, PI / 6);
-					ptr->setColor(100, 11, 124);
-					ptr->setPosition(0.5, 1.9, 0);
-					addShape(ptr);*/
 					ShapeInit init_6;
 					init_6.type = TRIANGULAR_PRISM;
 					init_6.xyz[0] = 0.5;
@@ -537,99 +480,9 @@ void idle() {
 					init_6.params.tri.blen = 1.5;
 					init_6.params.tri.angle = PI / 6;
 					init_6.params.tri.depth = 0.5;
-					//init_6.isSpoke = FALSE;
 					vm.shapes.push_back(init_6);
 
 				
-
-					/*ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
-					ptr->setPosition(-1.1, 0.4, -(0.4 + 1.1));
-					addShape(ptr);*/
-					/*ShapeInit init_7;
-					init_7.type = RECTANGULAR_PRISM;
-					init_7.xyz[0] = -1.1;
-					init_7.xyz[1] = 0.4;
-					init_7.xyz[2] = -1.5;
-					init_7.rgb[0] = 244 / MAX_COLOUR;
-					init_7.rgb[1] = 119 / MAX_COLOUR;
-					init_7.rgb[2] = 66 / MAX_COLOUR;
-					init_7.rotation = 0;
-					init_7.params.rect.xlen = cos(PI / 4)*0.5;
-					init_7.params.rect.ylen = sin(PI / 4)*0.5;
-					init_7.params.rect.zlen = 0.8;
-
-					init_7.params.rect.isSpoke = TRUE;
-					//init_7.params.rect.isSteering = FALSE;
-					//init_7.params.rect.normal = FALSE;
-					//init_7.isSpoke = TRUE;
-					vm.shapes.push_back(init_7);
-
-
-					/*ptr = new Rectangular(cos(PI / 4)*0.5, sin(PI / 4)*0.5, 0.8);
-					ptr->setPosition(-1.1, 0.4, (0.4 + 1.1));
-					addShape(ptr);
-					ShapeInit init_8;
-					init_8.type = RECTANGULAR_PRISM;
-					init_8.xyz[0] = -1.1;
-					init_8.xyz[1] = 0.4;
-					init_8.xyz[2] = 1.5;
-					init_8.rgb[0] = 244 / MAX_COLOUR;
-					init_8.rgb[1] = 119 / MAX_COLOUR;
-					init_8.rgb[2] = 66 / MAX_COLOUR;
-					init_8.rotation = 0;
-					init_8.params.rect.xlen = cos(PI / 4)*0.5;
-					init_8.params.rect.ylen = sin(PI / 4)*0.5;
-					init_8.params.rect.zlen = 0.8;
-					//init_8.params.rect.isSpoke = TRUE;
-					//init_8.params.rect.isSteering = FALSE;
-					//init_8.params.rect.normal = FALSE;
-					//init_8.isSpoke = TRUE;
-					vm.shapes.push_back(init_8);
-
-					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
-					ptr->setPosition(1.1, 0.2, (0.4 + 1.1));
-					addShape(ptr);
-					ShapeInit init_9;
-					init_9.type = RECTANGULAR_PRISM;
-					init_9.xyz[0] = 1.1;
-					init_9.xyz[1] = 0.2;
-					init_9.xyz[2] = 1.5;
-					init_9.rgb[0] = 244 / MAX_COLOUR;
-					init_9.rgb[1] = 119 / MAX_COLOUR;
-					init_9.rgb[2] = 66 / MAX_COLOUR;
-					init_9.rotation = 0;
-					init_9.params.rect.xlen = cos(PI / 4)*0.3;
-					init_9.params.rect.ylen = sin(PI / 4)*0.3;
-					init_9.params.rect.zlen = 0.8;
-					//init_9.params.rect.isSpoke = TRUE;
-					//init_9.params.rect.isSteering = FALSE;
-					//init_9.params.rect.normal = FALSE;
-					//init_9.isSpoke = TRUE;
-					vm.shapes.push_back(init_9);
-
-					/*ptr = new Rectangular(cos(PI / 4)*0.3, sin(PI / 4)*0.3, 0.8);
-					ptr->setPosition(1.1, 0.2, -(0.4 + 1.1));
-					addShape(ptr);
-					ShapeInit init_10;
-					init_10.type = RECTANGULAR_PRISM;
-					init_10.xyz[0] = 1.1;
-					init_10.xyz[1] = 0.2;
-					init_10.xyz[2] = -1.5;
-					init_10.rgb[0] = 244 / MAX_COLOUR;
-					init_10.rgb[1] = 119 / MAX_COLOUR;
-					init_10.rgb[2] = 66 / MAX_COLOUR;
-					init_10.rotation = 0;
-					init_10.params.rect.xlen = cos(PI / 4)*0.3;
-					init_10.params.rect.ylen = sin(PI / 4)*0.3;
-					init_10.params.rect.zlen = 0.8;
-					//init_10.params.rect.is = TRUE;
-					//init_10.params.rect.isSteering = FALSE;
-					//init_10.params.rect.normal = FALSE;
-					//init_10.isSpoke = TRUE;
-					vm.shapes.push_back(init_10);*/
-					
-					// student code goes here
-					//
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
 			}
@@ -664,11 +517,9 @@ void idle() {
 							std::vector<VehicleModel> models = GetVehicleModels(msg.payload);
 							for(unsigned int i = 0; i < models.size(); i++) {
 								VehicleModel vm = models[i];
+								//My new class to handle other vehivles.
+								//My new constructor which takes VehicleModle as parameters.
 								otherVehicles[vm.remoteID] = new Remote(vm);
-
-								//
-								// more student code goes here
-								//
 							}
 							break;
 						}

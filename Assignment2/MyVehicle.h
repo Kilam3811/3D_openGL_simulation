@@ -5,7 +5,6 @@
 
 class MyVehicle : public Vehicle {
 protected:
-	//Some extra variables?
 	std::vector<ShapeInit> cars_shapeInit;
 public:
 	MyVehicle();

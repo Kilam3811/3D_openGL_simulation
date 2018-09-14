@@ -90,13 +90,11 @@ void Rectangular::draw()
 }
 void Rectangular::draw_rolling()
 {
-	//positionInGL();
-	
 	glTranslated(0, y, 0);
 	rolling();
 	setColorInGL();
 	//	Draw 4 sides of the rectangle
-	//Calculating the offset realtive to the origin of the rectangle
+	//Calculating the offset relative to the origin of the rectangle
 
 	//Left
 	glBegin(GL_QUADS);
@@ -160,8 +158,6 @@ void Rectangular::rolling()
 	glTranslated(x, y_length/2, z);
 	glRotated(rotation, 0, 0, -1);
 	glTranslated(0, -y_length/2, 0);
-	//glTranslated(x, 0, z);
-	
 	
 }
 double Rectangular::get_x_length()

@@ -11,10 +11,8 @@
 class Remote : public MyVehicle {
 protected:
 	VehicleModel vm;
-	VehicleState vs_;
 	std::vector<Shape *> cars;
 public:
-	//Remote(VehicleState vs);
 	Remote(VehicleModel vm_);
 	void draw();
 	void draw_rec(double xLength, double yLength, double zLength, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle);

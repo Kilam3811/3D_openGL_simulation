@@ -33,7 +33,6 @@ Wheel::Wheel(double x_cor, double y_cor, double z_cor, double speed, double time
 	double theta = total_distance / r;
 
 	theta *= 180 / PI;
-	//?
 	angle = theta;
 }
 
