@@ -183,10 +183,12 @@ void testing_Draw() {
 	//F1.draw();
 	//==========================================
 
-	//Triangular tri(1, 1, 2.5, 90);
+	//Triangular tri(60, 80, 2.4, 36);
 	//tri.setColor(0, 1, 0);
 	//tri.setRotation(180);
 	//tri.setPosition(0, 0, 0);
+	//tri.positionInGL();
+	
 	//tri.draw();
 }
 
@@ -232,7 +234,7 @@ void display() {
 	// draw HUD
 	HUD::Draw();
 
-	//testing_Draw();
+	testing_Draw();
 	glutSwapBuffers();
 };
 

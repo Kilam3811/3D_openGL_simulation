@@ -67,8 +67,9 @@ Remote::Remote(VehicleModel vm_)
 			double x_cor = it->xyz[0];
 			double y_cor = it->xyz[1];
 			double z_cor = it->xyz[2];
-			//double rotate_angle = it->rotation;
+			double rotate_angle = it->rotation;
 			//printf("x is %f y is %f z %f\n", x_cor, y_cor, z_cor);
+			printf("a_len is %f b_len is %f theta is %f rotation is %f\n", a_len, b_len,theta,rotate_angle);
 			draw_tri(a_len, b_len, depth, theta, red, green, blue, x_cor, y_cor, z_cor, it->rotation);
 			add_to_shapeInit_list(*it);
 		}
@@ -172,10 +173,13 @@ void Remote::draw()
 			glPopMatrix();
 		}
 	}
+
+
 }
 
 void Remote::draw_rec(double xLength, double yLength, double zLength, double red, double green, double blue, double x_cor, double y_cor, double z_cor, double rotate_angle)
 {
+	//IF have problems just comment out setRot
 	shape_ptr = new Rectangular(xLength, yLength, zLength);
 	shape_ptr->setPosition(x_cor, y_cor, z_cor);
 	shape_ptr->setRotation(rotate_angle);

@@ -7,10 +7,6 @@ class MyVehicle : public Vehicle {
 protected:
 	//Some extra variables?
 	std::vector<ShapeInit> cars_shapeInit;
-
-	double x_ID1;
-	double y_ID1;
-	double z_ID1;
 public:
 	MyVehicle();
 	void draw();
