@@ -48,6 +48,7 @@
 #include "MyVehicle.h"
 #include "Remote.h"
 #include "XBoxController.h"
+#include"XInputWrapper.h"
 #include <cmath>
 
 #define MAX_COLOUR 255.0
@@ -257,7 +258,7 @@ double getTime()
 
 //Create instance of xbox controller.
 XInputWrapper xinput;
-GamePad::XBoxController x_control(&xinput, 2);
+GamePad::XBoxController x_control(&xinput, 0);
 
 //Create global variables that store the infomation we need to trace the ID1 car.
 double ID1_steering = 0;
@@ -272,31 +273,39 @@ double My_z = 0;
 bool trigger = FALSE;
 void idle() {
 
-	if (x_control.PressedLeftDpad()) {
+	if (x_control.PressedLeftDpad() || KeyManager::get()->isAsciiKeyPressed('a')) {
 		Camera::get()->strafeLeft();
 	}
 
-	if (x_control.PressedLeftShoulder()) {
+	if (x_control.PressedLeftShoulder() || KeyManager::get()->isAsciiKeyPressed('c')) {
 		Camera::get()->strafeDown();
 	}
 
-	if (x_control.PressedRightDpad()) {
+	if (x_control.PressedRightDpad() || KeyManager::get()->isAsciiKeyPressed('d')) {
 		Camera::get()->strafeRight();
 	}
 
-	if (x_control.PressedDownDpad()) {
+	if (x_control.PressedDownDpad() || KeyManager::get()->isAsciiKeyPressed('s')) {
 		Camera::get()->moveBackward();
 	}
 
-	if (x_control.PressedUpDpad()) {
+	if (x_control.PressedUpDpad() || KeyManager::get()->isAsciiKeyPressed('w')) {
 		Camera::get()->moveForward();
 	}
 
-	if (x_control.PressedRightShoulder()) {
+	if (x_control.PressedRightShoulder() || KeyManager::get()->isAsciiKeyPressed(' ')) {
 		Camera::get()->strafeUp();
 	}
 	if (x_control.PressedB()) {
 		Camera::get()->togglePursuitMode();
+	}
+
+	//follow the sign
+	if (x_control.PressedY()) {
+		Camera::get()->togglePursuitMode();
+		x_control.Vibrate(60000, 60000);
+		Sleep(300);
+		x_control.Vibrate(0, 0);
 	}
 	//Thunmb range
 #define MAX_RANGE 32767.0
@@ -343,15 +352,21 @@ void idle() {
 		trigger = FALSE;
 	}
 	
+	//use thumbstick control speed and direction
+	//////
 	if (pt_2.GetY() > 0) {
-		speed = Vehicle::MAX_FORWARD_SPEED_MPS * fabs(pt_2.GetY()) / MAX_RANGE;
+		speed = Vehicle::MAX_FORWARD_SPEED_MPS * (fabs(pt_2.GetY()) / MAX_RANGE);
 	}
 	if (pt_2.GetY() < 0) {
-		speed = Vehicle::MAX_BACKWARD_SPEED_MPS * fabs(pt_2.GetY()) / MAX_RANGE;
+		speed = Vehicle::MAX_BACKWARD_SPEED_MPS * (fabs(pt_2.GetY()) / MAX_RANGE);
 	}
+	//////
+
+	//exit
 	if (x_control.PressedBack()) {
 		exit(0);
 	}
+
 	// attempt to do data communications every 4 frames if we've created a local vehicle
 	if(frameCounter % 4 == 0 && vehicle != NULL) {
 
@@ -480,10 +495,10 @@ void idle() {
 					init_6.params.tri.blen = 1.5;
 					init_6.params.tri.angle = PI / 6;
 					init_6.params.tri.depth = 0.5;
-					vm.shapes.push_back(init_6);
 
 				
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
+					vm.shapes.push_back(init_6);
 				}
 			}
 		}
