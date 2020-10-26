@@ -1,2 +1,2 @@
-# Assignment2_Draw_Vehicle
+# 3D_openGL_simulation
 Group Member:Kilam,Tim
